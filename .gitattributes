@@ -1,0 +1,17 @@
+# Les exemples sont comparés octet par octet par les tests : aucune conversion de fins de ligne.
+*.pdf binary
+*.png binary
+*.docx binary
+examples/** -text
+
+# Fixtures v4 : copies exactes (octets) des fichiers écrits avant la v5, sans conversion de fins de ligne.
+crates/pf-core/tests/fixtures_v4/** -text
+
+# Fixtures v5 : copies exactes (octets) des fichiers écrits avant la v6, sans conversion de fins de ligne.
+crates/pf-core/tests/fixtures_v5/** -text
+
+# Jeu d'essai : projets de test, sans conversion de fins de ligne.
+crates/pf-core/tests/jeu_essai/** -text
+
+# Scripts shell : toujours en LF (bash refuse les CR).
+*.sh text eol=lf

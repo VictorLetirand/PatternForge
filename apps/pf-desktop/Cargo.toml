@@ -1,0 +1,25 @@
+[package]
+name = "pf-desktop"
+description = "PatternForge — application de bureau"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "patternforge"
+path = "src/main.rs"
+
+[dependencies]
+serde_json.workspace = true
+pf-geometry = { workspace = true }
+pf-core = { workspace = true }
+pf-export = { workspace = true }
+pf-ui = { workspace = true }
+pf-i18n = { workspace = true }
+eframe = "0.32"
+rfd = "0.15"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[dev-dependencies]
+egui_kittest = "0.32"

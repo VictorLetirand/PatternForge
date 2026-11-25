@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="275mm" height="670mm" viewBox="0 0 275 670">
+  <title>Jupe droite de base — Jupe devant</title>
+  <desc>PatternForge. Unités : 1 unité = 1 mm, échelle 1:1. Contenu : pièce avec ligne de coupe.</desc>
+  <g fill="none" stroke="#000000" stroke-linecap="round">
+    <line x1="15" y1="20" x2="15" y2="620" data-role="couture" stroke-width="0.35" stroke-dasharray="3 2"/>
+    <line x1="15" y1="620" x2="255" y2="620" data-role="couture" stroke-width="0.35" stroke-dasharray="3 2"/>
+    <line x1="255" y1="620" x2="255" y2="260" data-role="couture" stroke-width="0.35" stroke-dasharray="3 2"/>
+    <line x1="255" y1="260" x2="185" y2="20" data-role="couture" stroke-width="0.35" stroke-dasharray="3 2"/>
+    <line x1="185" y1="20" x2="15" y2="20" data-role="couture" stroke-width="0.35" stroke-dasharray="3 2"/>
+    <line x1="135" y1="520" x2="135" y2="220" data-role="droit-fil" stroke-width="0.35" stroke-dasharray="10 1.5 1.5 1.5"/>
+    <line x1="135" y1="520" x2="133.3095" y2="516.3748" data-role="droit-fil" stroke-width="0.35" stroke-dasharray="10 1.5 1.5 1.5"/>
+    <line x1="135" y1="520" x2="136.6905" y2="516.3748" data-role="droit-fil" stroke-width="0.35" stroke-dasharray="10 1.5 1.5 1.5"/>
+    <line x1="135" y1="220" x2="136.6905" y2="223.6252" data-role="droit-fil" stroke-width="0.35" stroke-dasharray="10 1.5 1.5 1.5"/>
+    <line x1="135" y1="220" x2="133.3095" y2="223.6252" data-role="droit-fil" stroke-width="0.35" stroke-dasharray="10 1.5 1.5 1.5"/>
+  </g>
+  <g fill="none" stroke="#000000" stroke-linecap="round" stroke-width="0.6" stroke-dasharray="10 2.5 2.5 2.5">
+    <path data-role="coupe-calculee" data-piece="Jupe devant" d="M 15 10 L 15 660 L 265 660 L 265 258.5714 L 192.5 10 L 15 10 Z"/>
+  </g>
+  <g fill="none" stroke="#000000" stroke-linecap="round" data-role="cran" stroke-width="0.6">
+    <line x1="255" y1="260" x2="260" y2="260"/>
+    <line x1="15" y1="260" x2="10" y2="260"/>
+    <line x1="110" y1="20" x2="110" y2="15"/>
+    <line x1="90" y1="20" x2="90" y2="15"/>
+  </g>
+  <g fill="none" stroke="#000000" stroke-linecap="round" stroke-width="0.4" stroke-dasharray="8 1.5 1.5 1.5 1.5 1.5">
+    <line data-role="pince" data-piece="Jupe devant" x1="100" y1="120" x2="90" y2="20"/>
+    <line data-role="pince" data-piece="Jupe devant" x1="100" y1="120" x2="110" y2="20"/>
+  </g>
+  <g id="marquages" fill="none" stroke="#000000" stroke-linecap="round" data-role="marquage" stroke-width="0.35">
+    <title>Marquages de pièce : pointage (disque plein), perçage (cercle), croix</title>
+    <circle data-form="pointage" cx="100" cy="110" r="0.5" fill="#000000" stroke="none"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="4" fill="#000000" stroke="none">
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="358.9" text-anchor="middle">Jupe devant</text>
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="363.9" text-anchor="middle">Code : JD-01</text>
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="368.9" text-anchor="middle">Quantité : 1</text>
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="373.9" text-anchor="middle">Matière : Tissu</text>
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="378.9" text-anchor="middle">Catégorie : Tissu</text>
+    <text data-role="etiquette-piece" data-piece="Jupe devant" x="85.8" y="383.9" text-anchor="middle">Couper au pli, milieu devant sur la pliure</text>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="3" fill="#000000">
+    <circle cx="15" cy="20" r="0.6"/>
+    <text x="16.5" y="18.5">A</text>
+    <circle cx="15" cy="620" r="0.6"/>
+    <text x="16.5" y="618.5">B</text>
+    <circle cx="255" cy="620" r="0.6"/>
+    <text x="256.5" y="618.5">C</text>
+    <circle cx="255" cy="260" r="0.6"/>
+    <text x="256.5" y="258.5">D</text>
+    <circle cx="185" cy="20" r="0.6"/>
+    <text x="186.5" y="18.5">E</text>
+    <circle cx="100" cy="120" r="0.6"/>
+    <text x="101.5" y="118.5">F</text>
+    <circle cx="100" cy="20" r="0.6"/>
+    <text x="101.5" y="18.5">G</text>
+    <circle cx="135" cy="520" r="0.6"/>
+    <text x="136.5" y="518.5">H</text>
+    <circle cx="135" cy="220" r="0.6"/>
+    <text x="136.5" y="218.5">I</text>
+  </g>
+</svg>

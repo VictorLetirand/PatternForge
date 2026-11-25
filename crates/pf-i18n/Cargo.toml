@@ -1,0 +1,10 @@
+[package]
+name = "pf-i18n"
+description = "PatternForge — catalogues de langues FR/EN et réglage persistant de la langue"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde_json = { workspace = true }

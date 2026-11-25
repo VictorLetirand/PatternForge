@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="140.292mm" height="102.7152mm" viewBox="0 0 140.292 102.7152">
+  <title>Exercice de géométrie — Devant</title>
+  <desc>PatternForge. Unités : 1 unité = 1 mm, échelle 1:1. Contenu : tracé de construction, sans ligne de coupe.</desc>
+  <g fill="none" stroke="#000000" stroke-linecap="round">
+    <line x1="10.292" y1="92.7152" x2="130.292" y2="92.7152" data-role="construction" stroke-width="0.25"/>
+    <line x1="130.292" y1="92.7152" x2="130.292" y2="12.7152" data-role="construction" stroke-width="0.25"/>
+    <path d="M 10.292 92.7152 C 5.292 47.7152 65.292 -2.2848 130.292 12.7152" data-role="construction" stroke-width="0.25"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="3" fill="#000000">
+    <circle cx="10.292" cy="92.7152" r="0.6"/>
+    <text x="11.792" y="91.2152">A</text>
+    <circle cx="130.292" cy="92.7152" r="0.6"/>
+    <text x="131.792" y="91.2152">B</text>
+    <circle cx="130.292" cy="12.7152" r="0.6"/>
+    <text x="131.792" y="11.2152">C</text>
+    <circle cx="52.292" cy="92.7152" r="0.6"/>
+    <text x="53.792" y="91.2152">P</text>
+  </g>
+</svg>

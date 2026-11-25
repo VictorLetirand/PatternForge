@@ -1,0 +1,24 @@
+[workspace]
+resolver = "3"
+members = ["crates/pf-geometry", "crates/pf-core", "crates/pf-export", "crates/pf-mcp", "crates/pf-ui", "crates/pf-i18n", "crates/pf-cli", "apps/pf-desktop"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.85"
+
+[workspace.dependencies]
+pf-geometry = { path = "crates/pf-geometry" }
+pf-core = { path = "crates/pf-core" }
+pf-export = { path = "crates/pf-export" }
+pf-ui = { path = "crates/pf-ui" }
+pf-i18n = { path = "crates/pf-i18n" }
+serde = { version = "1", features = ["derive"] }
+# float_roundtrip : relecture des f64 exacte au bit près (sinon erreur d'1 ULP possible).
+serde_json = { version = "1", features = ["float_roundtrip"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+strip = true

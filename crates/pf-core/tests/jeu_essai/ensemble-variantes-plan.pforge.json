@@ -1,0 +1,398 @@
+{
+  "format": "patternforge",
+  "schema_version": 6,
+  "name": "Ensemble - jeu d'essai",
+  "next_id": 37,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Feuille 1",
+      "points": [
+        {
+          "id": 2,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 3,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 400.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 4,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 400.0,
+            "y": 600.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 600.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 11,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 1000.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 12,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 1100.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 13,
+          "label": "G",
+          "definition": {
+            "type": "free",
+            "x": 1100.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 14,
+          "label": "H",
+          "definition": {
+            "type": "free",
+            "x": 1000.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 20,
+          "label": "I",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 21,
+          "label": "J",
+          "definition": {
+            "type": "free",
+            "x": 2100.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 22,
+          "label": "K",
+          "definition": {
+            "type": "free",
+            "x": 2100.0,
+            "y": 200.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 23,
+          "label": "L",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 200.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 6,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 2,
+            "to": 3
+          }
+        },
+        {
+          "id": 7,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 3,
+            "to": 4
+          }
+        },
+        {
+          "id": 8,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 4,
+            "to": 5
+          }
+        },
+        {
+          "id": 9,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 2
+          }
+        },
+        {
+          "id": 15,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 11,
+            "to": 12
+          }
+        },
+        {
+          "id": 16,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 12,
+            "to": 13
+          }
+        },
+        {
+          "id": 17,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 13,
+            "to": 14
+          }
+        },
+        {
+          "id": 18,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 14,
+            "to": 11
+          }
+        },
+        {
+          "id": 24,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 20,
+            "to": 21
+          }
+        },
+        {
+          "id": 25,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 21,
+            "to": 22
+          }
+        },
+        {
+          "id": 26,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 22,
+            "to": 23
+          }
+        },
+        {
+          "id": 27,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 23,
+            "to": 20
+          }
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 10,
+      "name": "Dos",
+      "quantity": 1,
+      "material": "Cuir",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 6,
+          "reversed": false
+        },
+        {
+          "entity": 7,
+          "reversed": false
+        },
+        {
+          "entity": 8,
+          "reversed": false
+        },
+        {
+          "entity": 9,
+          "reversed": false
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 19,
+      "name": "Poche",
+      "quantity": 1,
+      "material": "Cuir",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 15,
+          "reversed": false
+        },
+        {
+          "entity": 16,
+          "reversed": false
+        },
+        {
+          "entity": 17,
+          "reversed": false
+        },
+        {
+          "entity": 18,
+          "reversed": false
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 28,
+      "name": "Manche",
+      "quantity": 1,
+      "material": "Toile",
+      "mirrored_pair": true,
+      "outline": [
+        {
+          "entity": 24,
+          "reversed": false
+        },
+        {
+          "entity": 25,
+          "reversed": false
+        },
+        {
+          "entity": 26,
+          "reversed": false
+        },
+        {
+          "entity": 27,
+          "reversed": false
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    }
+  ],
+  "cutting_plans": [
+    {
+      "id": 33,
+      "name": "Cuir",
+      "material": "Cuir",
+      "fabric_width_mm": 1400.0,
+      "fold": "flat",
+      "selvedge_mm": 10.0,
+      "min_gap_mm": 5.0,
+      "placements": [
+        {
+          "id": 34,
+          "piece": 10,
+          "x_mm": 10.0,
+          "y_mm": 0.0,
+          "rotation_deg": 0.0
+        },
+        {
+          "id": 35,
+          "piece": 19,
+          "x_mm": 420.0,
+          "y_mm": 0.0,
+          "rotation_deg": 0.0
+        },
+        {
+          "id": 36,
+          "piece": 19,
+          "x_mm": 530.0,
+          "y_mm": 0.0,
+          "rotation_deg": 0.0
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": 29,
+      "name": "Chemise",
+      "options": [
+        "avec poche"
+      ],
+      "options_active": [
+        "avec poche"
+      ],
+      "entries": [
+        {
+          "id": 30,
+          "piece": 10,
+          "quantity": 1
+        },
+        {
+          "id": 31,
+          "piece": 19,
+          "quantity": 2,
+          "option": "avec poche"
+        },
+        {
+          "id": 32,
+          "piece": 28,
+          "quantity": 1,
+          "material": "Lin"
+        }
+      ]
+    }
+  ]
+}

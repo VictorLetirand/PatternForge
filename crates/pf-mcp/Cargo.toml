@@ -1,0 +1,20 @@
+[package]
+name = "pf-mcp"
+description = "PatternForge — serveur MCP local, lecture seule par défaut (stdio, JSON-RPC 2.0)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+name = "pf_mcp"
+
+[[bin]]
+name = "pf-mcp-server"
+path = "src/main.rs"
+
+[dependencies]
+pf-cli = { path = "../pf-cli" }
+pf-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

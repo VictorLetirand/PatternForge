@@ -1,0 +1,342 @@
+{
+  "format": "patternforge",
+  "schema_version": 5,
+  "name": "Sac cabas",
+  "next_id": 30,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Corps",
+      "points": [
+        {
+          "id": 2,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 3,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 400.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 4,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 400.0,
+            "y": 380.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 380.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 13,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 200.0,
+            "y": 76.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 14,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 200.0,
+            "y": 304.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 6,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 2,
+            "to": 3
+          }
+        },
+        {
+          "id": 7,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 3,
+            "to": 4
+          }
+        },
+        {
+          "id": 8,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 4,
+            "to": 5
+          }
+        },
+        {
+          "id": 9,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 2
+          }
+        },
+        {
+          "id": 15,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 13,
+            "to": 14
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 11,
+          "entity": 6,
+          "distance_mm": 200.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 12,
+          "entity": 8,
+          "distance_mm": 200.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Anse",
+      "points": [
+        {
+          "id": 17,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 18,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 700.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 19,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 700.0,
+            "y": 40.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 20,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 40.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 27,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 350.0,
+            "y": 8.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 28,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 350.0,
+            "y": 32.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 21,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 17,
+            "to": 18
+          }
+        },
+        {
+          "id": 22,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 18,
+            "to": 19
+          }
+        },
+        {
+          "id": 23,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 19,
+            "to": 20
+          }
+        },
+        {
+          "id": 24,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 20,
+            "to": 17
+          }
+        },
+        {
+          "id": 29,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 27,
+            "to": 28
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 26,
+          "entity": 21,
+          "distance_mm": 350.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 10,
+      "name": "Corps",
+      "code": "SC-01",
+      "quantity": 2,
+      "material": "Toile",
+      "category": "fabric",
+      "comment": "Couper deux fois, ourlet de 30 mm en haut",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 6,
+          "reversed": false
+        },
+        {
+          "entity": 7,
+          "reversed": false
+        },
+        {
+          "entity": 8,
+          "reversed": false
+        },
+        {
+          "entity": 9,
+          "reversed": false
+        }
+      ],
+      "grainline": 15,
+      "seam": {
+        "default_mm": 10.0,
+        "hems": [
+          {
+            "entity": 8,
+            "height_mm": 30.0
+          }
+        ]
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 25,
+      "name": "Anse",
+      "code": "SC-02",
+      "quantity": 2,
+      "material": "Toile",
+      "category": "fabric",
+      "comment": "Couper deux fois dans le droit-fil",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 21,
+          "reversed": false
+        },
+        {
+          "entity": 22,
+          "reversed": false
+        },
+        {
+          "entity": 23,
+          "reversed": false
+        },
+        {
+          "entity": 24,
+          "reversed": false
+        }
+      ],
+      "grainline": 29,
+      "seam": {
+        "default_mm": 10.0
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 16
+      }
+    }
+  ]
+}

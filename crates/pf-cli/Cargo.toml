@@ -1,0 +1,21 @@
+[package]
+name = "pf-cli"
+description = "PatternForge - ligne de commande et traitement par lot"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "patternforge-cli"
+path = "src/main.rs"
+
+[dependencies]
+pf-core = { workspace = true }
+pf-export = { workspace = true }
+pf-i18n = { workspace = true }
+
+[dev-dependencies]
+pf-geometry = { workspace = true }
+png = "=0.18.1"
+zune-jpeg = "=0.4.21"

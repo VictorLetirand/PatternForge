@@ -1,0 +1,18 @@
+[package]
+name = "pf-core"
+description = "PatternForge — modèle projet/feuilles, commandes d'édition et persistance"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+pf-geometry = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+png = "=0.18.1"
+zune-jpeg = "=0.4.21"
+
+[dev-dependencies]
+pf-export = { workspace = true }
+jpeg-encoder = "=0.7.1"

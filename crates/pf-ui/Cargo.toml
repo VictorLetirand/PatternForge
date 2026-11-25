@@ -1,0 +1,20 @@
+[package]
+name = "pf-ui"
+description = "PatternForge — design system « Precision Light » et UI Lab"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "pf-ui-lab"
+path = "src/bin/pf-ui-lab.rs"
+
+[dependencies]
+pf-core = { workspace = true }
+egui = "0.32"
+eframe = "0.32"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[dev-dependencies]
+egui_kittest = "0.32"

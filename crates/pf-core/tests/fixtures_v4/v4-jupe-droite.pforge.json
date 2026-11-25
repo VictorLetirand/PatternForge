@@ -1,0 +1,273 @@
+{
+  "format": "patternforge",
+  "schema_version": 4,
+  "name": "Jupe droite de base",
+  "next_id": 24,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Jupe devant",
+      "points": [
+        {
+          "id": 2,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 600.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 3,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 4,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 240.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 240.0,
+            "y": 360.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 6,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 170.0,
+            "y": 600.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 13,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 85.0,
+            "y": 500.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 14,
+          "label": "G",
+          "definition": {
+            "type": "free",
+            "x": 85.0,
+            "y": 600.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 21,
+          "label": "H",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 22,
+          "label": "I",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 400.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 7,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 2,
+            "to": 3
+          }
+        },
+        {
+          "id": 8,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 3,
+            "to": 4
+          }
+        },
+        {
+          "id": 9,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 4,
+            "to": 5
+          }
+        },
+        {
+          "id": 10,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 6
+          }
+        },
+        {
+          "id": 11,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 6,
+            "to": 2
+          }
+        },
+        {
+          "id": 23,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 21,
+            "to": 22
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 17,
+          "entity": 9,
+          "distance_mm": 360.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 18,
+          "entity": 7,
+          "distance_mm": 240.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 19,
+          "entity": 11,
+          "distance_mm": 75.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 20,
+          "entity": 11,
+          "distance_mm": 95.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 12,
+      "name": "Jupe devant",
+      "code": "JD-01",
+      "quantity": 1,
+      "material": "Tissu",
+      "category": "fabric",
+      "comment": "Couper au pli, milieu devant sur la pliure",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 7,
+          "reversed": false
+        },
+        {
+          "entity": 8,
+          "reversed": false
+        },
+        {
+          "entity": 9,
+          "reversed": false
+        },
+        {
+          "entity": 10,
+          "reversed": false
+        },
+        {
+          "entity": 11,
+          "reversed": false
+        }
+      ],
+      "grainline": 23,
+      "seam": {
+        "default_mm": 10.0,
+        "edges": [
+          {
+            "entity": 7,
+            "start_mm": 0.0,
+            "end_mm": 0.0
+          }
+        ],
+        "hems": [
+          {
+            "entity": 8,
+            "height_mm": 40.0
+          }
+        ]
+      },
+      "markings": [
+        {
+          "id": 16,
+          "at": {
+            "type": "dart_tip",
+            "tip": 13,
+            "toward": 14,
+            "setback_mm": 10.0
+          },
+          "shape": {
+            "type": "punch"
+          }
+        }
+      ],
+      "darts": [
+        {
+          "id": 15,
+          "apex": 13,
+          "toward": 14,
+          "length_mm": 100.0,
+          "opening_mm": 20.0,
+          "fixed": "left"
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    }
+  ]
+}

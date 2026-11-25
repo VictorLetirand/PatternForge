@@ -1,0 +1,115 @@
+{
+  "format": "patternforge",
+  "schema_version": 4,
+  "name": "Exercice de géométrie",
+  "next_id": 11,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Devant",
+      "points": [
+        {
+          "id": 4,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 7,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 80.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 9,
+          "label": "P",
+          "definition": {
+            "type": "on_segment",
+            "segment": 6,
+            "distance_mm": 42.0,
+            "origin": "start"
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 6,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 4,
+            "to": 5,
+            "construction": {
+              "type": "polar",
+              "length_mm": 120.0,
+              "angle_deg": 0.0
+            }
+          }
+        },
+        {
+          "id": 8,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 7,
+            "construction": {
+              "type": "perpendicular",
+              "reference": 6,
+              "length_mm": 80.0,
+              "side": "left"
+            }
+          }
+        },
+        {
+          "id": 10,
+          "role": "construction",
+          "kind": {
+            "type": "curve",
+            "start": 4,
+            "handle_start": {
+              "dx": -5.0,
+              "dy": 45.0
+            },
+            "handle_end": {
+              "dx": -65.0,
+              "dy": 15.0
+            },
+            "end": 7
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Fond",
+      "points": [],
+      "entities": []
+    },
+    {
+      "id": 3,
+      "name": "Anse",
+      "points": [],
+      "entities": []
+    }
+  ]
+}

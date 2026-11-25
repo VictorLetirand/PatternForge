@@ -1,0 +1,605 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pforge-v3.schema.json",
+  "title": "Projet PatternForge (.pforge.json), schema_version 3",
+  "description": "Remplace par pforge-v4.schema.json pour l'ecriture ; reste la reference des fichiers v3 (migres en memoire a l'ouverture). Ecrit a la main d'apres les types serde de pf-core a ce commit. Decrit le fichier tel qu'ecrit par l'application ; n'est pas une norme et ne remplace pas le validateur pf-validate (references, identifiants, geometrie). Voir docs/FORMAT_PFORGE_V3.md (limites connues, ecarts avec le chargeur).",
+  "type": "object",
+  "required": ["format", "schema_version", "name", "next_id", "sheets"],
+  "properties": {
+    "format": { "const": "patternforge" },
+    "schema_version": { "const": 3 },
+    "name": { "type": "string" },
+    "next_id": { "$ref": "#/$defs/id" },
+    "sheets": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sheet" } },
+    "pieces": { "type": "array", "items": { "$ref": "#/$defs/piece" } },
+    "seam_defaults": { "$ref": "#/$defs/seam_defaults" },
+    "seams": { "type": "array", "items": { "$ref": "#/$defs/seam_pair" } },
+    "variables": { "type": "array", "maxItems": 500, "items": { "$ref": "#/$defs/variable" } },
+    "migration_notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true,
+  "$comment": "additionalProperties true : le chargeur conserve et reecrit les cles inconnues du projet, des feuilles et des pieces (champ extra).",
+  "$defs": {
+    "id": { "type": "integer", "minimum": 1 },
+    "mm": { "type": "number" },
+    "u32": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+    "side": { "enum": ["left", "right"] },
+    "segment_end": { "enum": ["start", "end"] },
+    "xy": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": { "x": { "$ref": "#/$defs/mm" }, "y": { "$ref": "#/$defs/mm" } },
+      "additionalProperties": false
+    },
+    "offset": {
+      "type": "object",
+      "required": ["dx", "dy"],
+      "properties": { "dx": { "$ref": "#/$defs/mm" }, "dy": { "$ref": "#/$defs/mm" } },
+      "additionalProperties": false
+    },
+    "sheet": {
+      "type": "object",
+      "required": ["id", "name", "points", "entities"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "points": { "type": "array", "items": { "$ref": "#/$defs/point" } },
+        "entities": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+        "notches": { "type": "array", "items": { "$ref": "#/$defs/notch" } },
+        "dimensions": { "type": "array", "items": { "$ref": "#/$defs/dimension" } },
+        "layers": { "type": "array", "items": { "$ref": "#/$defs/layer" } },
+        "groups": { "type": "array", "items": { "$ref": "#/$defs/group" } },
+        "guides": { "type": "array", "items": { "$ref": "#/$defs/guide" } },
+        "topstitches": { "type": "array", "items": { "$ref": "#/$defs/topstitch" } },
+        "full_dimensions": { "type": "array", "items": { "$ref": "#/$defs/full_dimension" } },
+        "formulas": { "type": "array", "items": { "$ref": "#/$defs/param_formula" } },
+        "length_constraints": { "type": "array", "items": { "$ref": "#/$defs/length_constraint" } }
+      },
+      "additionalProperties": true
+    },
+    "layer": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "visible": { "type": "boolean" },
+        "locked": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "required": ["id", "members"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "members": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      },
+      "additionalProperties": false
+    },
+    "guide": {
+      "type": "object",
+      "required": ["id", "x_mm", "y_mm", "angle_deg"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "x_mm": { "$ref": "#/$defs/mm" },
+        "y_mm": { "$ref": "#/$defs/mm" },
+        "angle_deg": { "$ref": "#/$defs/mm" },
+        "axis": { "type": "boolean" },
+        "layer": { "$ref": "#/$defs/id" }
+      },
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "required": ["id", "label", "definition"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "type": "string" },
+        "definition": { "$ref": "#/$defs/point_definition" },
+        "role": { "enum": ["construction", "reference"] },
+        "layer": { "$ref": "#/$defs/id" }
+      },
+      "additionalProperties": false
+    },
+    "mirror_axis": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "guide"], "properties": { "type": { "const": "guide" }, "guide": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "segment"], "properties": { "type": { "const": "segment" }, "segment": { "$ref": "#/$defs/id" } }, "additionalProperties": false }
+      ]
+    },
+    "point_definition": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "x", "y"], "properties": { "type": { "const": "free" }, "x": { "$ref": "#/$defs/mm" }, "y": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "segment", "distance_mm", "origin"], "properties": { "type": { "const": "on_segment" }, "segment": { "$ref": "#/$defs/id" }, "distance_mm": { "$ref": "#/$defs/mm" }, "origin": { "$ref": "#/$defs/segment_end" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "segment", "ratio"], "properties": { "type": { "const": "on_segment_ratio" }, "segment": { "$ref": "#/$defs/id" }, "ratio": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "first", "second"], "properties": { "type": { "const": "intersection" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "curve", "t"], "properties": { "type": { "const": "on_curve" }, "curve": { "$ref": "#/$defs/id" }, "t": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "first", "second", "near"], "properties": { "type": { "const": "circle_intersection" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" }, "near": { "$ref": "#/$defs/xy" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "first", "second", "near"], "properties": { "type": { "const": "trace_intersection" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" }, "near": { "$ref": "#/$defs/xy" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "curve", "distance_mm", "origin"], "properties": { "type": { "const": "along_curve" }, "curve": { "$ref": "#/$defs/id" }, "distance_mm": { "$ref": "#/$defs/mm" }, "origin": { "$ref": "#/$defs/segment_end" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "from", "dx_mm", "dy_mm"], "properties": { "type": { "const": "offset" }, "from": { "$ref": "#/$defs/id" }, "dx_mm": { "$ref": "#/$defs/mm" }, "dy_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "first", "second"], "properties": { "type": { "const": "midpoint" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "point", "trace"], "properties": { "type": { "const": "projection" }, "point": { "$ref": "#/$defs/id" }, "trace": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "vertex", "first", "second", "distance_mm"], "properties": { "type": { "const": "bisector" }, "vertex": { "$ref": "#/$defs/id" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" }, "distance_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "from", "distance_mm", "angle_deg"], "properties": { "type": { "const": "polar" }, "from": { "$ref": "#/$defs/id" }, "distance_mm": { "$ref": "#/$defs/mm" }, "angle_deg": { "$ref": "#/$defs/mm" }, "reference": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "center_a", "center_b", "radius_a_mm", "radius_b_mm", "near"], "properties": { "type": { "const": "compass" }, "center_a": { "$ref": "#/$defs/id" }, "center_b": { "$ref": "#/$defs/id" }, "radius_a_mm": { "$ref": "#/$defs/mm" }, "radius_b_mm": { "$ref": "#/$defs/mm" }, "near": { "$ref": "#/$defs/xy" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "trace", "ratio"], "properties": { "type": { "const": "division" }, "trace": { "$ref": "#/$defs/id" }, "ratio": { "$ref": "#/$defs/mm" }, "start": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "source", "axis"], "properties": { "type": { "const": "mirror" }, "source": { "$ref": "#/$defs/id" }, "axis": { "$ref": "#/$defs/mirror_axis" } }, "additionalProperties": false }
+      ]
+    },
+    "path_role": {
+      "enum": ["construction", "sewing_contour", "cutting_contour", "grainline", "fold", "annotation_axis", "topstitch", "center_front", "center_back", "waist_line", "hip_line", "bust_line", "skiving_line", "glue_line"]
+    },
+    "entity": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "role": { "$ref": "#/$defs/path_role" },
+        "kind": { "$ref": "#/$defs/entity_kind" },
+        "layer": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "construction": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "length_mm", "angle_deg"], "properties": { "type": { "const": "polar" }, "length_mm": { "$ref": "#/$defs/mm" }, "angle_deg": { "$ref": "#/$defs/mm" }, "kept": { "type": "boolean" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "reference", "length_mm", "side"], "properties": { "type": { "const": "perpendicular" }, "reference": { "$ref": "#/$defs/id" }, "length_mm": { "$ref": "#/$defs/mm" }, "side": { "$ref": "#/$defs/side" }, "kept": { "type": "boolean" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "reference", "distance_mm", "side"], "properties": { "type": { "const": "parallel" }, "reference": { "$ref": "#/$defs/id" }, "distance_mm": { "$ref": "#/$defs/mm" }, "side": { "$ref": "#/$defs/side" }, "kept": { "type": "boolean" } }, "additionalProperties": false }
+      ]
+    },
+    "spline_node": {
+      "type": "object",
+      "required": ["point"],
+      "properties": {
+        "point": { "$ref": "#/$defs/id" },
+        "corner": { "type": "boolean" },
+        "tangent": { "$ref": "#/$defs/offset" },
+        "tangent_in": { "$ref": "#/$defs/offset" }
+      },
+      "additionalProperties": false
+    },
+    "entity_kind": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "from", "to"], "properties": { "type": { "const": "segment" }, "from": { "$ref": "#/$defs/id" }, "to": { "$ref": "#/$defs/id" }, "construction": { "$ref": "#/$defs/construction" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "start", "handle_start", "handle_end", "end"], "properties": { "type": { "const": "curve" }, "start": { "$ref": "#/$defs/id" }, "handle_start": { "$ref": "#/$defs/offset" }, "handle_end": { "$ref": "#/$defs/offset" }, "end": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "center", "radius_mm"], "properties": { "type": { "const": "circle" }, "center": { "$ref": "#/$defs/id" }, "radius_mm": { "$ref": "#/$defs/mm" }, "start_deg": { "$ref": "#/$defs/mm" }, "ccw": { "type": "boolean" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "center", "start", "end"], "properties": { "type": { "const": "arc" }, "center": { "$ref": "#/$defs/id" }, "start": { "$ref": "#/$defs/id" }, "end": { "$ref": "#/$defs/id" }, "ccw": { "type": "boolean" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "nodes"], "properties": { "type": { "const": "spline" }, "nodes": { "type": "array", "items": { "$ref": "#/$defs/spline_node" } } }, "additionalProperties": false }
+      ]
+    },
+    "notch_anchor": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "point"], "properties": { "type": { "const": "point" }, "point": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "midpoint" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "ratio"], "properties": { "type": { "const": "ratio" }, "ratio": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "entity", "point"], "properties": { "type": { "const": "carried" }, "entity": { "$ref": "#/$defs/id" }, "point": { "$ref": "#/$defs/id" }, "from_end": { "type": "boolean" } }, "additionalProperties": false }
+      ]
+    },
+    "notch": {
+      "type": "object",
+      "required": ["id", "entity", "distance_mm", "side", "length_mm"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "entity": { "$ref": "#/$defs/id" },
+        "distance_mm": { "$ref": "#/$defs/mm" },
+        "side": { "$ref": "#/$defs/side" },
+        "length_mm": { "$ref": "#/$defs/mm" },
+        "style": { "enum": ["single", "double"] },
+        "anchor": { "$ref": "#/$defs/notch_anchor" },
+        "form": { "enum": ["line", "t", "v", "u", "slot"] },
+        "width_mm": { "type": "number", "minimum": 0.1, "maximum": 100 },
+        "on_cut": { "type": "boolean" },
+        "corner": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "dimension": {
+      "type": "object",
+      "required": ["id", "from", "to", "offset_mm"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "from": { "$ref": "#/$defs/id" },
+        "to": { "$ref": "#/$defs/id" },
+        "offset_mm": { "$ref": "#/$defs/mm" }
+      },
+      "additionalProperties": false
+    },
+    "full_dimension_kind": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "entity", "offset_mm"], "properties": { "type": { "const": "path_length" }, "entity": { "$ref": "#/$defs/id" }, "offset_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "vertex", "first", "second", "radius_mm"], "properties": { "type": { "const": "angle" }, "vertex": { "$ref": "#/$defs/id" }, "first": { "$ref": "#/$defs/id" }, "second": { "$ref": "#/$defs/id" }, "radius_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "entity", "angle_deg"], "properties": { "type": { "const": "radius" }, "entity": { "$ref": "#/$defs/id" }, "angle_deg": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "entity", "angle_deg"], "properties": { "type": { "const": "diameter" }, "entity": { "$ref": "#/$defs/id" }, "angle_deg": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "from", "to", "offset_mm"], "properties": { "type": { "const": "horizontal" }, "from": { "$ref": "#/$defs/id" }, "to": { "$ref": "#/$defs/id" }, "offset_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "from", "to", "offset_mm"], "properties": { "type": { "const": "vertical" }, "from": { "$ref": "#/$defs/id" }, "to": { "$ref": "#/$defs/id" }, "offset_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "full_dimension": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "$ref": "#/$defs/full_dimension_kind" },
+        "label": { "type": "string" },
+        "text_shift_mm": { "$ref": "#/$defs/mm" }
+      },
+      "additionalProperties": false
+    },
+    "topstitch_source": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "piece"], "properties": { "type": { "const": "piece" }, "piece": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "paths"], "properties": { "type": { "const": "paths" }, "paths": { "type": "array", "items": { "$ref": "#/$defs/id" } }, "from": { "$ref": "#/$defs/id" } }, "additionalProperties": false }
+      ]
+    },
+    "topstitch": {
+      "type": "object",
+      "required": ["id", "source", "distance_mm", "side", "paths"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "source": { "$ref": "#/$defs/topstitch_source" },
+        "distance_mm": { "$ref": "#/$defs/mm" },
+        "side": { "enum": ["inside", "outside", "left", "right"] },
+        "paths": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "stale": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "piece_edge": {
+      "type": "object",
+      "required": ["entity"],
+      "properties": { "entity": { "$ref": "#/$defs/id" }, "reversed": { "type": "boolean" } },
+      "additionalProperties": false
+    },
+    "piece_link": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "sheet"], "properties": { "type": { "const": "linked" }, "sheet": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "detached" } }, "additionalProperties": false }
+      ]
+    },
+    "internal_target": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "entity"], "properties": { "type": { "const": "path" }, "entity": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "point"], "properties": { "type": { "const": "point" }, "point": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "notch"], "properties": { "type": { "const": "notch" }, "notch": { "$ref": "#/$defs/id" } }, "additionalProperties": false }
+      ]
+    },
+    "internal_element": {
+      "type": "object",
+      "required": ["target", "kind"],
+      "properties": {
+        "target": { "$ref": "#/$defs/internal_target" },
+        "kind": { "enum": ["fold", "topstitch", "pocket_position", "mark", "buttonhole", "other"] }
+      },
+      "additionalProperties": false
+    },
+    "grain_direction": {
+      "oneOf": [
+        { "type": "object", "required": ["mode"], "properties": { "mode": { "const": "drawn" } }, "additionalProperties": false },
+        { "type": "object", "required": ["mode", "reference"], "properties": { "mode": { "const": "parallel" }, "reference": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["mode", "reference"], "properties": { "mode": { "const": "perpendicular" }, "reference": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["mode", "angle_deg"], "properties": { "mode": { "const": "bias" }, "angle_deg": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "extra_grain_line": {
+      "type": "object",
+      "required": ["entity"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "direction": { "$ref": "#/$defs/grain_direction" },
+        "sense": { "enum": ["none", "nap", "pattern"] },
+        "reversed": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "piece_grain": {
+      "type": "object",
+      "properties": {
+        "direction": { "$ref": "#/$defs/grain_direction" },
+        "sense": { "enum": ["none", "nap", "pattern"] },
+        "reversed": { "type": "boolean" },
+        "rotation_tolerance_deg": { "$ref": "#/$defs/mm" },
+        "extra": { "type": "array", "items": { "$ref": "#/$defs/extra_grain_line" } }
+      },
+      "additionalProperties": false
+    },
+    "marking_anchor": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "point"], "properties": { "type": { "const": "point" }, "point": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "tip", "toward", "setback_mm"], "properties": { "type": { "const": "dart_tip" }, "tip": { "$ref": "#/$defs/id" }, "toward": { "$ref": "#/$defs/id" }, "setback_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "marking_shape": {
+      "oneOf": [
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "punch" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "diameter_mm"], "properties": { "type": { "const": "drill" }, "diameter_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "size_mm"], "properties": { "type": { "const": "cross" }, "size_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "length_mm", "width_mm", "angle_deg"], "properties": { "type": { "const": "slot" }, "length_mm": { "$ref": "#/$defs/mm" }, "width_mm": { "$ref": "#/$defs/mm" }, "angle_deg": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "marking": {
+      "type": "object",
+      "required": ["id", "at", "shape"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "at": { "$ref": "#/$defs/marking_anchor" },
+        "shape": { "$ref": "#/$defs/marking_shape" }
+      },
+      "additionalProperties": false
+    },
+    "seam_side": {
+      "type": "object",
+      "required": ["piece", "edges"],
+      "properties": {
+        "piece": { "$ref": "#/$defs/id" },
+        "edges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }
+      },
+      "additionalProperties": false
+    },
+    "param_formula": {
+      "type": "object",
+      "required": ["point", "param", "expr"],
+      "properties": {
+        "point": { "$ref": "#/$defs/id" },
+        "param": { "enum": ["distance", "angle", "dx", "dy"] },
+        "expr": { "type": "string", "minLength": 1, "maxLength": 500 }
+      },
+      "additionalProperties": false
+    },
+    "length_adjust": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "point"], "properties": { "type": { "const": "handle" }, "point": { "$ref": "#/$defs/id" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "point", "angle_deg"], "properties": { "type": { "const": "slide" }, "point": { "$ref": "#/$defs/id" }, "angle_deg": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "length_constraint": {
+      "type": "object",
+      "required": ["curve", "length_mm", "adjust"],
+      "properties": {
+        "curve": { "$ref": "#/$defs/id" },
+        "length_mm": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "adjust": { "$ref": "#/$defs/length_adjust" },
+        "reference": { "$ref": "#/$defs/length_reference" }
+      },
+      "additionalProperties": false
+    },
+    "length_reference": {
+      "type": "object",
+      "required": ["entity", "offset_mm"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "offset_mm": { "type": "number", "minimum": -1000000, "maximum": 1000000 }
+      },
+      "additionalProperties": false
+    },
+    "variable": {
+      "type": "object",
+      "required": ["name", "unit", "expr"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 40, "pattern": "^[A-Za-z_][A-Za-z0-9_]*$" },
+        "unit": { "enum": ["mm", "deg", "none"] },
+        "expr": { "type": "string", "minLength": 1, "maxLength": 500 }
+      },
+      "additionalProperties": false
+    },
+    "seam_pair": {
+      "type": "object",
+      "required": ["id", "a", "b"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "a": { "$ref": "#/$defs/seam_side" },
+        "b": { "$ref": "#/$defs/seam_side" },
+        "embu_mm": { "type": "number", "minimum": 0, "maximum": 1000 },
+        "tolerance_mm": { "type": "number", "minimum": 0, "maximum": 1000 }
+      },
+      "additionalProperties": false
+    },
+    "dart": {
+      "type": "object",
+      "required": ["id", "apex", "toward", "length_mm", "opening_mm", "fixed"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "apex": { "$ref": "#/$defs/id" },
+        "toward": { "$ref": "#/$defs/id" },
+        "length_mm": { "type": "number", "minimum": 1, "maximum": 2000 },
+        "opening_mm": { "type": "number", "minimum": 0.1, "maximum": 1000 },
+        "fixed": { "$ref": "#/$defs/side" },
+        "cut_closed": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "pleat": {
+      "type": "object",
+      "required": ["id", "kind", "from_x_mm", "from_y_mm", "to_x_mm", "to_y_mm", "depth_mm", "sense"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["flat", "hollow"] },
+        "from_x_mm": { "$ref": "#/$defs/mm" },
+        "from_y_mm": { "$ref": "#/$defs/mm" },
+        "to_x_mm": { "$ref": "#/$defs/mm" },
+        "to_y_mm": { "$ref": "#/$defs/mm" },
+        "depth_mm": { "type": "number", "minimum": 0.1, "maximum": 500 },
+        "sense": { "$ref": "#/$defs/side" }
+      },
+      "additionalProperties": false
+    },
+    "flare": {
+      "type": "object",
+      "required": ["id", "hinge_x_mm", "hinge_y_mm", "stay_x_mm", "stay_y_mm", "moved_x_mm", "moved_y_mm"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "hinge_x_mm": { "$ref": "#/$defs/mm" },
+        "hinge_y_mm": { "$ref": "#/$defs/mm" },
+        "stay_x_mm": { "$ref": "#/$defs/mm" },
+        "stay_y_mm": { "$ref": "#/$defs/mm" },
+        "moved_x_mm": { "$ref": "#/$defs/mm" },
+        "moved_y_mm": { "$ref": "#/$defs/mm" }
+      },
+      "additionalProperties": false
+    },
+    "buttonhole_orientation": {
+      "oneOf": [
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "horizontal" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "vertical" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "perpendicular" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "degrees"], "properties": { "type": { "const": "angle" }, "degrees": { "$ref": "#/$defs/mm" } }, "additionalProperties": false }
+      ]
+    },
+    "button_element": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "diameter_mm"], "properties": { "type": { "const": "button" }, "diameter_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "length_mm", "width_mm", "orientation"], "properties": { "type": { "const": "buttonhole" }, "length_mm": { "$ref": "#/$defs/mm" }, "width_mm": { "$ref": "#/$defs/mm" }, "orientation": { "$ref": "#/$defs/buttonhole_orientation" } }, "additionalProperties": false }
+      ]
+    },
+    "button_group": {
+      "type": "object",
+      "required": ["id", "from", "to", "count", "element", "edge_margin_mm"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "from": { "$ref": "#/$defs/id" },
+        "to": { "$ref": "#/$defs/id" },
+        "count": { "$ref": "#/$defs/u32" },
+        "element": { "$ref": "#/$defs/button_element" },
+        "edge_margin_mm": { "$ref": "#/$defs/mm" }
+      },
+      "additionalProperties": false
+    },
+    "derived_op": {
+      "oneOf": [
+        { "type": "object", "required": ["type", "distance_mm"], "properties": { "type": { "const": "offset" }, "distance_mm": { "$ref": "#/$defs/mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "fold"], "properties": { "type": { "const": "unfold" }, "fold": { "$ref": "#/$defs/id" } }, "additionalProperties": false }
+      ]
+    },
+    "derived": {
+      "type": "object",
+      "required": ["mother", "kind", "operation"],
+      "properties": {
+        "mother": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["facing", "lining", "interfacing", "reinforcement", "unfolded"] },
+        "operation": { "$ref": "#/$defs/derived_op" },
+        "stale": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "placement": {
+      "type": "object",
+      "required": ["x_mm", "y_mm", "rotation_deg"],
+      "properties": {
+        "x_mm": { "$ref": "#/$defs/mm" },
+        "y_mm": { "$ref": "#/$defs/mm" },
+        "rotation_deg": { "$ref": "#/$defs/mm" }
+      },
+      "additionalProperties": false
+    },
+    "seam_mm": { "type": "number", "minimum": 0, "maximum": 1000 },
+    "edge_allowance": {
+      "type": "object",
+      "required": ["entity", "start_mm", "end_mm"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "start_mm": { "$ref": "#/$defs/seam_mm" },
+        "end_mm": { "$ref": "#/$defs/seam_mm" }
+      },
+      "additionalProperties": false
+    },
+    "corner_mm": { "type": "number", "minimum": 0, "maximum": 10000 },
+    "corner_type": {
+      "oneOf": [
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "perpendicular_previous" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "perpendicular_next" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "symmetric" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type", "depth_mm"], "properties": { "type": { "const": "truncated" }, "depth_mm": { "$ref": "#/$defs/corner_mm" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "stepped" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "hem_fold_next" } }, "additionalProperties": false },
+        { "type": "object", "required": ["type"], "properties": { "type": { "const": "hem_fold_previous" } }, "additionalProperties": false }
+      ]
+    },
+    "corner_allowance": {
+      "type": "object",
+      "required": ["entity", "corner"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "corner": { "$ref": "#/$defs/corner_type" }
+      },
+      "additionalProperties": false
+    },
+    "hem_allowance": {
+      "type": "object",
+      "required": ["entity", "height_mm"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "height_mm": { "$ref": "#/$defs/seam_mm" }
+      },
+      "additionalProperties": false
+    },
+    "fold_allowance": {
+      "type": "object",
+      "required": ["entity", "value_mm"],
+      "properties": {
+        "entity": { "$ref": "#/$defs/id" },
+        "value_mm": { "$ref": "#/$defs/seam_mm" },
+        "notch_step_mm": { "type": "number", "minimum": 1, "maximum": 1000 },
+        "notch_count": { "type": "integer", "minimum": 1, "maximum": 1000 }
+      },
+      "additionalProperties": false
+    },
+    "seam_defaults": {
+      "type": "object",
+      "required": ["fabric_mm", "lining_mm", "interfacing_mm", "leather_mm", "reinforcement_mm"],
+      "properties": {
+        "fabric_mm": { "$ref": "#/$defs/seam_mm" },
+        "lining_mm": { "$ref": "#/$defs/seam_mm" },
+        "interfacing_mm": { "$ref": "#/$defs/seam_mm" },
+        "leather_mm": { "$ref": "#/$defs/seam_mm" },
+        "reinforcement_mm": { "$ref": "#/$defs/seam_mm" }
+      },
+      "additionalProperties": false
+    },
+    "piece_seam": {
+      "type": "object",
+      "required": ["default_mm"],
+      "properties": {
+        "default_mm": { "$ref": "#/$defs/seam_mm" },
+        "edges": { "type": "array", "items": { "$ref": "#/$defs/edge_allowance" } },
+        "hems": { "type": "array", "items": { "$ref": "#/$defs/hem_allowance" } },
+        "folds": { "type": "array", "items": { "$ref": "#/$defs/fold_allowance" } },
+        "corners": { "type": "array", "items": { "$ref": "#/$defs/corner_allowance" } },
+        "max_corner_mm": { "$ref": "#/$defs/corner_mm" }
+      },
+      "additionalProperties": false
+    },
+    "piece": {
+      "type": "object",
+      "required": ["id", "name", "quantity", "link"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "quantity": { "$ref": "#/$defs/u32" },
+        "material": { "type": "string" },
+        "category": { "enum": ["fabric", "lining", "interfacing", "leather", "reinforcement"] },
+        "comment": { "type": "string" },
+        "mirrored_pair": { "type": "boolean" },
+        "outline": { "type": "array", "items": { "$ref": "#/$defs/piece_edge" } },
+        "grainline": { "$ref": "#/$defs/id" },
+        "grain": { "$ref": "#/$defs/piece_grain" },
+        "seam": { "$ref": "#/$defs/piece_seam" },
+        "net_cut": { "const": true },
+        "no_grain": { "const": true },
+        "on_fold": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "internal": { "type": "array", "items": { "$ref": "#/$defs/internal_element" } },
+        "markings": { "type": "array", "items": { "$ref": "#/$defs/marking" } },
+        "darts": { "type": "array", "items": { "$ref": "#/$defs/dart" } },
+        "pleats": { "type": "array", "items": { "$ref": "#/$defs/pleat" } },
+        "flares": { "type": "array", "maxItems": 50, "items": { "$ref": "#/$defs/flare" } },
+        "buttons": { "type": "array", "items": { "$ref": "#/$defs/button_group" } },
+        "derived": { "$ref": "#/$defs/derived" },
+        "placement": { "$ref": "#/$defs/placement" },
+        "link": { "$ref": "#/$defs/piece_link" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

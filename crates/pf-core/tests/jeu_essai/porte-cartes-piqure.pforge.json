@@ -1,0 +1,1075 @@
+{
+  "format": "patternforge",
+  "schema_version": 6,
+  "name": "Porte-cartes - jeu d'essai",
+  "next_id": 101,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Porte-cartes",
+      "points": [
+        {
+          "id": 10,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 95.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 11,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 100.0,
+            "y": 5.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 12,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 95.0,
+            "y": 5.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 14,
+          "label": "G",
+          "definition": {
+            "type": "free",
+            "x": 100.0,
+            "y": 65.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 15,
+          "label": "H",
+          "definition": {
+            "type": "free",
+            "x": 95.0,
+            "y": 70.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 16,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 95.0,
+            "y": 65.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 18,
+          "label": "I",
+          "definition": {
+            "type": "free",
+            "x": 5.0,
+            "y": 70.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 19,
+          "label": "J",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 65.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 20,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 5.0,
+            "y": 65.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 22,
+          "label": "K",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 5.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 23,
+          "label": "L",
+          "definition": {
+            "type": "free",
+            "x": 5.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 24,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 5.0,
+            "y": 5.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 27,
+          "label": "M",
+          "definition": {
+            "type": "free",
+            "x": 6.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 29,
+          "label": "N",
+          "definition": {
+            "type": "free",
+            "x": 10.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 31,
+          "label": "O",
+          "definition": {
+            "type": "free",
+            "x": 14.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 33,
+          "label": "P",
+          "definition": {
+            "type": "free",
+            "x": 18.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 35,
+          "label": "Q",
+          "definition": {
+            "type": "free",
+            "x": 22.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 37,
+          "label": "R",
+          "definition": {
+            "type": "free",
+            "x": 26.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 39,
+          "label": "S",
+          "definition": {
+            "type": "free",
+            "x": 30.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 41,
+          "label": "T",
+          "definition": {
+            "type": "free",
+            "x": 34.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 43,
+          "label": "U",
+          "definition": {
+            "type": "free",
+            "x": 38.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 45,
+          "label": "V",
+          "definition": {
+            "type": "free",
+            "x": 42.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 47,
+          "label": "W",
+          "definition": {
+            "type": "free",
+            "x": 46.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 49,
+          "label": "X",
+          "definition": {
+            "type": "free",
+            "x": 50.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 51,
+          "label": "Y",
+          "definition": {
+            "type": "free",
+            "x": 54.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 53,
+          "label": "Z",
+          "definition": {
+            "type": "free",
+            "x": 58.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 55,
+          "label": "A1",
+          "definition": {
+            "type": "free",
+            "x": 62.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 57,
+          "label": "B1",
+          "definition": {
+            "type": "free",
+            "x": 66.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 59,
+          "label": "C1",
+          "definition": {
+            "type": "free",
+            "x": 70.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 61,
+          "label": "D1",
+          "definition": {
+            "type": "free",
+            "x": 74.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 63,
+          "label": "E1",
+          "definition": {
+            "type": "free",
+            "x": 78.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 65,
+          "label": "F1",
+          "definition": {
+            "type": "free",
+            "x": 82.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 67,
+          "label": "G1",
+          "definition": {
+            "type": "free",
+            "x": 86.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 69,
+          "label": "H1",
+          "definition": {
+            "type": "free",
+            "x": 90.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 71,
+          "label": "I1",
+          "definition": {
+            "type": "free",
+            "x": 94.0,
+            "y": 3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 75,
+          "label": "J1",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 76,
+          "label": "K1",
+          "definition": {
+            "type": "free",
+            "x": 210.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 78,
+          "label": "L1",
+          "definition": {
+            "type": "free",
+            "x": 210.0,
+            "y": 50.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 80,
+          "label": "M1",
+          "definition": {
+            "type": "free",
+            "x": 165.0,
+            "y": 55.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 81,
+          "label": "N1",
+          "definition": {
+            "type": "free",
+            "x": 120.0,
+            "y": 50.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 82,
+          "label": "O1",
+          "definition": {
+            "type": "free",
+            "x": 165.0,
+            "y": -150.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 88,
+          "label": "P1",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": -20.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 89,
+          "label": "Q1",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": -50.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 91,
+          "label": "R1",
+          "definition": {
+            "type": "free",
+            "x": 40.0,
+            "y": -90.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 92,
+          "label": "S1",
+          "definition": {
+            "type": "free",
+            "x": 80.0,
+            "y": -50.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 93,
+          "label": "T1",
+          "definition": {
+            "type": "free",
+            "x": 40.0,
+            "y": -50.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 95,
+          "label": "U1",
+          "definition": {
+            "type": "free",
+            "x": 80.0,
+            "y": -20.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 4,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 23,
+            "to": 10
+          }
+        },
+        {
+          "id": 6,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 11,
+            "to": 14
+          }
+        },
+        {
+          "id": 8,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 15,
+            "to": 18
+          }
+        },
+        {
+          "id": 9,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 19,
+            "to": 22
+          }
+        },
+        {
+          "id": 13,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 12,
+            "start": 10,
+            "end": 11,
+            "ccw": true
+          }
+        },
+        {
+          "id": 17,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 16,
+            "start": 14,
+            "end": 15,
+            "ccw": true
+          }
+        },
+        {
+          "id": 21,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 20,
+            "start": 18,
+            "end": 19,
+            "ccw": true
+          }
+        },
+        {
+          "id": 25,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 24,
+            "start": 22,
+            "end": 23,
+            "ccw": true
+          }
+        },
+        {
+          "id": 77,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 75,
+            "to": 76
+          }
+        },
+        {
+          "id": 79,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 76,
+            "to": 78
+          }
+        },
+        {
+          "id": 83,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 82,
+            "start": 78,
+            "end": 81,
+            "ccw": true
+          }
+        },
+        {
+          "id": 84,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 81,
+            "to": 75
+          }
+        },
+        {
+          "id": 90,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 88,
+            "to": 89
+          }
+        },
+        {
+          "id": 94,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "arc",
+            "center": 93,
+            "start": 89,
+            "end": 92,
+            "ccw": true
+          }
+        },
+        {
+          "id": 96,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 92,
+            "to": 95
+          }
+        },
+        {
+          "id": 97,
+          "role": "sewing_contour",
+          "kind": {
+            "type": "segment",
+            "from": 95,
+            "to": 88
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 73,
+          "entity": 4,
+          "distance_mm": 20.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 74,
+          "entity": 4,
+          "distance_mm": 70.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 86,
+          "entity": 77,
+          "distance_mm": 20.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 87,
+          "entity": 77,
+          "distance_mm": 70.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 99,
+          "entity": 97,
+          "distance_mm": 40.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 26,
+      "name": "Fond",
+      "code": "PC-01",
+      "quantity": 1,
+      "material": "Cuir",
+      "category": "leather",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 4,
+          "reversed": false
+        },
+        {
+          "entity": 13,
+          "reversed": false
+        },
+        {
+          "entity": 6,
+          "reversed": false
+        },
+        {
+          "entity": 17,
+          "reversed": false
+        },
+        {
+          "entity": 8,
+          "reversed": false
+        },
+        {
+          "entity": 21,
+          "reversed": false
+        },
+        {
+          "entity": 9,
+          "reversed": false
+        },
+        {
+          "entity": 25,
+          "reversed": false
+        }
+      ],
+      "net_cut": true,
+      "markings": [
+        {
+          "id": 28,
+          "at": {
+            "type": "point",
+            "point": 27
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 30,
+          "at": {
+            "type": "point",
+            "point": 29
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 32,
+          "at": {
+            "type": "point",
+            "point": 31
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 34,
+          "at": {
+            "type": "point",
+            "point": 33
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 36,
+          "at": {
+            "type": "point",
+            "point": 35
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 38,
+          "at": {
+            "type": "point",
+            "point": 37
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 40,
+          "at": {
+            "type": "point",
+            "point": 39
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 42,
+          "at": {
+            "type": "point",
+            "point": 41
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 44,
+          "at": {
+            "type": "point",
+            "point": 43
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 46,
+          "at": {
+            "type": "point",
+            "point": 45
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 48,
+          "at": {
+            "type": "point",
+            "point": 47
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 50,
+          "at": {
+            "type": "point",
+            "point": 49
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 52,
+          "at": {
+            "type": "point",
+            "point": 51
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 54,
+          "at": {
+            "type": "point",
+            "point": 53
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 56,
+          "at": {
+            "type": "point",
+            "point": 55
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 58,
+          "at": {
+            "type": "point",
+            "point": 57
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 60,
+          "at": {
+            "type": "point",
+            "point": 59
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 62,
+          "at": {
+            "type": "point",
+            "point": 61
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 64,
+          "at": {
+            "type": "point",
+            "point": 63
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 66,
+          "at": {
+            "type": "point",
+            "point": 65
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 68,
+          "at": {
+            "type": "point",
+            "point": 67
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 70,
+          "at": {
+            "type": "point",
+            "point": 69
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        },
+        {
+          "id": 72,
+          "at": {
+            "type": "point",
+            "point": 71
+          },
+          "shape": {
+            "type": "drill",
+            "diameter_mm": 1.2
+          }
+        }
+      ],
+      "stitch_lines": [
+        {
+          "id": 100,
+          "edges": [
+            4
+          ],
+          "hole": {
+            "type": "round",
+            "diameter_mm": 1.0
+          },
+          "pitch_mm": 4.0,
+          "setback_mm": 3.0
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 85,
+      "name": "Poche",
+      "code": "PC-02",
+      "quantity": 1,
+      "material": "Cuir",
+      "category": "leather",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 77,
+          "reversed": false
+        },
+        {
+          "entity": 79,
+          "reversed": false
+        },
+        {
+          "entity": 83,
+          "reversed": false
+        },
+        {
+          "entity": 84,
+          "reversed": false
+        }
+      ],
+      "seam": {
+        "default_mm": 6.0,
+        "folds": [
+          {
+            "entity": 83,
+            "value_mm": 8.0
+          }
+        ]
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 98,
+      "name": "Patte",
+      "code": "PC-03",
+      "quantity": 1,
+      "material": "Cuir",
+      "category": "leather",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 90,
+          "reversed": false
+        },
+        {
+          "entity": 94,
+          "reversed": false
+        },
+        {
+          "entity": 96,
+          "reversed": false
+        },
+        {
+          "entity": 97,
+          "reversed": false
+        }
+      ],
+      "net_cut": true,
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    }
+  ]
+}

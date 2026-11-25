@@ -1,0 +1,193 @@
+{
+  "format": "patternforge",
+  "schema_version": 4,
+  "name": "Pièce avec crans et droit-fil",
+  "next_id": 19,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Rabat",
+      "points": [
+        {
+          "id": 2,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 3,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 170.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 4,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 170.0,
+            "y": 120.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 120.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 15,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 85.0,
+            "y": 20.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 16,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 85.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 6,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 2,
+            "to": 3
+          }
+        },
+        {
+          "id": 7,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 3,
+            "to": 4
+          }
+        },
+        {
+          "id": 8,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 4,
+            "to": 5
+          }
+        },
+        {
+          "id": 9,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 2
+          }
+        },
+        {
+          "id": 17,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 15,
+            "to": 16
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 10,
+          "entity": 6,
+          "distance_mm": 40.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 11,
+          "entity": 6,
+          "distance_mm": 125.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "double"
+        },
+        {
+          "id": 12,
+          "entity": 9,
+          "distance_mm": 60.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ],
+      "dimensions": [
+        {
+          "id": 13,
+          "from": 2,
+          "to": 3,
+          "offset_mm": -15.0
+        },
+        {
+          "id": 14,
+          "from": 3,
+          "to": 4,
+          "offset_mm": 15.0
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 18,
+      "name": "Rabat",
+      "quantity": 2,
+      "material": "Cuir",
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 6,
+          "reversed": false
+        },
+        {
+          "entity": 7,
+          "reversed": false
+        },
+        {
+          "entity": 8,
+          "reversed": false
+        },
+        {
+          "entity": 9,
+          "reversed": false
+        }
+      ],
+      "grainline": 17,
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    }
+  ]
+}

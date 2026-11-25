@@ -1,0 +1,106 @@
+{
+  "format": "patternforge",
+  "schema_version": 5,
+  "name": "Grande pièce 600 × 450",
+  "next_id": 11,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Panneau",
+      "points": [
+        {
+          "id": 2,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 3,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 600.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 5,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 600.0,
+            "y": 450.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 7,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 450.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 4,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 2,
+            "to": 3
+          }
+        },
+        {
+          "id": 6,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 3,
+            "to": 5
+          }
+        },
+        {
+          "id": 8,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 7
+          }
+        },
+        {
+          "id": 9,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 7,
+            "to": 2
+          }
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 10,
+      "name": "Panneau",
+      "quantity": 2,
+      "material": "Toile",
+      "mirrored_pair": false,
+      "outline": [],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    }
+  ]
+}

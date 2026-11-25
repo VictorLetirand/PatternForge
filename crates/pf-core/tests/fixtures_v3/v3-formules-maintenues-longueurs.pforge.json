@@ -1,0 +1,2325 @@
+{
+  "format": "patternforge",
+  "schema_version": 3,
+  "name": "Extras é",
+  "next_id": 196,
+  "sheets": [
+    {
+      "id": 1,
+      "name": "Feuille 1",
+      "points": [
+        {
+          "id": 5,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 6,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 200.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 7,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 200.0,
+            "y": 120.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 8,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 0.0,
+            "y": 120.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 15,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 4.0,
+            "y": 4.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 16,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 196.0,
+            "y": 4.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 17,
+          "label": "G",
+          "definition": {
+            "type": "free",
+            "x": 196.0,
+            "y": 116.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 18,
+          "label": "H",
+          "definition": {
+            "type": "free",
+            "x": 4.0,
+            "y": 116.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 23,
+          "label": "I",
+          "definition": {
+            "type": "free",
+            "x": 10.0,
+            "y": 10.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 24,
+          "label": "J",
+          "definition": {
+            "type": "free",
+            "x": 90.0,
+            "y": 40.0
+          },
+          "role": "construction",
+          "layer": 2
+        },
+        {
+          "id": 30,
+          "label": "K",
+          "definition": {
+            "type": "midpoint",
+            "first": 23,
+            "second": 24
+          },
+          "role": "construction"
+        },
+        {
+          "id": 31,
+          "label": "L",
+          "definition": {
+            "type": "offset",
+            "from": 23,
+            "dx_mm": 5.0,
+            "dy_mm": -3.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 32,
+          "label": "M",
+          "definition": {
+            "type": "on_segment_ratio",
+            "segment": 9,
+            "ratio": 0.3
+          },
+          "role": "construction"
+        },
+        {
+          "id": 33,
+          "label": "N",
+          "definition": {
+            "type": "on_segment",
+            "segment": 9,
+            "distance_mm": 20.0,
+            "origin": "end"
+          },
+          "role": "construction"
+        },
+        {
+          "id": 34,
+          "label": "O",
+          "definition": {
+            "type": "polar",
+            "from": 23,
+            "distance_mm": 30.0,
+            "angle_deg": 15.0,
+            "reference": 9
+          },
+          "role": "construction"
+        },
+        {
+          "id": 35,
+          "label": "P",
+          "definition": {
+            "type": "division",
+            "trace": 10,
+            "ratio": 0.3333333333333333
+          },
+          "role": "construction"
+        },
+        {
+          "id": 36,
+          "label": "Q",
+          "definition": {
+            "type": "division",
+            "trace": 10,
+            "ratio": 0.6666666666666666
+          },
+          "role": "construction"
+        },
+        {
+          "id": 37,
+          "label": "R",
+          "definition": {
+            "type": "mirror",
+            "source": 23,
+            "axis": {
+              "type": "guide",
+              "guide": 4
+            }
+          },
+          "role": "construction"
+        },
+        {
+          "id": 39,
+          "label": "S",
+          "definition": {
+            "type": "free",
+            "x": 150.0,
+            "y": 60.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 44,
+          "label": "T",
+          "definition": {
+            "type": "free",
+            "x": 300.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 45,
+          "label": "U",
+          "definition": {
+            "type": "free",
+            "x": 340.0,
+            "y": 30.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 46,
+          "label": "V",
+          "definition": {
+            "type": "free",
+            "x": 380.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 47,
+          "label": "W",
+          "definition": {
+            "type": "free",
+            "x": 340.0,
+            "y": -11.666666666666666
+          },
+          "role": "construction"
+        },
+        {
+          "id": 50,
+          "label": "X",
+          "definition": {
+            "type": "free",
+            "x": 300.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 51,
+          "label": "Y",
+          "definition": {
+            "type": "free",
+            "x": 330.0,
+            "y": 130.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 52,
+          "label": "Z",
+          "definition": {
+            "type": "free",
+            "x": 380.0,
+            "y": 110.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 54,
+          "label": "A1",
+          "definition": {
+            "type": "free",
+            "x": 100.0,
+            "y": 20.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 55,
+          "label": "B1",
+          "definition": {
+            "type": "free",
+            "x": 100.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 57,
+          "label": "C1",
+          "definition": {
+            "type": "free",
+            "x": 40.0,
+            "y": 20.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 58,
+          "label": "D1",
+          "definition": {
+            "type": "free",
+            "x": 40.0,
+            "y": 90.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 60,
+          "label": "E1",
+          "definition": {
+            "type": "free",
+            "x": 500.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 61,
+          "label": "F1",
+          "definition": {
+            "type": "free",
+            "x": 600.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 63,
+          "label": "G1",
+          "definition": {
+            "type": "free",
+            "x": 500.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 65,
+          "label": "H1",
+          "definition": {
+            "type": "free",
+            "x": 570.7106781186548,
+            "y": 70.71067811865476
+          },
+          "role": "construction"
+        },
+        {
+          "id": 68,
+          "label": "I1",
+          "definition": {
+            "type": "free",
+            "x": 700.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 71,
+          "label": "J1",
+          "definition": {
+            "type": "free",
+            "x": 800.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 74,
+          "label": "K1",
+          "definition": {
+            "type": "free",
+            "x": 900.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 75,
+          "label": "L1",
+          "definition": {
+            "type": "free",
+            "x": 1100.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 76,
+          "label": "M1",
+          "definition": {
+            "type": "free",
+            "x": 1100.0,
+            "y": 150.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 77,
+          "label": "N1",
+          "definition": {
+            "type": "free",
+            "x": 900.0,
+            "y": 150.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 83,
+          "label": "O1",
+          "definition": {
+            "type": "free",
+            "x": 1000.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 84,
+          "label": "P1",
+          "definition": {
+            "type": "free",
+            "x": 1000.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 86,
+          "label": "Q1",
+          "definition": {
+            "type": "free",
+            "x": 1400.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 87,
+          "label": "R1",
+          "definition": {
+            "type": "free",
+            "x": 1600.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 88,
+          "label": "S1",
+          "definition": {
+            "type": "free",
+            "x": 1600.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 89,
+          "label": "T1",
+          "definition": {
+            "type": "free",
+            "x": 1400.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 105,
+          "label": "U1",
+          "definition": {
+            "type": "free",
+            "x": 1700.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 106,
+          "label": "V1",
+          "definition": {
+            "type": "free",
+            "x": 1900.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 107,
+          "label": "W1",
+          "definition": {
+            "type": "free",
+            "x": 1900.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 108,
+          "label": "X1",
+          "definition": {
+            "type": "free",
+            "x": 1700.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 137,
+          "label": "Y1",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 138,
+          "label": "Z1",
+          "definition": {
+            "type": "free",
+            "x": 2200.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 139,
+          "label": "A2",
+          "definition": {
+            "type": "free",
+            "x": 2200.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 140,
+          "label": "B2",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 172,
+          "label": "C2",
+          "definition": {
+            "type": "free",
+            "x": 196.0,
+            "y": 5.0
+          },
+          "role": "construction",
+          "layer": 171
+        },
+        {
+          "id": 174,
+          "label": "D2",
+          "definition": {
+            "type": "free",
+            "x": 196.0,
+            "y": 60.0
+          },
+          "role": "construction",
+          "layer": 171
+        },
+        {
+          "id": 176,
+          "label": "E2",
+          "definition": {
+            "type": "free",
+            "x": 196.0,
+            "y": 115.0
+          },
+          "role": "construction",
+          "layer": 171
+        },
+        {
+          "id": 179,
+          "label": "F2",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 2000.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 180,
+          "label": "G2",
+          "definition": {
+            "type": "free",
+            "x": 2086.602540378444,
+            "y": 2050.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 182,
+          "label": "H2",
+          "definition": {
+            "type": "free",
+            "x": 1980.0,
+            "y": 2034.6410161513775
+          },
+          "role": "construction"
+        },
+        {
+          "id": 184,
+          "label": "I2",
+          "definition": {
+            "type": "free",
+            "x": 2012.5,
+            "y": 1978.349364905389
+          },
+          "role": "construction"
+        },
+        {
+          "id": 185,
+          "label": "J2",
+          "definition": {
+            "type": "free",
+            "x": 2099.102540378444,
+            "y": 2028.349364905389
+          },
+          "role": "construction"
+        },
+        {
+          "id": 187,
+          "label": "K2",
+          "definition": {
+            "type": "free",
+            "x": 3000.0,
+            "y": 3000.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 188,
+          "label": "L2",
+          "definition": {
+            "type": "free",
+            "x": 3226.6258057822592,
+            "y": 3007.1343631571845
+          },
+          "role": "construction"
+        },
+        {
+          "id": 190,
+          "label": "M2",
+          "definition": {
+            "type": "free",
+            "x": 3000.0,
+            "y": 3200.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 191,
+          "label": "N2",
+          "definition": {
+            "type": "free",
+            "x": 3200.0,
+            "y": 3200.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 193,
+          "label": "O2",
+          "definition": {
+            "type": "free",
+            "x": 3000.0,
+            "y": 3400.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 194,
+          "label": "P2",
+          "definition": {
+            "type": "free",
+            "x": 3239.47056941466,
+            "y": 3400.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 9,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 5,
+            "to": 6
+          },
+          "name": "Bord haut"
+        },
+        {
+          "id": 10,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 6,
+            "to": 7
+          }
+        },
+        {
+          "id": 11,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 7,
+            "to": 8
+          }
+        },
+        {
+          "id": 12,
+          "role": "cutting_contour",
+          "kind": {
+            "type": "segment",
+            "from": 8,
+            "to": 5
+          }
+        },
+        {
+          "id": 19,
+          "role": "topstitch",
+          "kind": {
+            "type": "segment",
+            "from": 15,
+            "to": 16
+          }
+        },
+        {
+          "id": 20,
+          "role": "topstitch",
+          "kind": {
+            "type": "segment",
+            "from": 16,
+            "to": 17
+          }
+        },
+        {
+          "id": 21,
+          "role": "topstitch",
+          "kind": {
+            "type": "segment",
+            "from": 17,
+            "to": 18
+          }
+        },
+        {
+          "id": 22,
+          "role": "topstitch",
+          "kind": {
+            "type": "segment",
+            "from": 18,
+            "to": 15
+          }
+        },
+        {
+          "id": 40,
+          "role": "construction",
+          "kind": {
+            "type": "circle",
+            "center": 39,
+            "radius_mm": 12.0,
+            "start_deg": 0.0,
+            "ccw": true
+          }
+        },
+        {
+          "id": 48,
+          "role": "construction",
+          "kind": {
+            "type": "arc",
+            "center": 47,
+            "start": 44,
+            "end": 46,
+            "ccw": false
+          }
+        },
+        {
+          "id": 49,
+          "role": "construction",
+          "kind": {
+            "type": "curve",
+            "start": 44,
+            "handle_start": {
+              "dx": 10.0,
+              "dy": 60.0
+            },
+            "handle_end": {
+              "dx": -20.0,
+              "dy": 60.0
+            },
+            "end": 46
+          }
+        },
+        {
+          "id": 53,
+          "role": "construction",
+          "kind": {
+            "type": "spline",
+            "nodes": [
+              {
+                "point": 50
+              },
+              {
+                "point": 51,
+                "corner": true,
+                "tangent": {
+                  "dx": 20.0,
+                  "dy": 5.0
+                },
+                "tangent_in": {
+                  "dx": 10.0,
+                  "dy": -5.0
+                }
+              },
+              {
+                "point": 52
+              }
+            ]
+          }
+        },
+        {
+          "id": 56,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 54,
+            "to": 55
+          }
+        },
+        {
+          "id": 59,
+          "role": "grainline",
+          "kind": {
+            "type": "segment",
+            "from": 57,
+            "to": 58
+          }
+        },
+        {
+          "id": 62,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 60,
+            "to": 61
+          }
+        },
+        {
+          "id": 64,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 63,
+            "to": 60
+          }
+        },
+        {
+          "id": 66,
+          "role": "construction",
+          "kind": {
+            "type": "arc",
+            "center": 60,
+            "start": 61,
+            "end": 63,
+            "ccw": true
+          }
+        },
+        {
+          "id": 69,
+          "role": "construction",
+          "kind": {
+            "type": "circle",
+            "center": 68,
+            "radius_mm": 20.0,
+            "start_deg": 0.0,
+            "ccw": true
+          }
+        },
+        {
+          "id": 72,
+          "role": "construction",
+          "kind": {
+            "type": "circle",
+            "center": 71,
+            "radius_mm": 15.0,
+            "start_deg": 0.0,
+            "ccw": true
+          }
+        },
+        {
+          "id": 78,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 74,
+            "to": 75
+          }
+        },
+        {
+          "id": 79,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 75,
+            "to": 76
+          }
+        },
+        {
+          "id": 80,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 76,
+            "to": 77
+          }
+        },
+        {
+          "id": 81,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 77,
+            "to": 74
+          }
+        },
+        {
+          "id": 90,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 86,
+            "to": 87
+          }
+        },
+        {
+          "id": 91,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 87,
+            "to": 88
+          }
+        },
+        {
+          "id": 92,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 88,
+            "to": 89
+          }
+        },
+        {
+          "id": 93,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 89,
+            "to": 86
+          }
+        },
+        {
+          "id": 109,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 105,
+            "to": 106
+          }
+        },
+        {
+          "id": 110,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 106,
+            "to": 107
+          }
+        },
+        {
+          "id": 111,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 107,
+            "to": 108
+          }
+        },
+        {
+          "id": 112,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 108,
+            "to": 105
+          }
+        },
+        {
+          "id": 141,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 137,
+            "to": 138
+          }
+        },
+        {
+          "id": 142,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 138,
+            "to": 139
+          }
+        },
+        {
+          "id": 143,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 139,
+            "to": 140
+          }
+        },
+        {
+          "id": 144,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 140,
+            "to": 137
+          }
+        },
+        {
+          "id": 181,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 179,
+            "to": 180,
+            "construction": {
+              "type": "polar",
+              "length_mm": 100.0,
+              "angle_deg": 30.0,
+              "kept": true
+            }
+          }
+        },
+        {
+          "id": 183,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 179,
+            "to": 182,
+            "construction": {
+              "type": "perpendicular",
+              "reference": 181,
+              "length_mm": 40.0,
+              "side": "left",
+              "kept": true
+            }
+          }
+        },
+        {
+          "id": 186,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 184,
+            "to": 185,
+            "construction": {
+              "type": "parallel",
+              "reference": 181,
+              "distance_mm": 25.0,
+              "side": "right",
+              "kept": true
+            }
+          }
+        },
+        {
+          "id": 189,
+          "role": "construction",
+          "kind": {
+            "type": "curve",
+            "start": 187,
+            "handle_start": {
+              "dx": 40.0,
+              "dy": 60.0
+            },
+            "handle_end": {
+              "dx": -40.0,
+              "dy": 60.0
+            },
+            "end": 188
+          }
+        },
+        {
+          "id": 192,
+          "role": "construction",
+          "kind": {
+            "type": "curve",
+            "start": 190,
+            "handle_start": {
+              "dx": 79.78812444355076,
+              "dy": 119.68218666532613
+            },
+            "handle_end": {
+              "dx": -40.0,
+              "dy": 60.0
+            },
+            "end": 191
+          }
+        },
+        {
+          "id": 195,
+          "role": "construction",
+          "kind": {
+            "type": "curve",
+            "start": 193,
+            "handle_start": {
+              "dx": 40.0,
+              "dy": 60.0
+            },
+            "handle_end": {
+              "dx": -40.0,
+              "dy": 60.0
+            },
+            "end": 194
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 25,
+          "entity": 9,
+          "distance_mm": 0.0,
+          "side": "left",
+          "length_mm": 5.0,
+          "style": "single",
+          "anchor": {
+            "type": "midpoint"
+          }
+        },
+        {
+          "id": 26,
+          "entity": 9,
+          "distance_mm": 0.0,
+          "side": "left",
+          "length_mm": 5.0,
+          "style": "single",
+          "anchor": {
+            "type": "ratio",
+            "ratio": 0.25
+          }
+        },
+        {
+          "id": 27,
+          "entity": 9,
+          "distance_mm": 0.0,
+          "side": "left",
+          "length_mm": 5.0,
+          "style": "single",
+          "anchor": {
+            "type": "point",
+            "point": 23
+          }
+        },
+        {
+          "id": 28,
+          "entity": 10,
+          "distance_mm": 20.0,
+          "side": "right",
+          "length_mm": 6.0,
+          "style": "double",
+          "form": "u",
+          "width_mm": 4.0,
+          "on_cut": true
+        },
+        {
+          "id": 29,
+          "entity": 9,
+          "distance_mm": 0.0,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single",
+          "anchor": {
+            "type": "ratio",
+            "ratio": 0.0
+          },
+          "corner": true
+        }
+      ],
+      "dimensions": [
+        {
+          "id": 38,
+          "from": 23,
+          "to": 24,
+          "offset_mm": 10.0
+        }
+      ],
+      "layers": [
+        {
+          "id": 2,
+          "name": "Calque A",
+          "visible": true,
+          "locked": false
+        },
+        {
+          "id": 3,
+          "name": "Calque B",
+          "visible": false,
+          "locked": false
+        },
+        {
+          "id": 171,
+          "name": "Points de perçages",
+          "visible": false,
+          "locked": false
+        }
+      ],
+      "groups": [
+        {
+          "id": 178,
+          "members": [
+            11,
+            12
+          ]
+        }
+      ],
+      "guides": [
+        {
+          "id": 4,
+          "x_mm": 50.0,
+          "y_mm": 0.0,
+          "angle_deg": 90.0,
+          "axis": true
+        }
+      ],
+      "topstitches": [
+        {
+          "id": 14,
+          "source": {
+            "type": "piece",
+            "piece": 13
+          },
+          "distance_mm": 4.0,
+          "side": "inside",
+          "paths": [
+            19,
+            20,
+            21,
+            22
+          ]
+        }
+      ],
+      "full_dimensions": [
+        {
+          "id": 41,
+          "kind": {
+            "type": "path_length",
+            "entity": 9,
+            "offset_mm": 8.0
+          },
+          "label": "Cote é",
+          "text_shift_mm": 2.0
+        },
+        {
+          "id": 42,
+          "kind": {
+            "type": "horizontal",
+            "from": 23,
+            "to": 24,
+            "offset_mm": -6.0
+          },
+          "label": "Cote é",
+          "text_shift_mm": 2.0
+        },
+        {
+          "id": 43,
+          "kind": {
+            "type": "radius",
+            "entity": 40,
+            "angle_deg": 30.0
+          },
+          "label": "Cote é",
+          "text_shift_mm": 2.0
+        }
+      ],
+      "formulas": [
+        {
+          "point": 31,
+          "param": "dx",
+          "expr": "aisance/8"
+        },
+        {
+          "point": 34,
+          "param": "distance",
+          "expr": "aisance-10"
+        },
+        {
+          "point": 34,
+          "param": "angle",
+          "expr": "largeur/16"
+        }
+      ],
+      "length_constraints": [
+        {
+          "curve": 189,
+          "length_mm": 253.04257909541093,
+          "adjust": {
+            "type": "slide",
+            "point": 188,
+            "angle_deg": 15.0
+          }
+        },
+        {
+          "curve": 192,
+          "length_mm": 253.04257909541093,
+          "adjust": {
+            "type": "handle",
+            "point": 190
+          }
+        },
+        {
+          "curve": 195,
+          "length_mm": 265.0425790954106,
+          "adjust": {
+            "type": "slide",
+            "point": 194,
+            "angle_deg": 0.0
+          },
+          "reference": {
+            "entity": 189,
+            "offset_mm": 12.0
+          }
+        }
+      ]
+    },
+    {
+      "id": 96,
+      "name": "Plissé",
+      "points": [
+        {
+          "id": 97,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 1400.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 98,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 1400.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 99,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 1620.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 100,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 1620.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 101,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 97,
+            "to": 98
+          }
+        },
+        {
+          "id": 102,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 98,
+            "to": 99
+          }
+        },
+        {
+          "id": 103,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 99,
+            "to": 100
+          }
+        },
+        {
+          "id": 104,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 100,
+            "to": 97
+          }
+        }
+      ]
+    },
+    {
+      "id": 116,
+      "name": "Évasée",
+      "points": [
+        {
+          "id": 117,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 1770.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 118,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 1700.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 119,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 1700.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 120,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 1770.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 121,
+          "label": "E",
+          "definition": {
+            "type": "free",
+            "x": 1838.6,
+            "y": -13.92982411949268
+          },
+          "role": "construction"
+        },
+        {
+          "id": 122,
+          "label": "F",
+          "definition": {
+            "type": "free",
+            "x": 1893.848,
+            "y": -37.33192864024037
+          },
+          "role": "construction"
+        },
+        {
+          "id": 123,
+          "label": "G",
+          "definition": {
+            "type": "free",
+            "x": 1932.8515075345797,
+            "y": 54.74807135975959
+          },
+          "role": "construction"
+        },
+        {
+          "id": 124,
+          "label": "H",
+          "definition": {
+            "type": "free",
+            "x": 1877.6035075345796,
+            "y": 78.15017588050729
+          },
+          "role": "construction"
+        },
+        {
+          "id": 125,
+          "label": "I",
+          "definition": {
+            "type": "free",
+            "x": 1858.4997487421324,
+            "y": 84.07017588050732
+          },
+          "role": "construction"
+        },
+        {
+          "id": 126,
+          "label": "J",
+          "definition": {
+            "type": "free",
+            "x": 1789.8997487421325,
+            "y": 98.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 127,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 117,
+            "to": 118
+          }
+        },
+        {
+          "id": 128,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 118,
+            "to": 119
+          }
+        },
+        {
+          "id": 129,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 119,
+            "to": 120
+          }
+        },
+        {
+          "id": 130,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 120,
+            "to": 121
+          }
+        },
+        {
+          "id": 131,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 121,
+            "to": 122
+          }
+        },
+        {
+          "id": 132,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 122,
+            "to": 123
+          }
+        },
+        {
+          "id": 133,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 123,
+            "to": 124
+          }
+        },
+        {
+          "id": 134,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 124,
+            "to": 125
+          }
+        },
+        {
+          "id": 135,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 125,
+            "to": 126
+          }
+        },
+        {
+          "id": 136,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 126,
+            "to": 117
+          }
+        }
+      ]
+    },
+    {
+      "id": 146,
+      "name": "Découpée (1/2)",
+      "points": [
+        {
+          "id": 147,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 2125.714285714286,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 148,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 149,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 2000.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 150,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 2054.285714285714,
+            "y": 0.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 151,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 147,
+            "to": 148
+          }
+        },
+        {
+          "id": 152,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 148,
+            "to": 149
+          }
+        },
+        {
+          "id": 153,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 149,
+            "to": 150
+          }
+        },
+        {
+          "id": 154,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 150,
+            "to": 147
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 155,
+          "entity": 154,
+          "distance_mm": 40.96345365258396,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 156,
+          "entity": 154,
+          "distance_mm": 81.92690730516792,
+          "side": "right",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    },
+    {
+      "id": 157,
+      "name": "Découpée (2/2)",
+      "points": [
+        {
+          "id": 158,
+          "label": "A",
+          "definition": {
+            "type": "free",
+            "x": 2054.285714285714,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 159,
+          "label": "B",
+          "definition": {
+            "type": "free",
+            "x": 2200.0,
+            "y": 0.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 160,
+          "label": "C",
+          "definition": {
+            "type": "free",
+            "x": 2200.0,
+            "y": 100.0
+          },
+          "role": "construction"
+        },
+        {
+          "id": 161,
+          "label": "D",
+          "definition": {
+            "type": "free",
+            "x": 2125.714285714286,
+            "y": 100.0
+          },
+          "role": "construction"
+        }
+      ],
+      "entities": [
+        {
+          "id": 162,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 158,
+            "to": 159
+          }
+        },
+        {
+          "id": 163,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 159,
+            "to": 160
+          }
+        },
+        {
+          "id": 164,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 160,
+            "to": 161
+          }
+        },
+        {
+          "id": 165,
+          "role": "construction",
+          "kind": {
+            "type": "segment",
+            "from": 158,
+            "to": 161
+          }
+        }
+      ],
+      "notches": [
+        {
+          "id": 166,
+          "entity": 165,
+          "distance_mm": 40.96345365258396,
+          "side": "left",
+          "length_mm": 5.0,
+          "style": "single"
+        },
+        {
+          "id": 167,
+          "entity": 165,
+          "distance_mm": 81.92690730516792,
+          "side": "left",
+          "length_mm": 5.0,
+          "style": "single"
+        }
+      ]
+    }
+  ],
+  "pieces": [
+    {
+      "id": 13,
+      "name": "Corps",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 9,
+          "reversed": false
+        },
+        {
+          "entity": 10,
+          "reversed": false
+        },
+        {
+          "entity": 11,
+          "reversed": false
+        },
+        {
+          "entity": 12,
+          "reversed": false
+        }
+      ],
+      "grainline": 56,
+      "grain": {
+        "direction": {
+          "mode": "bias",
+          "angle_deg": 45.0
+        },
+        "sense": "nap",
+        "reversed": true,
+        "rotation_tolerance_deg": 5.0,
+        "extra": [
+          {
+            "entity": 59,
+            "direction": {
+              "mode": "parallel",
+              "reference": 10
+            }
+          }
+        ]
+      },
+      "seam": {
+        "default_mm": 8.0,
+        "edges": [
+          {
+            "entity": 9,
+            "start_mm": 2.0,
+            "end_mm": 6.0
+          },
+          {
+            "entity": 11,
+            "start_mm": 4.0,
+            "end_mm": 4.0
+          }
+        ],
+        "hems": [
+          {
+            "entity": 12,
+            "height_mm": 25.0
+          }
+        ],
+        "folds": [
+          {
+            "entity": 10,
+            "value_mm": 6.0
+          }
+        ],
+        "corners": [
+          {
+            "entity": 10,
+            "corner": {
+              "type": "truncated",
+              "depth_mm": 1.5
+            }
+          },
+          {
+            "entity": 11,
+            "corner": {
+              "type": "stepped"
+            }
+          }
+        ],
+        "max_corner_mm": 30.0
+      },
+      "markings": [
+        {
+          "id": 173,
+          "at": {
+            "type": "point",
+            "point": 172
+          },
+          "shape": {
+            "type": "slot",
+            "length_mm": 6.0,
+            "width_mm": 1.5,
+            "angle_deg": 90.0
+          }
+        },
+        {
+          "id": 175,
+          "at": {
+            "type": "point",
+            "point": 174
+          },
+          "shape": {
+            "type": "slot",
+            "length_mm": 6.0,
+            "width_mm": 1.5,
+            "angle_deg": 90.0
+          }
+        },
+        {
+          "id": 177,
+          "at": {
+            "type": "point",
+            "point": 176
+          },
+          "shape": {
+            "type": "slot",
+            "length_mm": 6.0,
+            "width_mm": 1.5,
+            "angle_deg": 90.0
+          }
+        }
+      ],
+      "placement": {
+        "x_mm": 100.0,
+        "y_mm": -60.0,
+        "rotation_deg": 90.0
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 67,
+      "name": "Quartier",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 62,
+          "reversed": false
+        },
+        {
+          "entity": 66,
+          "reversed": false
+        },
+        {
+          "entity": 64,
+          "reversed": false
+        }
+      ],
+      "seam": {
+        "default_mm": 5.0,
+        "folds": [
+          {
+            "entity": 66,
+            "value_mm": 12.0,
+            "notch_step_mm": 30.0
+          }
+        ]
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 70,
+      "name": "Rond",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 69,
+          "reversed": false
+        }
+      ],
+      "seam": {
+        "default_mm": 0.0,
+        "folds": [
+          {
+            "entity": 69,
+            "value_mm": 3.0,
+            "notch_count": 5
+          }
+        ]
+      },
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 73,
+      "name": "Bord franc",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 72,
+          "reversed": false
+        }
+      ],
+      "net_cut": true,
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 82,
+      "name": "Pincé",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 78,
+          "reversed": false
+        },
+        {
+          "entity": 79,
+          "reversed": false
+        },
+        {
+          "entity": 80,
+          "reversed": false
+        },
+        {
+          "entity": 81,
+          "reversed": false
+        }
+      ],
+      "no_grain": true,
+      "on_fold": [
+        78
+      ],
+      "darts": [
+        {
+          "id": 85,
+          "apex": 83,
+          "toward": 84,
+          "length_mm": 100.0,
+          "opening_mm": 20.0,
+          "fixed": "right",
+          "cut_closed": true
+        }
+      ],
+      "link": {
+        "type": "linked",
+        "sheet": 1
+      }
+    },
+    {
+      "id": 94,
+      "name": "Plissé",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 101,
+          "reversed": false
+        },
+        {
+          "entity": 102,
+          "reversed": false
+        },
+        {
+          "entity": 103,
+          "reversed": false
+        },
+        {
+          "entity": 104,
+          "reversed": false
+        }
+      ],
+      "pleats": [
+        {
+          "id": 95,
+          "kind": "flat",
+          "from_x_mm": 1500.0,
+          "from_y_mm": 0.0,
+          "to_x_mm": 1500.0,
+          "to_y_mm": 100.0,
+          "depth_mm": 10.0,
+          "sense": "right"
+        }
+      ],
+      "link": {
+        "type": "detached"
+      }
+    },
+    {
+      "id": 113,
+      "name": "Évasée",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 127,
+          "reversed": false
+        },
+        {
+          "entity": 128,
+          "reversed": false
+        },
+        {
+          "entity": 129,
+          "reversed": false
+        },
+        {
+          "entity": 130,
+          "reversed": false
+        },
+        {
+          "entity": 131,
+          "reversed": false
+        },
+        {
+          "entity": 132,
+          "reversed": false
+        },
+        {
+          "entity": 133,
+          "reversed": false
+        },
+        {
+          "entity": 134,
+          "reversed": false
+        },
+        {
+          "entity": 135,
+          "reversed": false
+        },
+        {
+          "entity": 136,
+          "reversed": false
+        }
+      ],
+      "flares": [
+        {
+          "id": 114,
+          "hinge_x_mm": 1770.0,
+          "hinge_y_mm": 0.0,
+          "stay_x_mm": 1770.0,
+          "stay_y_mm": 100.0,
+          "moved_x_mm": 1789.8997487421325,
+          "moved_y_mm": 98.0
+        },
+        {
+          "id": 115,
+          "hinge_x_mm": 1838.6,
+          "hinge_y_mm": -13.92982411949268,
+          "stay_x_mm": 1858.4997487421324,
+          "stay_y_mm": 84.07017588050732,
+          "moved_x_mm": 1877.6035075345796,
+          "moved_y_mm": 78.15017588050729
+        }
+      ],
+      "link": {
+        "type": "detached"
+      }
+    },
+    {
+      "id": 168,
+      "name": "Découpée (1/2)",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 151,
+          "reversed": false
+        },
+        {
+          "entity": 152,
+          "reversed": false
+        },
+        {
+          "entity": 153,
+          "reversed": false
+        },
+        {
+          "entity": 154,
+          "reversed": false
+        }
+      ],
+      "link": {
+        "type": "detached"
+      }
+    },
+    {
+      "id": 169,
+      "name": "Découpée (2/2)",
+      "quantity": 1,
+      "mirrored_pair": false,
+      "outline": [
+        {
+          "entity": 162,
+          "reversed": false
+        },
+        {
+          "entity": 163,
+          "reversed": false
+        },
+        {
+          "entity": 164,
+          "reversed": false
+        },
+        {
+          "entity": 165,
+          "reversed": true
+        }
+      ],
+      "link": {
+        "type": "detached"
+      }
+    }
+  ],
+  "seam_defaults": {
+    "fabric_mm": 12.0,
+    "lining_mm": 10.0,
+    "interfacing_mm": 5.0,
+    "leather_mm": 6.0,
+    "reinforcement_mm": 5.0
+  },
+  "seams": [
+    {
+      "id": 170,
+      "a": {
+        "piece": 82,
+        "edges": [
+          78
+        ]
+      },
+      "b": {
+        "piece": 94,
+        "edges": [
+          101,
+          102
+        ]
+      },
+      "embu_mm": 3.0,
+      "tolerance_mm": 1.5
+    }
+  ],
+  "variables": [
+    {
+      "name": "poitrine",
+      "unit": "mm",
+      "expr": "920"
+    },
+    {
+      "name": "aisance",
+      "unit": "mm",
+      "expr": "40"
+    },
+    {
+      "name": "largeur",
+      "unit": "mm",
+      "expr": "(poitrine+aisance)/4"
+    },
+    {
+      "name": "angle",
+      "unit": "deg",
+      "expr": "min(12,5;pi)"
+    },
+    {
+      "name": "rapport",
+      "unit": "none",
+      "expr": "largeur/poitrine"
+    }
+  ]
+}
