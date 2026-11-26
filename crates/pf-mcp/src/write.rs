@@ -348,6 +348,11 @@ fn export_target(project: &Path, raw: &str) -> Result<PathBuf, ToolError> {
                 if name.contains(':') {
                     return Err(bad("« : » interdit (flux NTFS)"));
                 }
+                // Sous Windows, « \ » a déjà été découpé ; ailleurs il resterait dans le nom, et
+                // « ..\x » désignerait un autre dossier une fois le projet rouvert sous Windows.
+                if name.contains('\\') {
+                    return Err(bad("« \\ » interdit : séparez les dossiers par « / »"));
+                }
                 // Windows retire ces fins de nom : « p.json. » désignerait « p.json ».
                 if name.ends_with('.') || name.ends_with(' ') {
                     return Err(bad("un nom ne peut pas finir par un point ou une espace"));
