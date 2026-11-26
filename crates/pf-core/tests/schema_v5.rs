@@ -108,8 +108,11 @@ fn ca2_les_exemples_v5_sont_les_fichiers_v4_avec_la_seule_version_changee() {
         }
         n += 1;
         let v5 = std::fs::read_to_string(&path).unwrap();
-        let v4 = std::fs::read_to_string(tests_dir().join(format!("fixtures_v4/v4-{name}")))
-            .unwrap_or_else(|_| panic!("{name} : fixture v4 absente"));
+        let v4 = std::fs::read_to_string(tests_dir().join(format!(
+            "fixtures_v4/v4-{}.pforge.json",
+            pf_core::project_stem(&name)
+        )))
+        .unwrap_or_else(|_| panic!("{name} : fixture v4 absente"));
         assert_eq!(v5, expected_v5(&v4), "{name}");
     }
     assert_eq!(n, 5, "cinq exemples attendus");

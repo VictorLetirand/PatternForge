@@ -98,7 +98,7 @@ fn creation_ecrit_les_octets_du_format_sans_toucher_le_projet() {
     persist::save(&pp, &p).unwrap();
     let before = fs::read(&pp).unwrap();
     let info = create(&pp, &p, "Avant jupe!", T0).unwrap();
-    assert_eq!(info.file, "20231114T221320Z-Avant-jupe.pforge.json");
+    assert_eq!(info.file, "20231114T221320Z-Avant-jupe.pforge");
     assert_eq!(info.name, "Avant jupe!");
     assert_eq!(info.created, "2023-11-14 22:13:20");
     let vf = versions_dir(&pp).join(&info.file);
@@ -147,8 +147,8 @@ fn deux_versions_meme_seconde_ne_s_ecrasent_pas() {
     let pp = proj_path(&d);
     let a = create(&pp, &project_with("J", 1), "v", T0).unwrap();
     let b = create(&pp, &project_with("J", 2), "v", T0).unwrap();
-    assert_eq!(a.file, "20231114T221320Z-v.pforge.json");
-    assert_eq!(b.file, "20231114T221321Z-v.pforge.json");
+    assert_eq!(a.file, "20231114T221320Z-v.pforge");
+    assert_eq!(b.file, "20231114T221321Z-v.pforge");
     assert_ne!(a.revision, b.revision);
     assert_eq!(read(&pp, &a.file).unwrap(), project_with("J", 1));
     assert_eq!(read(&pp, &b.file).unwrap(), project_with("J", 2));

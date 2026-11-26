@@ -1448,9 +1448,9 @@ fn ca4_fichiers_sans_derivee_octets_inchanges() {
     assert!(!t.contains("derived") && !t.contains("stale"));
     assert_eq!(t, text(&persist::from_json(&t).unwrap()));
     for file in [
-        "piece-crans-droit-fil.pforge.json",
-        "geometrie-exercice.pforge.json",
-        "grande-piece-600x450.pforge.json",
+        "piece-crans-droit-fil.pforge",
+        "geometrie-exercice.pforge",
+        "grande-piece-600x450.pforge",
     ] {
         let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("../../examples")

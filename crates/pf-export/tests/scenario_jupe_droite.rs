@@ -752,7 +752,7 @@ fn scenario_deterministe() {
 #[test]
 fn projet_charge_depuis_l_exemple_exporte_comme_le_projet_construit() {
     let j = jupe();
-    let loaded = persist::load(&examples().join("jupe-droite.pforge.json")).expect(HINT);
+    let loaded = persist::load(&examples().join("jupe-droite.pforge")).expect(HINT);
     assert_eq!(loaded, j.project, "{HINT}");
     assert_eq!(
         exports(&loaded, loaded.sheets[0].id),
@@ -767,7 +767,7 @@ fn fichiers_d_exemple_a_jour() {
     let read =
         |name: &str| fs::read(examples().join(name)).unwrap_or_else(|e| panic!("{name} : {e}"));
     assert_eq!(
-        read("jupe-droite.pforge.json"),
+        read("jupe-droite.pforge"),
         persist::to_json(&j.project).unwrap().into_bytes(),
         "{HINT}"
     );

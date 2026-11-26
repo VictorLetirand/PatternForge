@@ -157,7 +157,12 @@ fn mask_paths(text: &[char]) -> Vec<char> {
                 break;
             }
             j += 1;
-            if ends_with_extension(&text[i..j]) && text.get(j).is_none_or(|n| !n.is_alphanumeric())
+            // « a.pforge.json » : l'extension continue, on ne coupe pas après « .pforge ».
+            let suite =
+                text.get(j) == Some(&'.') && text.get(j + 1).is_some_and(|n| n.is_alphanumeric());
+            if !suite
+                && ends_with_extension(&text[i..j])
+                && text.get(j).is_none_or(|n| !n.is_alphanumeric())
             {
                 break;
             }

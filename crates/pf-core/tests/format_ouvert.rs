@@ -982,8 +982,8 @@ fn corpus() -> Vec<(String, Value)> {
         .unwrap()
         .map(|e| e.unwrap().path())
         .filter(|p| {
-            (p.to_string_lossy().ends_with(".pforge")
-                || p.to_string_lossy().ends_with(".pforge.json"))
+            let n = p.to_string_lossy();
+            n.ends_with(".pforge") || n.ends_with(".pforge.json")
         })
         .collect();
     names.sort();

@@ -12,7 +12,7 @@ const HINT: &str = "régénérer avec : cargo run -p pf-export --example generer
 
 #[test]
 fn projet_exemple_ouvrable_et_a_jour() {
-    let path = examples().join("geometrie-exercice.pforge.json");
+    let path = examples().join("geometrie-exercice.pforge");
     let loaded = pf_core::persist::load(&path).expect("le projet d'exemple doit s'ouvrir");
     assert_eq!(loaded, pf_core::demo_project().unwrap(), "{HINT}");
 }
@@ -43,8 +43,7 @@ fn exports_exemples_a_jour() {
 #[test]
 fn piece_avec_crans_et_droit_fil_a_jour_et_complete() {
     let project = pf_core::demo_piece_project().unwrap();
-    let loaded =
-        pf_core::persist::load(&examples().join("piece-crans-droit-fil.pforge.json")).unwrap();
+    let loaded = pf_core::persist::load(&examples().join("piece-crans-droit-fil.pforge")).unwrap();
     assert_eq!(loaded, project, "{HINT}");
     let scene = Scene::from_sheet(&project, project.sheets[0].id).unwrap();
     let read = |name: &str| fs::read(examples().join(name)).unwrap();

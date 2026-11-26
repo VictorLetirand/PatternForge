@@ -79,7 +79,7 @@ fn langue_en_messages_anglais() {
 #[test]
 fn exports_identiques_aux_exemples_du_depot() {
     let dir = temp_dir("exemples");
-    let src = example("jupe-droite.pforge.json");
+    let src = example("jupe-droite.pforge");
     for (fmt, ext, name) in [
         ("svg", "svg", "jupe-droite.svg"),
         ("pdf", "pdf", "jupe-droite.pdf"),
@@ -97,7 +97,7 @@ fn exports_identiques_aux_exemples_du_depot() {
 #[test]
 fn hpgl_identique_a_la_bibliotheque_page_par_page() {
     let dir = temp_dir("hpgl");
-    let src = example("jupe-droite.pforge.json");
+    let src = example("jupe-droite.pforge");
     let project = persist::load(&src).unwrap();
     let scene = Scene::from_sheet(&project, project.sheets[0].id).unwrap();
     let tiles = pf_export::hpgl::export_hpgl_pages(

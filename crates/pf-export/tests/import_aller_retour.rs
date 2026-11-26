@@ -183,12 +183,12 @@ fn first_group(svg: &str) -> String {
 fn example_projects() -> Vec<(String, Project)> {
     let mut out = Vec::new();
     for rel in [
-        "geometrie-exercice.pforge.json",
-        "grande-piece-600x450.pforge.json",
-        "jupe-droite.pforge.json",
-        "piece-crans-droit-fil.pforge.json",
-        "porte-cartes.pforge.json",
-        "aide/sac-cabas.pforge.json",
+        "geometrie-exercice.pforge",
+        "grande-piece-600x450.pforge",
+        "jupe-droite.pforge",
+        "piece-crans-droit-fil.pforge",
+        "porte-cartes.pforge",
+        "aide/sac-cabas.pforge",
     ] {
         out.push((rel.to_string(), persist::load(&root().join(rel)).unwrap()));
     }

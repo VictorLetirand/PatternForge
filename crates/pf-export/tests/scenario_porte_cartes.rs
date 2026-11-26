@@ -1092,7 +1092,7 @@ fn scenario_deterministe() {
 #[test]
 fn projet_charge_depuis_l_exemple_exporte_comme_le_projet_construit() {
     let c = pc();
-    let loaded = persist::load(&examples().join("porte-cartes.pforge.json")).expect(HINT);
+    let loaded = persist::load(&examples().join("porte-cartes.pforge")).expect(HINT);
     assert_eq!(loaded, c.project, "{HINT}");
     assert_eq!(
         exports(&loaded, loaded.sheets[0].id),
@@ -1107,7 +1107,7 @@ fn fichiers_d_exemple_a_jour() {
     let read =
         |name: &str| fs::read(examples().join(name)).unwrap_or_else(|e| panic!("{name} : {e}"));
     assert_eq!(
-        read("porte-cartes.pforge.json"),
+        read("porte-cartes.pforge"),
         persist::to_json(&c.project).unwrap().into_bytes(),
         "{HINT}"
     );
@@ -1146,18 +1146,18 @@ fn dossier_examples_contient_les_fichiers_attendus() {
         "etalon-100mm.pdf",
         "etalon-100mm.svg",
         "geometrie-exercice.pdf",
-        "geometrie-exercice.pforge.json",
+        "geometrie-exercice.pforge",
         "geometrie-exercice.svg",
         "grande-piece-600x450.pdf",
-        "grande-piece-600x450.pforge.json",
+        "grande-piece-600x450.pforge",
         "piece-crans-droit-fil.pdf",
-        "piece-crans-droit-fil.pforge.json",
+        "piece-crans-droit-fil.pforge",
         "piece-crans-droit-fil.svg",
     ] {
         assert!(names.iter().any(|n| n == base), "{base} absent");
     }
     for stem in ["jupe-droite", "porte-cartes"] {
-        for ext in ["pforge.json", "svg", "pdf", "dxf", "hpgl"] {
+        for ext in ["pforge", "svg", "pdf", "dxf", "hpgl"] {
             let name = format!("{stem}.{ext}");
             assert!(names.contains(&name), "{name} absent");
         }

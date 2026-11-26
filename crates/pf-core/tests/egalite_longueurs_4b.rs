@@ -849,7 +849,7 @@ fn read_dir_files(dir: &str, suffix: &str) -> Vec<std::path::PathBuf> {
 #[test]
 fn les_exemples_se_relisent_et_se_reecrivent_a_l_identique_sans_cle_link() {
     let root = concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples");
-    let files = read_dir_files(root, ".pforge.json");
+    let files = read_dir_files(root, ".pforge");
     assert!(files.len() >= 4, "{files:?}");
     for f in files {
         let text = std::fs::read_to_string(&f).unwrap();

@@ -599,7 +599,7 @@ fn ca5_projet_vide_ou_sans_couture_donne_un_rapport_valide_et_aucune_anomalie() 
 #[test]
 fn ca5_un_fichier_existant_sans_couture_reste_identique_octet_pour_octet() {
     let dir = concat!(env!("CARGO_MANIFEST_DIR"), "/../../examples");
-    for name in ["jupe-droite.pforge.json", "porte-cartes.pforge.json"] {
+    for name in ["jupe-droite.pforge", "porte-cartes.pforge"] {
         let raw = std::fs::read(format!("{dir}/{name}")).unwrap();
         let p = persist::from_json(std::str::from_utf8(&raw).unwrap()).unwrap();
         assert!(p.seams.is_empty(), "{name} : 0 couture");

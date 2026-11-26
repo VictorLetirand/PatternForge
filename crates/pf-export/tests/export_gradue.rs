@@ -160,7 +160,7 @@ fn ca1_base_octets_identiques_a_l_export_d_avant_sur_le_rectangle() {
 #[test]
 fn ca1_exemples_livres_identiques_avec_ou_sans_gamme_de_tailles() {
     for stem in ["jupe-droite", "porte-cartes", "geometrie-exercice"] {
-        let mut project = persist::load(&examples().join(format!("{stem}.pforge.json"))).unwrap();
+        let mut project = persist::load(&examples().join(format!("{stem}.pforge"))).unwrap();
         let sheet = project.sheets[0].id;
         let want_svg = fs::read(examples().join(format!("{stem}.svg"))).unwrap();
         let want_pdf = fs::read(examples().join(format!("{stem}.pdf"))).unwrap();

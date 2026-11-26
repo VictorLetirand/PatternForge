@@ -105,7 +105,7 @@ fn walk(l: Labels) {
     let files: Vec<String> = std::fs::read_dir(&vdir)
         .unwrap()
         .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
-        .filter(|n| n.ends_with("-Etat-A.pforge.json"))
+        .filter(|n| n.ends_with("-Etat-A.pforge"))
         .collect();
     assert_eq!(files.len(), 1, "{files:?}");
     assert_eq!(std::fs::read(&path).unwrap(), before_bytes);
