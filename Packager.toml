@@ -1,0 +1,45 @@
+# Installers: cargo packager --release -c Packager.toml   (tool: cargo install cargo-packager --locked)
+# Windows -> NSIS setup .exe; macOS -> .app and .dmg; Linux -> .deb and .AppImage.
+# Prerequisite: cargo build --release -p pf-desktop -p pf-cli -p pf-mcp (.github/workflows/release.yml does it).
+name = "patternforge"
+product-name = "PatternForge"
+version = "0.1.0-rc.1"
+identifier = "io.github.victorletirand.patternforge"
+description = "Offline 2D CAD for sewing and leather pattern drafting."
+long-description = "PatternForge is an offline 2D CAD workshop for pattern drafting: precise construction in millimetres, seam allowances, grading, cutting plans and 1:1 output. Prototype: not yet validated by a pattern maker."
+authors = ["The PatternForge contributors"]
+publisher = "PatternForge"
+copyright = "Copyright (c) 2026 The PatternForge contributors — MIT"
+category = "GraphicsAndDesign"
+license-file = "LICENSE"
+out-dir = "dist"
+binaries-dir = "target/release"
+icons = ["assets/icon/icon.ico", "assets/icon/icon.png"]
+resources = [
+  { src = "README.md", target = "README.md" },
+  { src = "README.fr.md", target = "README.fr.md" },
+  { src = "LICENSE", target = "LICENSE" },
+  { src = "THIRD-PARTY.md", target = "THIRD-PARTY.md" },
+  { src = "THIRD-PARTY-LICENSES.txt", target = "THIRD-PARTY-LICENSES.txt" },
+  { src = "docs/USER_GUIDE.md", target = "USER_GUIDE.md" },
+  { src = "docs/GUIDE_UTILISATEUR.md", target = "GUIDE_UTILISATEUR.md" },
+  { src = "examples", target = "examples" },
+]
+
+[[binaries]]
+path = "patternforge"
+main = true
+
+# Command-line tool and MCP server, installed next to the application.
+[[binaries]]
+path = "patternforge-cli"
+
+[[binaries]]
+path = "pf-mcp-server"
+
+# Libraries loaded at runtime (windowing, file dialogs).
+[deb]
+depends = ["libgtk-3-0", "libgl1", "libxkbcommon0", "libxkbcommon-x11-0"]
+
+[macos]
+minimum-system-version = "11.0"

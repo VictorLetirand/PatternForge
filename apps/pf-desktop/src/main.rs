@@ -187,11 +187,27 @@ fn parse_args() -> Launch {
     launch
 }
 
+/// Icône de la fenêtre et de la barre des tâches (`assets/icon/`, dessinée par `dessiner.py`).
+fn window_icon() -> eframe::egui::IconData {
+    let png = include_bytes!("../../../assets/icon/icon-256.png");
+    image::load_from_memory_with_format(png, image::ImageFormat::Png)
+        .map(|i| {
+            let i = i.to_rgba8();
+            eframe::egui::IconData {
+                width: i.width(),
+                height: i.height(),
+                rgba: i.into_raw(),
+            }
+        })
+        .unwrap_or_default()
+}
+
 fn main() -> eframe::Result {
     let launch = parse_args();
     let options = eframe::NativeOptions {
         viewport: eframe::egui::ViewportBuilder::default()
             .with_title("PatternForge")
+            .with_icon(window_icon())
             .with_inner_size(launch.size.unwrap_or([1280.0, 800.0]))
             .with_min_inner_size([900.0, 560.0]),
         ..Default::default()

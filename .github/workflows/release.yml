@@ -1,0 +1,189 @@
+name: Release
+
+# Publishes installers on GitHub Releases when a "v*" tag is pushed (pre-release if the tag has a
+# hyphen). On demand (workflow_dispatch) nothing is published: the installers are built, installed
+# and checked. Installers are attached directly to the Release (no long-lived artifacts).
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 || gh release create "$TAG" --title "$TAG" \
+            --notes-file .github/RELEASE_NOTES.md $(case "$TAG" in *-*) echo --prerelease;; esac)
+
+  package:
+    needs: create-release
+    if: ${{ !cancelled() && (needs.create-release.result == 'success' || needs.create-release.result == 'skipped') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, name: windows-x64 }
+          - { os: ubuntu-22.04, name: linux-x64 }
+          - { os: macos-15-intel, name: macos-x64 }
+          - { os: macos-15, name: macos-arm64 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2 libgtk-3-dev libxkbcommon-dev libwayland-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
+
+      - name: Tests
+        run: cargo test --workspace
+
+      - name: Build
+        run: cargo build --release -p pf-desktop -p pf-cli -p pf-mcp
+
+      - name: Packaging tool
+        run: cargo install cargo-packager --locked
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        run: cargo packager --release -c Packager.toml --formats nsis
+
+      - name: Package (Linux)
+        if: runner.os == 'Linux'
+        run: cargo packager --release -c Packager.toml --formats deb,appimage
+
+      # cargo-packager writes the AppDir with owner-only permissions, and winit loads
+      # libxkbcommon-x11 at run time: the squashfs is rebuilt behind the same runtime.
+      - name: AppImage permissions and libraries (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get install -y squashfs-tools libxkbcommon-x11-0
+          cd dist
+          img=$(ls *.AppImage)
+          chmod +x "$img"
+          off=$(./"$img" --appimage-offset)
+          unsquashfs -q -o "$off" -d root "$img"
+          mkdir -p root/usr/lib
+          for lib in libxkbcommon-x11.so.0 libxcb-xkb.so.1; do cp -L "/usr/lib/x86_64-linux-gnu/$lib" root/usr/lib/; done
+          for pkg in libxkbcommon-x11-0 libxcb-xkb1; do
+            mkdir -p "root/usr/share/doc/$pkg" && cp "/usr/share/doc/$pkg/copyright" "root/usr/share/doc/$pkg/"
+          done
+          chmod -R u+rwX,go+rX,go-w root
+          head -c "$off" "$img" > fixed.AppImage
+          mksquashfs root fs.sqfs -root-owned -noappend -comp zstd -b 131072 -quiet
+          cat fs.sqfs >> fixed.AppImage
+          mv fixed.AppImage "$img" && chmod +x "$img"
+          rm -rf root fs.sqfs
+
+      # `hdiutil: Resource busy` happens now and then on the macOS runners: up to 3 attempts.
+      - name: Package (macOS)
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            cargo packager --release -c Packager.toml --formats app,dmg && exit 0
+            echo "::warning::packaging failed (attempt $attempt of 3)"
+            hdiutil detach /Volumes/PatternForge -force 2>/dev/null || true
+            rm -rf dist/*.dmg dist/*.app dist/.cargo-packager 2>/dev/null || true
+            sleep 15
+          done
+          exit 1
+
+      - name: SHA-256 checksums
+        shell: bash
+        run: |
+          cd dist
+          shopt -s nullglob
+          for f in *.exe *.dmg *.deb *.AppImage; do
+            (sha256sum "$f" 2>/dev/null || shasum -a 256 "$f") >> "SHA256SUMS-${{ matrix.name }}.txt"
+          done
+          ls -l
+
+      # --- Checks: each installer is really installed and run ------------------------------------
+      - name: Check the Windows installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        timeout-minutes: 10
+        run: |
+          $setup = @(Get-ChildItem dist -Filter '*setup.exe')
+          if ($setup.Count -ne 1) { Get-ChildItem dist | Out-Host; throw "expected one setup .exe in dist" }
+          $p = Start-Process -FilePath $setup[0].FullName -ArgumentList '/S' -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "silent install failed: $($p.ExitCode)" }
+          $app = Get-ChildItem "$env:LOCALAPPDATA", "$env:ProgramFiles" -Recurse -Filter patternforge.exe -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $app) { throw "patternforge.exe not found after install" }
+          $dir = $app.DirectoryName
+          Get-ChildItem $dir | Out-Host
+          foreach ($f in 'patternforge-cli.exe', 'pf-mcp-server.exe') { if (-not (Test-Path "$dir\$f")) { throw "$f missing" } }
+          & "$dir\patternforge-cli.exe" valider examples\jupe-droite.pforge.json
+          if ($LASTEXITCODE -ne 0) { throw "installed CLI failed" }
+          $un = Get-ChildItem $dir -Filter 'uninstall*.exe' | Select-Object -First 1
+          if (-not $un) { throw "no uninstaller" }
+          Start-Process -FilePath $un.FullName -ArgumentList '/S' -Wait
+          Start-Sleep -Seconds 5
+          if (Test-Path "$dir\patternforge.exe") { throw "still installed after uninstall" }
+
+      - name: Check the .deb and the AppImage (Linux)
+        if: runner.os == 'Linux'
+        timeout-minutes: 10
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: |
+          set -euo pipefail
+          sudo apt-get install -y xvfb libgl1-mesa-dri
+          deb=$(ls dist/*.deb)
+          sudo apt-get install -y "$PWD/$deb"
+          bin=$(dpkg -L "$(dpkg-deb -f "$deb" Package)" | grep -E '/patternforge$' | while read -r p; do [ -f "$p" ] && [ -x "$p" ] && echo "$p" && break; done)
+          [ -n "$bin" ] || { echo "installed executable not found"; exit 1; }
+          xvfb-run -a -s "-screen 0 1920x1080x24" timeout 120 "$bin" --demo --screenshot "$PWD/deb.png"
+          [ "$(stat -c %s deb.png)" -gt 20000 ]
+          sudo apt-get remove -y "$(dpkg-deb -f "$deb" Package)"
+          img=$(ls dist/*.AppImage)
+          chmod +x "$img"
+          xvfb-run -a -s "-screen 0 1920x1080x24" timeout 120 "$PWD/$img" --appimage-extract-and-run --demo --screenshot "$PWD/appimage.png"
+          [ "$(stat -c %s appimage.png)" -gt 20000 ]
+
+      - name: Check the .dmg (macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          set -euo pipefail
+          mnt=$(mktemp -d)
+          # the dmg shows the license first: accept it
+          printf 'Y\n' | hdiutil attach dist/*.dmg -mountpoint "$mnt" -nobrowse -readonly
+          trap 'hdiutil detach "$mnt" -force >/dev/null 2>&1 || true' EXIT
+          app=$(find "$mnt" -maxdepth 1 -name '*.app' | head -n 1)
+          [ -n "$app" ] || { echo "no .app in the dmg"; ls -l "$mnt"; exit 1; }
+          ditto "$app" "$RUNNER_TEMP/installed.app"
+          bin="$RUNNER_TEMP/installed.app/Contents/MacOS"
+          ls -l "$bin"
+          "$bin/patternforge-cli" valider examples/jupe-droite.pforge.json
+          perl -e 'alarm 120; exec @ARGV' -- "$bin/patternforge" --demo --screenshot "$RUNNER_TEMP/dmg.png"
+          [ "$(stat -f %z "$RUNNER_TEMP/dmg.png")" -gt 20000 ]
+
+      - name: Attach the installers to the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          cd dist
+          shopt -s nullglob
+          files=(*.exe *.dmg *.deb *.AppImage SHA256SUMS-*.txt)
+          [ ${#files[@]} -gt 0 ] || { echo "no installer produced"; exit 1; }
+          gh release upload "$TAG" "${files[@]}" --clobber --repo "${{ github.repository }}"
