@@ -24,7 +24,7 @@ New-Item -ItemType Directory -Force $dossier | Out-Null
 Copy-Item target\release\patternforge.exe (Join-Path $dossier "PatternForge.exe")
 Copy-Item README.md, README.fr.md, LICENSE, THIRD-PARTY.md $dossier
 Copy-Item examples (Join-Path $dossier "examples") -Recurse
-Copy-Item docs\GUIDE_UTILISATEUR.md $dossier
+Copy-Item docs\USER_GUIDE.md, docs\GUIDE_UTILISATEUR.md $dossier
 Compress-Archive -Path $dossier -DestinationPath (Join-Path $racine "dist\$nom.zip") -Force
 $zip = Join-Path $racine "dist\$nom.zip"
 $hash = (Get-FileHash $zip -Algorithm SHA256).Hash
