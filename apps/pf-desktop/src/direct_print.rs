@@ -18,6 +18,7 @@ use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 pub const SCALE_PERCENT: u32 = 100;
 pub const MAX_COPIES: u32 = 99;
 const TEMP_PREFIX: &str = "pforge-print-";
+#[cfg(windows)]
 const REAL_KEEP_SECS: u64 = 300;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -152,6 +153,7 @@ pub fn sweep_stale(temp_dir: &Path) -> usize {
 }
 
 /// « nom|True » par ligne (sortie de la requête système).
+#[cfg(any(windows, test))]
 pub fn parse_printers(text: &str) -> Vec<PrinterInfo> {
     text.lines()
         .filter_map(|l| {

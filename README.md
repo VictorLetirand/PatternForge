@@ -32,7 +32,8 @@ avec ses limites, est dans le [guide utilisateur](docs/GUIDE_UTILISATEUR.md).
 - Pas de fichier de règles de gradation `.rul` ; la table des couches DXF de type AAMA / ASTM n'est pas
   confirmée, et aucune compatibilité avec un logiciel métier n'est annoncée.
 - Le placement automatique est une aide, pas une optimisation industrielle.
-- Développé et essayé sous Windows. Pas d'installateur ni de binaire signé.
+- Développé et essayé sous Windows. Linux et macOS sont visés par la CI, mais l'application n'y a pas été
+  essayée à la main. L'impression directe n'existe que sous Windows. Pas d'installateur ni de binaire signé.
 
 ## Compiler et lancer
 
@@ -48,6 +49,19 @@ L'exécutable est `target/release/patternforge` (`.exe` sous Windows). Il accept
 
 Sous Linux, installer d'abord les bibliothèques de fenêtrage et de dialogues (liste dans
 [.github/workflows/ci.yml](.github/workflows/ci.yml)).
+
+## macOS
+
+L'application n'est pas signée auprès d'Apple. Un binaire téléchargé est donc bloqué à la première
+ouverture : l'autoriser dans Réglages Système › Confidentialité et sécurité, ou retirer la quarantaine du
+dossier décompressé :
+
+```bash
+xattr -dr com.apple.quarantine PatternForge-macos-arm64
+```
+
+L'archive produite par la CI vise les Mac à puce Apple ; sur un Mac Intel, compiler depuis les sources.
+Les menus affichent « Ctrl » là où le raccourci utilise la touche Cmd.
 
 ## Format de fichier
 
@@ -66,6 +80,9 @@ cargo fmt --all -- --check
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
+
+Les tests d'intégration de `pf-core` et `pf-export` forment un seul programme par paquet
+(`tests/suite.rs`) : un nouveau fichier de test s'ajoute à sa liste.
 
 | Dossier | Rôle |
 |---|---|

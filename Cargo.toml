@@ -18,6 +18,13 @@ serde = { version = "1", features = ["derive"] }
 # float_roundtrip : relecture des f64 exacte au bit près (sinon erreur d'1 ULP possible).
 serde_json = { version = "1", features = ["float_roundtrip"] }
 
+# Les campagnes de tests sont du calcul pur : sans optimisation elles dominaient le temps total. Les
+# assertions de débogage et les contrôles de dépassement restent actifs ; sans symboles de débogage,
+# l'édition de liens est plus rapide et `target/` bien plus petit (un panic indique toujours sa ligne).
+[profile.test]
+opt-level = 1
+debug = 0
+
 [profile.release]
 opt-level = 3
 lto = "thin"

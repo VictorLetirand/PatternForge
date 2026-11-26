@@ -3,7 +3,14 @@ name: CI
 on:
   push:
     branches: [main]
+    tags: ["v*"]
   pull_request:
+  workflow_dispatch:
+
+# Un nouvel envoi annule la vérification devenue inutile.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   CARGO_TERM_COLOR: never
@@ -11,6 +18,7 @@ env:
 jobs:
   windows:
     runs-on: windows-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -21,7 +29,9 @@ jobs:
       - run: rustup toolchain install 1.99.1 --profile minimal --component clippy
       - run: cargo +1.99.1 clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace
+      # Compilation release et archive : lancement manuel ou tag seulement (environ 10 minutes).
       - run: cargo build --release -p pf-desktop
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
       - name: Relecture des PDF par un lecteur tiers (MuPDF)
         shell: pwsh
         run: |
@@ -32,6 +42,7 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit 1 }
           }
       - name: Archive portable et empreinte SHA-256
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
         shell: pwsh
         run: |
           $dir = "dist/PatternForge-windows-x64"
@@ -42,6 +53,7 @@ jobs:
           Compress-Archive -Path $dir -DestinationPath "$dir.zip" -Force
           (Get-FileHash "$dir.zip" -Algorithm SHA256).Hash | Tee-Object "$dir.zip.sha256"
       - uses: actions/upload-artifact@v4
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
         # Le quota de stockage d'artefacts du compte peut être plein : cela ne doit pas
         # masquer le résultat des contrôles ci-dessus.
         continue-on-error: true
@@ -53,6 +65,7 @@ jobs:
 
   linux:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -66,3 +79,39 @@ jobs:
       - run: rustup toolchain install 1.99.1 --profile minimal --component clippy
       - run: cargo +1.99.1 clippy --workspace --all-targets -- -D warnings
       - run: cargo test --workspace
+
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    # Une minute macOS coûte bien plus cher qu'une minute Linux sur un dépôt privé : la tâche
+    # tourne d'elle-même une fois le dépôt public, et à la demande avant cela.
+    if: github.event_name == 'workflow_dispatch' || github.event.repository.private == false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: rustup toolchain install 1.99.1 --profile minimal --component clippy
+      - run: cargo +1.99.1 clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace
+      # Archive non signée (Apple Silicon) : lancement manuel ou tag seulement. `tar` conserve le droit
+      # d'exécution, que le zip des artefacts perdrait.
+      - run: cargo build --release -p pf-desktop
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+      - name: Archive portable et empreinte SHA-256
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        run: |
+          dir=PatternForge-macos-arm64
+          mkdir -p "dist/$dir"
+          cp target/release/patternforge "dist/$dir/PatternForge"
+          cp -R README.md LICENSE THIRD-PARTY.md examples "dist/$dir/"
+          cd dist && tar -czf "$dir.tar.gz" "$dir" && shasum -a 256 "$dir.tar.gz" | tee "$dir.tar.gz.sha256"
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
+        continue-on-error: true
+        with:
+          name: patternforge-macos-arm64
+          path: |
+            dist/PatternForge-macos-arm64.tar.gz
+            dist/PatternForge-macos-arm64.tar.gz.sha256

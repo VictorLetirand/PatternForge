@@ -5,6 +5,8 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
+# Un seul programme de test (tests/suite.rs) : voir son en-tête.
+autotests = false
 
 [dependencies]
 pf-geometry = { workspace = true }
@@ -13,3 +15,7 @@ pf-i18n = { workspace = true }
 png = "=0.18.1"
 jpeg-encoder = "=0.7.1"
 miniz_oxide = "=0.8.9"
+
+[[test]]
+name = "suite"
+path = "tests/suite.rs"

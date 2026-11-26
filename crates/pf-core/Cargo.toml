@@ -5,6 +5,8 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
+# Un seul programme de test (tests/suite.rs) : voir son en-tête.
+autotests = false
 
 [dependencies]
 pf-geometry = { workspace = true }
@@ -16,3 +18,15 @@ zune-jpeg = "=0.4.21"
 [dev-dependencies]
 pf-export = { workspace = true }
 jpeg-encoder = "=0.7.1"
+
+[[test]]
+name = "suite"
+path = "tests/suite.rs"
+
+[[test]]
+name = "bancs_volumineux"
+path = "tests/bancs_volumineux.rs"
+
+[[test]]
+name = "durcissement_bancs"
+path = "tests/durcissement_bancs.rs"
