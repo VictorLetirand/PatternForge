@@ -1,79 +1,79 @@
 # PatternForge
 
-Atelier de CAO 2D de patronage (couture et maroquinerie), écrit en Rust, hors ligne. Les pièces se
-construisent en millimètres, avec des longueurs et des angles saisis, puis s'impriment à l'échelle 1:1.
+*Version française : [README.fr.md](README.fr.md).*
 
-> **État : prototype (0.1.0).** Rien n'a encore été validé par une modéliste, et aucune impression n'a
-> été mesurée sur papier. Avant de couper dans la matière, imprimez l'étalon de 100 mm et mesurez-le.
-> Les conventions métier (marges, crans, gradation, placement) restent à confirmer.
+An offline 2D CAD workshop for pattern drafting (sewing and leatherwork), written in Rust. Pieces are
+built in millimetres, with typed lengths and angles, then printed at 1:1 scale.
 
-## Ce qu'on peut faire
+> **Status: prototype (0.1.0).** Nothing has been validated by a pattern maker yet, and no print has been
+> measured on paper. Before cutting material, print the 100 mm calibration square and measure it. Trade
+> conventions (seam allowances, notches, grading, layout) still have to be confirmed.
 
-- **Dessiner avec précision** : segment (longueur et angle), perpendiculaire, parallèle, point à
-  distance, rectangle, arc, cercle, courbes avec longueur développée, accrochage, cotes.
-- **Garder des liens, quand on le demande** : constructions maintenues, variables et formules, longueur
-  imposée d'une courbe. Rien ne suit automatiquement sans ce choix.
-- **Travailler les pièces** : feuilles, calques, extraction de pièces, marges de couture, crans,
-  droit-fil, pinces, plis, perçages, boutonnières, contrôle d'assemblage.
-- **Décliner** : tailles et gradation, variantes, barème de mesures et fiches client.
-- **Maroquinerie** : lignes de piqûre, zones de parage et de collage, placement sur peau.
-- **Placer et sortir** : plan de coupe, PDF A4 tuilé à l'échelle 1:1, SVG, DXF, HPGL, PNG et JPEG ;
-  impression directe et projection.
-- **Reprendre un existant** : import DXF, SVG et PDF vectoriel, photo ou scan calibré à décalquer.
-- **Automatiser** : ligne de commande ([docs/CLI.md](docs/CLI.md)) et serveur MCP local, en lecture
-  seule par défaut ([crates/pf-mcp](crates/pf-mcp/README.md)).
+## What you can do
 
-L'interface est en français et en anglais ([docs/I18N.md](docs/I18N.md)). Le détail de chaque outil,
-avec ses limites, est dans le [guide utilisateur](docs/GUIDE_UTILISATEUR.md).
+- **Draft precisely**: segment (length and angle), perpendicular, parallel, point at distance, rectangle,
+  arc, circle, curves with developed length, snapping, dimensions.
+- **Keep links, when you ask for them**: maintained constructions, variables and formulas, imposed curve
+  length. Nothing follows automatically unless you choose it.
+- **Work on pieces**: sheets, layers, piece extraction, seam allowances, notches, grainline, darts,
+  pleats, drill holes, buttonholes, assembly checks.
+- **Derive**: sizes and grading, variants, measurement tables and client records.
+- **Leatherwork**: stitching lines, skiving and gluing zones, layout on a hide.
+- **Lay out and output**: cutting plan, tiled A4 PDF at 1:1, SVG, DXF, HPGL, PNG and JPEG; direct printing
+  and projection.
+- **Reuse existing work**: DXF, SVG and vector PDF import, calibrated photo or scan to trace.
+- **Automate**: command line ([docs/CLI.md](docs/CLI.md), in French) and a local MCP server, read-only by
+  default ([crates/pf-mcp](crates/pf-mcp/README.md), in French).
 
-## Limites à connaître
+The interface is available in French (default) and English (**View › Language**, or `--lang en`). Each
+tool and its limits are described in the [user guide](docs/USER_GUIDE.md).
 
-- Pas de solveur de contraintes général.
-- Pas de fichier de règles de gradation `.rul` ; la table des couches DXF de type AAMA / ASTM n'est pas
-  confirmée, et aucune compatibilité avec un logiciel métier n'est annoncée.
-- Le placement automatique est une aide, pas une optimisation industrielle.
-- Développé et essayé sous Windows. Linux et macOS sont visés par la CI, mais l'application n'y a pas été
-  essayée à la main. L'impression directe n'existe que sous Windows. Pas d'installateur ni de binaire signé.
+## Known limits
 
-## Compiler et lancer
+- No general constraint solver.
+- No grading rule file (`.rul`); the AAMA / ASTM-type DXF layer table is not confirmed, and no
+  compatibility with industry software is claimed.
+- Automatic placement is an aid, not industrial optimisation.
+- Developed and tried on Windows. Linux and macOS are targeted by CI, but the application has not been
+  tried by hand there. Direct printing is Windows only. No installer, no signed binary.
 
-Il faut une chaîne Rust stable récente (essayé avec la 1.90).
+## Build and run
+
+A recent stable Rust toolchain is required (tried with 1.90).
 
 ```bash
 cargo run --release -p pf-desktop
 ```
 
-L'exécutable est `target/release/patternforge` (`.exe` sous Windows). Il accepte le chemin d'un projet
-à ouvrir, `--demo` pour un exercice de référence et `--lang fr|en`. Des projets d'exemple sont dans
-`examples/`.
+The executable is `target/release/patternforge` (`.exe` on Windows). It takes the path of a project to
+open, `--demo` for a reference exercise and `--lang fr|en`. Example projects are in `examples/`.
 
-Sous Linux, installer d'abord les bibliothèques de fenêtrage et de dialogues (liste dans
+On Linux, install the windowing and dialog libraries first (listed in
 [.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
 ## macOS
 
-L'application n'est pas signée auprès d'Apple. Un binaire téléchargé est donc bloqué à la première
-ouverture : l'autoriser dans Réglages Système › Confidentialité et sécurité, ou retirer la quarantaine du
-dossier décompressé :
+The application is not signed with Apple. A downloaded binary is therefore blocked on first launch: allow
+it in System Settings › Privacy & Security, or remove the quarantine flag from the unpacked folder:
 
 ```bash
 xattr -dr com.apple.quarantine PatternForge-macos-arm64
 ```
 
-L'archive produite par la CI vise les Mac à puce Apple ; sur un Mac Intel, compiler depuis les sources.
-Les menus affichent « Ctrl » là où le raccourci utilise la touche Cmd.
+The archive built by CI targets Apple Silicon Macs; on an Intel Mac, build from source. Menus show “Ctrl”
+where the shortcut uses the Cmd key.
 
-## Format de fichier
+## File format
 
-Un projet est un fichier texte `.pforge.json`, versionné et documenté :
-[format version 6](docs/FORMAT_PFORGE_V6.md) et son [schéma JSON](docs/pforge-v6.schema.json). Les
-versions antérieures restent lisibles. Pour contrôler un fichier :
+A project is a versioned, documented `.pforge.json` text file:
+[format version 6](docs/FORMAT_PFORGE_V6.md) (in French) and its
+[JSON schema](docs/pforge-v6.schema.json). Earlier versions can still be read. To check a file:
 
 ```bash
-cargo run -q -p pf-core --bin pf-validate -- mon-projet.pforge.json
+cargo run -q -p pf-core --bin pf-validate -- my-project.pforge.json
 ```
 
-## Développement
+## Development
 
 ```bash
 cargo fmt --all -- --check
@@ -81,24 +81,24 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace
 ```
 
-Les tests d'intégration de `pf-core` et `pf-export` forment un seul programme par paquet
-(`tests/suite.rs`) : un nouveau fichier de test s'ajoute à sa liste.
+The integration tests of `pf-core` and `pf-export` form a single program per crate (`tests/suite.rs`): add
+any new test file to its list.
 
-| Dossier | Rôle |
+| Folder | Role |
 |---|---|
-| `crates/pf-geometry` | Calculs géométriques purs, en mm |
-| `crates/pf-core` | Modèle, commandes d'édition, annuler / rétablir, fichiers |
-| `crates/pf-export` | Exports et imports (PDF, SVG, DXF, HPGL, images) |
-| `crates/pf-i18n` | Textes français et anglais |
-| `crates/pf-ui` | Éléments d'interface partagés |
-| `crates/pf-cli` | Ligne de commande |
-| `crates/pf-mcp` | Serveur MCP local |
+| `crates/pf-geometry` | Pure geometry, in mm |
+| `crates/pf-core` | Model, editing commands, undo / redo, files |
+| `crates/pf-export` | Exports and imports (PDF, SVG, DXF, HPGL, images) |
+| `crates/pf-i18n` | French and English texts |
+| `crates/pf-ui` | Shared interface elements |
+| `crates/pf-cli` | Command line |
+| `crates/pf-mcp` | Local MCP server |
 | `apps/pf-desktop` | Application (egui) |
-| `examples/` | Projets d'exemple et exports de référence (comparés octet par octet par les tests) |
+| `examples/` | Example projects and reference exports (compared byte by byte by the tests) |
 
-Les commentaires du code citent parfois des numéros de story, de tranche ou de décision : ils viennent
-des documents de travail internes, qui ne sont pas publiés.
+Source comments and most technical documents are in French. Comments sometimes cite story or decision
+numbers from internal working documents that are not published.
 
 ## Licence
 
-[MIT](LICENSE). Composants tiers et leurs licences : [THIRD-PARTY.md](THIRD-PARTY.md).
+[MIT](LICENSE). Third-party components and their licences: [THIRD-PARTY.md](THIRD-PARTY.md) (in French).

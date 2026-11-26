@@ -22,7 +22,7 @@ $dossier = Join-Path $racine "dist\$nom"
 Remove-Item (Join-Path $racine "dist") -Recurse -Force -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force $dossier | Out-Null
 Copy-Item target\release\patternforge.exe (Join-Path $dossier "PatternForge.exe")
-Copy-Item README.md, LICENSE, THIRD-PARTY.md $dossier
+Copy-Item README.md, README.fr.md, LICENSE, THIRD-PARTY.md $dossier
 Copy-Item examples (Join-Path $dossier "examples") -Recurse
 Copy-Item docs\GUIDE_UTILISATEUR.md $dossier
 Compress-Archive -Path $dossier -DestinationPath (Join-Path $racine "dist\$nom.zip") -Force

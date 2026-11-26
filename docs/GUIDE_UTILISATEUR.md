@@ -1,10 +1,17 @@
 # Guide utilisateur — PatternForge
 
+*English version: [USER_GUIDE.md](USER_GUIDE.md).*
+
 Atelier de CAO 2D pour construire des patrons précis, en millimètres, hors ligne. Ce guide décrit
 ce que fait la version actuelle, et ce qu'elle ne fait pas.
 
 > **Avant d'imprimer pour de vrai** : l'export PDF reste *expérimental* tant que le carré de
 > 100 mm n'a pas été mesuré sur papier (voir « Vérifier l'impression »).
+
+**Pas encore décrit dans ce guide** (les fonctions existent dans l'application) : marges de couture (fiche de
+pièce), pinces, plis et ampleur, variables et formules, tailles et gradation, barème et fiches client, variantes,
+nomenclature, plans de coupe et placement automatique, lignes de piqûre et zones du cuir, bibliothèque, versions
+nommées, impression directe et projection. La ligne de commande est décrite dans [CLI.md](CLI.md).
 
 ## 1. Démarrer
 
@@ -31,8 +38,7 @@ Options : un chemin de projet à ouvrir ; `--demo` (exercice de référence) ; `
 Un projet contient plusieurs **feuilles** indépendantes (« + Nouvelle feuille », `F2` ou
 double-clic pour renommer, flèches pour réordonner). Une feuille n'est pas une page A4. Elle peut
 porter une ou plusieurs pièces de patron (nom, quantité, matière) — la case « Cette feuille porte une pièce » crée une fiche sans contour, l'outil
-« Extraire une pièce » crée une pièce avec son contour (voir ci-dessous). Une pièce est enregistrée dans le projet (format v3) ;
-les anciens fichiers v1 et v2 s'ouvrent et sont migrés : le contour de coupe est rattaché à la pièce
+« Extraire une pièce » crée une pièce avec son contour (voir ci-dessous). Une pièce est enregistrée dans le projet ; les anciens fichiers s'ouvrent et sont migrés ; pour un fichier v1 ou v2 : le contour de coupe est rattaché à la pièce
 s'il est unique, sinon la pièce est conservée sans contour (remarque enregistrée dans le fichier).
 
 **Dupliquer une feuille** : bouton « Dupliquer » du panneau (ou `Fichier › Dupliquer la feuille`). La copie
@@ -241,8 +247,8 @@ les courbes), sauf sur les pointes et biseaux des coins extérieurs, qui sont pa
 | Paramètre de création | « 120 mm à 0° » d'un segment | Mémorisé pour information, **non maintenu** si un point bouge |
 | Paramètre de construction | distance d'un point placé sur un segment | Maintenu : le point suit son segment |
 
-Il n'y a **pas** de contrainte persistante générale : ni perpendicularité maintenue, ni longueur de
-courbe imposée. Supprimer le parent d'un point construit le « fige » (une remarque s'affiche).
+Il n'y a **pas** de solveur de contraintes général. Seuls les liens explicites sont maintenus : constructions que vous
+choisissez de garder, formules, longueur imposée d'une courbe. Rien d'autre ne suit automatiquement. Supprimer le parent d'un point construit le « fige » (une remarque s'affiche).
 
 ## 6. Rôles des tracés
 
@@ -328,8 +334,7 @@ mémorisé sur ce poste, comme le format ; rien n'est ajouté au projet. Par dé
 - L'aperçu de la fenêtre donne le **nombre de pages avant l'export**, plan compris, avec le nombre de
   pages vides omises et la rotation retenue.
 
-Ce que cette version ne fait pas : impression directe (étape suivante de l'epic impression), ni les
-formats A5, A2, A1 ; rotation pièce par pièce d'une planche. **L'échelle
+Ce que cette version ne fait pas : les formats A5, A2, A1 ; rotation pièce par pièce d'une planche. **L'échelle
 réellement obtenue sur papier n'est pas validée**, pas plus que la superposition des repères :
 imprimez l'étalon dans le format choisi et mesurez-le (ci-dessous).
 
@@ -388,8 +393,7 @@ ne change pas).
 
 - **Contours** : coupe, couture, droits-fils. « **Couture seule** » et « **Coupe seule** » sont des
   raccourcis. Attention : le « contour de coupe » est le **tracé que vous avez dessiné avec le rôle
-  coupe**. Il n'est **pas calculé** à partir de la couture (les marges de couture n'existent pas encore) :
-  si la feuille n'a aucun tracé de coupe, « coupe seule » n'en invente pas, et une remarque vous le dit.
+  coupe**. Le contour de coupe d'une pièce à marge de couture, lui, est calculé depuis sa fiche. Si la feuille n'a aucun tracé de coupe, « coupe seule » n'en invente pas, et une remarque vous le dit.
 - **Lignes** : tracés de construction, pliures et lignes spéciales (surpiqûre, milieux, taille, hanche,
   poitrine, parage, collage), axes de repère et lignes d'aide.
 - **Repères et marquages** : crans, perçages / pointages / croix, boutons et boutonnières, points, noms
@@ -428,11 +432,11 @@ fichier « validé » : essayez-le d'abord dans votre logiciel et dites-nous ce 
 - **Couches** : 1 contour de pièce · 4 crans · 6 droit-fil · 7 lignes internes · 8 découpes internes ·
   13 perçages, marques et boutons · 15 ligne de couture · 84 texte. Les couches 2 et 3 (points de
   rotation et de courbe) et 10 (ligne de miroir) sont déclarées mais **restent vides**.
-- **Le contour de coupe n'est jamais calculé** (pas de marge de couture) : le contour de la pièce est
-  écrit **tel que vous l'avez dessiné**. S'il a le rôle « contour de coupe » il va sur la couche 1 ;
+- **Contour de coupe** : pour une pièce à marge de couture, le contour dessiné est la couture (couche 15) et la coupe
+  calculée va sur la couche 1. Sans marge de couture, le contour est écrit **tel que vous l'avez dessiné**. S'il a le rôle « contour de coupe » il va sur la couche 1 ;
   s'il a le rôle « ligne de couture » il va **seulement** sur la couche 15 (aucun contour de coupe n'est
   écrit, la fenêtre le dit) ; sinon il va sur la couche 1 avec une remarque.
-- **Aucun fichier de règles de gradation (`.rul`)** : la gradation n'existe pas encore dans PatternForge.
+- **Aucun fichier de règles de gradation (`.rul`)**.
 - **Rapport avant l'écriture** : la fenêtre montre le nombre de pièces, de couches et d'entités, puis
   **ce qui n'est pas exporté** (pièce sans contour, contour non fermé ou plat, éléments illisibles, texte
   tronqué à 80 caractères) et des remarques. Rien n'est perdu sans que la fenêtre le dise.
@@ -652,8 +656,7 @@ en page** : déplacer ou tourner une pièce dans le plan **ne modifie jamais la 
   détection exacte** des recouvrements (deux contours peuvent avoir des boîtes qui se recouvrent sans se toucher) et rien n'est refusé.
 - Dans le plan, les outils et raccourcis de la feuille (Suppr, copier-coller, sélection…) sont **inactifs** ; **Retour à la feuille** (ou un clic sur une feuille) rend la feuille.
 
-Limites : pas d'aimantation aux bords ni de rotation à la souris ; le droit-fil et les crans ne sont **pas dessinés** dans le plan ; **pas d'imbrication ni d'optimisation de
-placement, pas d'export du plan** (étapes futures) ; le plan est une aide de mise en page, **pas** un plan de coupe validé ; le rendu n'a pas été vu dans la vraie fenêtre.
+Limites : pas d'aimantation aux bords ni de rotation à la souris ; le droit-fil et les crans ne sont **pas dessinés** dans le plan ; ce plan ne s'exporte pas ; c'est une aide de mise en page : pour placer sur tissu ou sur peau, utilisez **Fichier › Plan de coupe…** ; le rendu n'a pas été vu dans la vraie fenêtre.
 
 ### Pièces dérivées
 
@@ -681,8 +684,7 @@ dans la même étape d'annulation que votre modification).
 - Une dérivée peut être la mère d'une autre (8 niveaux au plus).
 
 Limites : le **vocabulaire** (parementure, doublure, entoilage, renfort) **n'a pas été relu par une modéliste** ; seul le **décalage** du contour est
-livré (coins en pointe, pas de coins arrondis au choix) : la **bande de parementure** limitée par une ligne de découpe n'existe pas encore ; pas de marge de
-couture (E05) ; les raisons d'obsolescence viennent du cœur et sont écrites en français ; aucun export ne les écrit encore ; le rendu n'a pas été vu dans
+livré (coins en pointe, pas de coins arrondis au choix) : la **bande de parementure** limitée par une ligne de découpe n'existe pas encore ; pas de marge de couture sur la dérivée ; les raisons d'obsolescence viennent du cœur et sont écrites en français ; aucun export ne les écrit encore ; le rendu n'a pas été vu dans
 la vraie fenêtre.
 
 ### Séparer et assembler des pièces
@@ -711,7 +713,7 @@ première, bord retourné ; le bord commun disparaît du contour. La fenêtre mo
   internes sont repris (ceux de la seconde déplacés avec elle). Une seule étape d'annulation. Les pièces sont lues **telles que construites** (le placement du plan n'intervient pas).
 - **Séparer puis assembler** les deux moitiés par leur bord de coupe retrouve l'aire d'origine.
 
-Limites : **pas de découpe en plus de deux morceaux** ; la ligne est une droite infinie ; **aucune marge de couture n'est recalculée** (elles n'existent pas encore : E05) ; les bords se choisissent dans
+Limites : **pas de découpe en plus de deux morceaux** ; la ligne est une droite infinie ; **aucune marge de couture n'est recalculée** pour les pièces créées ; les bords se choisissent dans
 une liste (pas au clic) ; le recouvrement n'est détecté que si les contours se croisent ; les messages de refus viennent du cœur et sont écrits en français ; **le rendu et les gestes à la souris n'ont
 été exercés que par des tests automatiques, jamais vus dans la vraie fenêtre**.
 
@@ -734,7 +736,7 @@ la moitié et de la pièce entière, et la raison d'un refus éventuel (bouton g
   encore liée (« cassez le lien »).
 
 Limites : le **droit-fil**, les **éléments internes** et les **crans** de la moitié ne sont **pas repris** sur la pièce dépliée (une remarque le dit, la pièce affiche « droit-fil manquant ») ; pliure
-rectiligne seulement et une seule pliure à la fois ; **aucune marge de couture n'est recalculée** (elles n'existent pas encore : E05) ; la quantité reprise telle quelle, le mot « dépliée » et
+rectiligne seulement et une seule pliure à la fois ; **aucune marge de couture n'est recalculée** pour les pièces créées ; la quantité reprise telle quelle, le mot « dépliée » et
 l'absence de « paire » sont à faire relire par une modéliste ; le rendu et la fenêtre n'ont été exercés que par des tests automatiques, **jamais vus dans la vraie fenêtre**.
 
 ### Perçages et pointages
@@ -815,7 +817,7 @@ posé au même endroit.
 
 Limites : l'outil Cran pose toujours un cran fixe (le lien se choisit ensuite dans l'inspecteur) ; points et tracé source se choisissent dans des listes, pas au clic ; pas de report d'une feuille à
 l'autre ; la précision du pied d'un point sur une courbe de Bézier est de l'ordre du dix-millième de millimètre (mesurée) mais n'a pas été étudiée sur de très longues courbes ; les **crans projetés sur
-la coupe** (US-06.1) dépendent des marges de couture, qui n'existent pas encore ; le vocabulaire (ancrage, report, proportion) n'a **pas été relu par une modéliste** ; l'inspecteur n'a été exercé que par
+la coupe** se règlent avec les marges de couture, non décrites ici ; le vocabulaire (ancrage, report, proportion) n'a **pas été relu par une modéliste** ; l'inspecteur n'a été exercé que par
 des tests automatiques, **jamais vu dans la vraie fenêtre**.
 
 ### Droit-fil avancé
