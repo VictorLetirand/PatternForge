@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/icon/icon.png" width="96" alt="PatternForge logo"></p>
+
 # PatternForge
 
 **A free, fully offline 2D CAD workshop for sewing and leather pattern drafting — written in Rust.**

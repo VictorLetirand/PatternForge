@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/icon/icon.png" width="96" alt="Logo PatternForge"></p>
+
 # PatternForge
 
 **Un atelier de CAO 2D gratuit et entièrement hors ligne pour le patronage de couture et de maroquinerie — écrit en Rust.**
