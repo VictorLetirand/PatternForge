@@ -83,7 +83,7 @@ fn initialize_handshake() {
     );
     assert_eq!(r["id"], 1);
     assert_eq!(r["result"]["protocolVersion"], "2024-11-05");
-    assert_eq!(r["result"]["serverInfo"]["name"], "patterncraft");
+    assert_eq!(r["result"]["serverInfo"]["name"], "patternforge");
     assert_eq!(
         r["result"]["serverInfo"]["version"],
         env!("CARGO_PKG_VERSION")
@@ -144,12 +144,12 @@ fn resource_summary() {
     );
     assert_eq!(
         r["result"]["resources"][0]["uri"],
-        "patterncraft://project/summary"
+        "patternforge://project/summary"
     );
     let r = send(
         &mut s,
         json!({"jsonrpc":"2.0","id":2,"method":"resources/read",
-               "params":{"uri":"patterncraft://project/summary"}}),
+               "params":{"uri":"patternforge://project/summary"}}),
     );
     let text = r["result"]["contents"][0]["text"].as_str().expect("texte");
     let v: Value = serde_json::from_str(text).expect("JSON");
@@ -326,7 +326,7 @@ fn corrupted_or_missing_project_is_tool_error() {
     assert!(r["structuredContent"]["error"].is_string());
     let r = send(
         &mut s,
-        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patterncraft://project/summary"}}),
+        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patternforge://project/summary"}}),
     );
     assert!(r["error"].is_object());
 
@@ -343,7 +343,7 @@ fn project_is_reread_on_each_call() {
     pf_core::persist::save(&t.file(), &project).expect("enregistrement");
     let r = send(
         &mut s,
-        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patterncraft://project/summary"}}),
+        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patternforge://project/summary"}}),
     );
     let text = r["result"]["contents"][0]["text"].as_str().expect("texte");
     assert!(text.contains("Autre nom"));
@@ -498,7 +498,7 @@ fn project_file_is_never_modified() {
     let _ = s.handle_line("n'importe quoi");
     let _ = send(
         &mut s,
-        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patterncraft://project/summary"}}),
+        json!({"jsonrpc":"2.0","id":1,"method":"resources/read","params":{"uri":"patternforge://project/summary"}}),
     );
     assert_eq!(fs::read(t.file()).expect("relecture"), before);
     let names: Vec<_> = fs::read_dir(&t.0)

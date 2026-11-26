@@ -9,12 +9,6 @@ switch with **View › Language**, or start with `--lang en`.
 > **Before printing for real**: PDF export remains *experimental* until the 100 mm square has been
 > measured on paper (see “Check your print”).
 
-**Not covered by this guide yet** (the features exist in the application): seam allowances (piece card,
-“Seam allowance”), darts, pleats and flares, variables and formulas, sizes and grading, measurement
-tables and client records, variants, bill of materials, cutting plans and automatic placement, stitching
-lines and leather zones, the piece library, named versions, direct printing and projection. The command
-line is described in [CLI.md](CLI.md) (in French).
-
 ## 1. Getting started
 
 ```bash
@@ -231,7 +225,7 @@ their perimeter and area in the inspector. See also “Special lines and linked 
 (unknown version, missing reference) opens with a clear error, with no silent loss.
 
 **Autosave.** Every 60 seconds (if the project changed), a backup copy is written next to the file:
-`myproject.pforge.json.autosave`. A project never saved is copied to `%APPDATA%\PatternCraft\recovery\`
+`myproject.pforge.json.autosave`. A project never saved is copied to `%APPDATA%\PatternForge\recovery\`
 (Windows). Your file is never overwritten by this copy; `Ctrl+S` deletes it. After a crash, a box offers
 to **Recover** (the project comes back as modified: save to keep it) or **Ignore** (the copy is deleted).
 An unreadable copy is renamed `.corrupt`. The interval is set with the `autosave_seconds` key of
@@ -723,6 +717,150 @@ real outline of a hide: the **outline**, **flaws** to avoid (hole, scar, stain, 
 
 Limits: never tried with a real hide; two overlapping zones of the same grade count twice.
 
+### Seam allowances
+
+In the piece card, section **Seam allowance**. The drawn outline is the **sewing line**; the **cut outline
+is computed** and the drawing is never modified.
+
+- **Default (mm)** applies to every edge (0 to 1000 mm, measured outwards).
+- **Per-edge overrides**: select a path of the outline, **Override the selected path**; a different value
+  can be set at its start and at its end.
+- **Corners**: *Mitre* (default), *Perp. previous*, *Perp. next*, *Symmetric*, *Truncated*, *Stepped*, and
+  *Hem* with the next or previous edge as the fold. **Maximum tip** limits long mitres.
+- **Hems**: select a straight edge, **Hem on the selected path**, and give its height.
+- **On fold**: a straight edge declared on the fold gets no allowance and no cutting; “ON FOLD” is written
+  on export.
+- **Allowances by material**: apply the value of the piece's category.
+
+The inspector shows the perimeter and area of the computed cut outline. If it cannot be computed, the
+reason is given. The values and corner conventions have **not been reviewed by a pattern maker**.
+
+### Darts, pleats, flare and cutting a piece
+
+- **Dart** tool (`Y`): click the straight outline edge that carries the dart base, then the apex inside
+  the piece; type the **opening** or aim with the mouse, then Enter. The dart panel shows leg lengths,
+  angle and the line before and after folding; it can **switch side**, **cut with the dart closed**,
+  delete, or **transfer the dart** (fully or by a percentage) to another edge; a transfer rebuilds the
+  piece on a new sheet.
+- **Edit › Pleats…**: place a pleat line (2 clicks), choose **flat** or **hollow**, the side, depth,
+  number and spread. The window shows the added width and the area before and after; **Show the folded
+  piece** displays the result closed.
+- **Edit › Flare…**: opens the piece like a fan. Choose the fixed (straight) edge, the number or
+  positions of the lines and the opening at the top (one value or one per line). One flare per piece.
+- **Edit › Cut into pieces…**: cuts a piece in two along a line and places **identical registration
+  notches** on both new edges.
+
+Gathers and godets are not provided.
+
+### Stitching lines and leather zones
+
+In the piece card.
+
+- **Stitching lines…**: select consecutive outline paths, choose the hole shape (round punch, flat punch,
+  French lozenge, Japanese oblique), **automatic count** from a requested pitch or a **fixed count**, and
+  the **setback** from the edge. Positions are recomputed when the edge changes.
+- **Pair…** two stitching lines of two pieces to compare hole counts and mean pitches; missing or shifted
+  holes are listed.
+- **Zones (skiving, gluing, cut-out)…**: a **band** along an outline edge (recomputed with it) or a
+  **free polygon** from selected points. The area is shown.
+
+### Variables, formulas and maintained constructions
+
+- **Edit › Variables…**: named values (mm, degrees or none) defined by expressions: `+ - * / ( )`,
+  `min(a;b)`, `max(a;b)`, `abs`, `sqrt`, `pi`; separate arguments with `;`. Nothing changes while an entry
+  is invalid.
+- **Formula**: in the inspector of a point placed by distance, proportion or direction, or by dx / dy,
+  type a formula such as `L/2+10`; the value stays **maintained**. **Unlink** keeps the current number.
+- **Keep the construction**: for a segment drawn by length and angle, perpendicular, parallel or rectangle,
+  tick it to have the shape follow its references. Unticked, points stay where they are.
+- **Imposed length**: a Bézier or smooth curve can have its developed length imposed, one handle or end
+  being adjusted; it can also follow the length of another path.
+- **View › Link diagnostics** lists all links and their problems; **View › Dependencies** shows the
+  parents and dependents of the selection.
+
+There is still no general constraint solver.
+
+### Sizes and grading
+
+- **View › Sizes...**: ranges of sizes (alphanumeric or numeric) in grading order, with one **base size**.
+- **View › Grading...**: select a free point and type its **cumulative offsets** (dx, dy) from the base
+  size, per size. Constructed points follow their parents. A rule can be **copied** to other points (same,
+  mirrored, inverted) or **interpolated** between two graded points.
+- Variables can take a different expression in each size.
+- The size shown can be switched to check the result; non-base sizes are read only.
+- **View › Measures by size...**: lengths, perimeters, areas and seam gaps for every size.
+- **View › Size nest...** (and *Show size nest*): all sizes stacked on a common point.
+- **View › Shape check...**: compares the curvature of curves across sizes.
+- **File › Export sizes…** writes one file per size.
+
+Kept constructions and imposed lengths are not re-evaluated per size, and no `.rul` rule file is written.
+
+### Measurement table, client records and alterations
+
+- **View › Measurement table...**: measurements (mm or degrees) per size. An empty cell means “not filled
+  in”.
+- **View › Client records...**: one person's measurements. A missing value is never guessed. The closest
+  size is suggested for information only, and **a made-to-measure size** can be generated from a record.
+- **View › Alterations and finished measurements…**: an alteration adds a difference to a table value when
+  read; a finished measurement is read on a seam or a dimension and compared with its tolerance.
+
+The drawing is never modified by these windows, and no default values are provided.
+
+### Variants, bill of materials, library, versions
+
+- **File › Variants…**: a selection of the project's pieces with quantities, materials and options, without
+  copying the pieces.
+- **File › Bill of materials and technical sheet…**: pieces, materials, cuts and net area by size.
+- **File › Library…**: save a piece, a block (the selection) or a model, and insert it later as an
+  independent copy.
+- **File › Versions…**: named snapshots stored next to the project; compare, or restore in one undoable
+  step.
+- **File › Naming conventions…**: build piece and sheet names from a prefix, a counter and a suffix, only
+  when asked.
+
+### Cutting plan and automatic placement
+
+**File › Cutting plan…**: several plans per project. Set the fabric width, selvedge, folded fabric and
+minimum gap, then drag pieces onto the fabric.
+
+- **Checks**: overlaps (red hatching) and overflows (orange) are listed; the plan says whether it is valid.
+- **Yardage**: length used, usable width, area used, yield and share per size. No figure is given for an
+  invalid plan.
+- **Automatic placement**: replace everything or **complete** the unplaced pieces. The result is a
+  **proposal**, neither optimal nor guaranteed minimal.
+- **Export** to SVG or PDF at 1:1, and the yardage to CSV.
+
+For leather, see “Cutting plan on a hide” above.
+
+### Printing and projection
+
+- **File › Print…** sends the same layout as the PDF export to the system print service, at 100 %,
+  calibration square included. **Windows only.**
+- **File › Projection…**: full screen on black for a projector. Enter the real width of the projected
+  image; mirroring, grid and line width are adjustable; `Esc` quits.
+
+Accuracy is computed, **not measured** on paper or on a screen: check the 100 mm square with a ruler.
+
+### Imports and quick construction
+
+- **File › Import pieces from an AAMA / ASTM-style DXF…**: one detached piece per block (cut or sewing
+  outline, notches, grainline, card), in one undoable step.
+- **File › Import an SVG / PDF…**: paths only, as ordinary construction geometry; no text, no images.
+- **Edit › Quick construction…**: polygon from coordinates, rectangle or rounded rectangle, as ordinary
+  geometry; the typed sizes are not maintained afterwards.
+
+None of these imports has been tried with files from industry software.
+
+### Workspace and command line
+
+**View › Workspace**, **Customize toolbars...**, **Preferences...** and **History...** adjust the interface
+and let you step back through the actions.
+
+The command line (`patternforge-cli`, crate `pf-cli`) validates, converts and exports projects without the
+interface. Its commands and options are in French: `valider` (check), `convertir` (convert), `exporter`
+(export, including PNG and JPEG with `--dpi`), `lot` (batch a folder). Run
+`cargo run -p pf-cli -- --aide` and see [CLI.md](CLI.md).
+
 ## 9. Shortcuts and theme
 
 `F1` opens the shortcut table. **Tool** letters can be changed (“Change”, then a letter A–Z; a letter in
@@ -730,8 +868,8 @@ use is refused). `Ctrl+…` shortcuts and special keys are fixed; on macOS, `Ctr
 menus means the Cmd key. The choice is stored outside the project, like the language (View › Language) and
 theme (View › Theme, light or dark).
 
-Settings: `%APPDATA%\PatternCraft\settings.json` on Windows; `$XDG_CONFIG_HOME/patterncraft`, or
-`~/.config/patterncraft`, elsewhere. Deleting the file restores the defaults.
+Settings: `%APPDATA%\PatternForge\settings.json` on Windows; `$XDG_CONFIG_HOME/patternforge`, or
+`~/.config/patternforge`, elsewhere. Deleting the file restores the defaults.
 
 ## 10. MCP server (AI assistants)
 

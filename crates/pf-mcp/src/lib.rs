@@ -285,6 +285,6 @@ fn initialize(params: Option<&Value>) -> Result<Value, RpcError> {
     Ok(json!({
         "protocolVersion": version,
         "capabilities": {"tools": {}, "resources": {}},
-        "serverInfo": {"name": "patterncraft", "version": env!("CARGO_PKG_VERSION")}
+        "serverInfo": {"name": "patternforge", "version": env!("CARGO_PKG_VERSION")}
     }))
 }

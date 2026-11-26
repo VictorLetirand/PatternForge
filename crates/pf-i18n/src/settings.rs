@@ -1,7 +1,7 @@
 //! Réglages de l'application, hors projet : aujourd'hui la seule langue.
 //!
-//! Fichier `settings.json` (`{"language":"fr"}`) dans `%APPDATA%\PatternCraft\`
-//! (Windows) ou `$XDG_CONFIG_HOME/patterncraft` / `$HOME/.config/patterncraft`.
+//! Fichier `settings.json` (`{"language":"fr"}`) dans `%APPDATA%\PatternForge\`
+//! (Windows) ou `$XDG_CONFIG_HOME/patternforge` / `$HOME/.config/patternforge`.
 //! Toutes les fonctions prennent le chemin en paramètre : les tests utilisent
 //! un dossier temporaire et n'écrivent jamais dans le dossier utilisateur.
 
@@ -19,11 +19,11 @@ pub const FILE_NAME: &str = "settings.json";
 pub fn config_dir_from(windows: bool, var: impl Fn(&str) -> Option<OsString>) -> Option<PathBuf> {
     let non_empty = |name: &str| var(name).filter(|v| !v.is_empty());
     if windows {
-        non_empty("APPDATA").map(|a| PathBuf::from(a).join("PatternCraft"))
+        non_empty("APPDATA").map(|a| PathBuf::from(a).join("PatternForge"))
     } else if let Some(xdg) = non_empty("XDG_CONFIG_HOME") {
-        Some(PathBuf::from(xdg).join("patterncraft"))
+        Some(PathBuf::from(xdg).join("patternforge"))
     } else {
-        non_empty("HOME").map(|h| PathBuf::from(h).join(".config").join("patterncraft"))
+        non_empty("HOME").map(|h| PathBuf::from(h).join(".config").join("patternforge"))
     }
 }
 
@@ -232,7 +232,7 @@ mod tests {
         };
         assert_eq!(
             config_dir_from(true, env(&[("APPDATA", "C:\\Roaming")])),
-            Some(PathBuf::from("C:\\Roaming").join("PatternCraft"))
+            Some(PathBuf::from("C:\\Roaming").join("PatternForge"))
         );
         assert_eq!(config_dir_from(true, env(&[("HOME", "/home/x")])), None);
         assert_eq!(
@@ -240,19 +240,19 @@ mod tests {
                 false,
                 env(&[("XDG_CONFIG_HOME", "/cfg"), ("HOME", "/home/x")])
             ),
-            Some(PathBuf::from("/cfg").join("patterncraft"))
+            Some(PathBuf::from("/cfg").join("patternforge"))
         );
         assert_eq!(
             config_dir_from(false, env(&[("HOME", "/home/x")])),
             Some(
                 PathBuf::from("/home/x")
                     .join(".config")
-                    .join("patterncraft")
+                    .join("patternforge")
             )
         );
         assert_eq!(
             config_dir_from(false, env(&[("XDG_CONFIG_HOME", ""), ("HOME", "/h")])),
-            Some(PathBuf::from("/h").join(".config").join("patterncraft"))
+            Some(PathBuf::from("/h").join(".config").join("patternforge"))
         );
         assert_eq!(config_dir_from(false, env(&[])), None);
     }

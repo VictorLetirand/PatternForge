@@ -21,7 +21,7 @@ Unités : mm ; repère : X droite, Y haut, angles en degrés anti-horaires.
 
 | Nom | Arguments | Résultat |
 |---|---|---|
-| `patterncraft://project/summary` (resource) | | nom, `schema_version`, unité, repère, feuilles |
+| `patternforge://project/summary` (resource) | | nom, `schema_version`, unité, repère, feuilles |
 | `list_sheets` | | `revision` du fichier ; feuilles : id, nom, nombre de points et de tracés, pièce |
 | `list_entities` | `sheet_id` | points (`x_mm`, `y_mm`, type de définition, rôle) et tracés |
 | `measure_entity` | `sheet_id`, `entity_id` | segment : `length_mm`, `direction_deg` ; courbe : `length_mm` (développée), `chord_mm` |
@@ -71,7 +71,7 @@ Sans `--allow-write`, ces outils sont absents de `tools/list` et tout appel est 
 ```json
 {
   "mcpServers": {
-    "patterncraft": {
+    "patternforge": {
       "command": "pf-mcp-server",
       "args": ["--project", "C:/chemin/vers/projet.pforge.json"]
     }

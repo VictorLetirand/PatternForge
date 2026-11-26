@@ -8,11 +8,6 @@ ce que fait la version actuelle, et ce qu'elle ne fait pas.
 > **Avant d'imprimer pour de vrai** : l'export PDF reste *expérimental* tant que le carré de
 > 100 mm n'a pas été mesuré sur papier (voir « Vérifier l'impression »).
 
-**Pas encore décrit dans ce guide** (les fonctions existent dans l'application) : marges de couture (fiche de
-pièce), pinces, plis et ampleur, variables et formules, tailles et gradation, barème et fiches client, variantes,
-nomenclature, plans de coupe et placement automatique, lignes de piqûre et zones du cuir, bibliothèque, versions
-nommées, impression directe et projection. La ligne de commande est décrite dans [CLI.md](CLI.md).
-
 ## 1. Démarrer
 
 ```bash
@@ -269,7 +264,7 @@ claire, sans perte silencieuse.
 
 **Sauvegarde automatique.** Toutes les 60 secondes (si le projet a changé), une copie de secours est
 écrite à côté du fichier : `monprojet.pforge.json.autosave`. Un projet jamais enregistré est copié
-dans `%APPDATA%\PatternCraft\recovery\`. Votre fichier n'est jamais écrasé par cette copie ;
+dans `%APPDATA%\PatternForge\recovery\`. Votre fichier n'est jamais écrasé par cette copie ;
 `Ctrl+S` la supprime. Après un arrêt brutal, à l'ouverture du projet (ou au démarrage pour un projet
 jamais enregistré), une boîte propose **Récupérer** (le projet revient comme modifié : enregistrez
 pour le conserver) ou **Ignorer** (la copie est supprimée). Une copie illisible n'est pas
@@ -1006,6 +1001,141 @@ Dans la fenêtre « Plan de coupe », la section **Peau (cuir)** remplace la lai
 - **Exports** (SVG, PDF 1:1, CSV) : contour, défauts (hachures, libellé) et zones (tirets, libellé) sont dessinés ; le CSV ajoute les sections `peau` et `peau_poses`.
 - **Limites** : jamais essayé avec une vraie peau ; le contour numérisé vient de la saisie (le calque d'une photo n'est pas encore branché) ; deux zones de même grade qui se recouvrent comptent deux fois.
 
+### Marges de couture
+
+Dans la fiche de pièce, section **Marge de couture**. Le contour dessiné est la **ligne de couture** ; le
+**contour de coupe est calculé** et le dessin n'est jamais modifié.
+
+- **Défaut (mm)** s'applique à tous les bords (0 à 1000 mm, vers l'extérieur).
+- **Surcharges par bord** : sélectionnez un tracé du contour puis surchargez-le ; la valeur peut différer au
+  début et à la fin.
+- **Coins** : onglet (par défaut), perpendiculaire au bord précédent ou suivant, symétrique, tronqué, en
+  escalier, ourlet (pli sur le bord suivant ou précédent). Une pointe maximale limite les onglets longs.
+- **Ourlets** : sur un bord droit, avec leur hauteur.
+- **Sur le pli** : un bord droit déclaré sur le pli n'a ni marge ni coupe ; « SUR LE PLI » est écrit à l'export.
+- **Marges par matière** : appliquer la valeur de la catégorie de la pièce.
+
+L'inspecteur donne le périmètre et l'aire de la coupe calculée, ou la raison d'un échec. Valeurs et
+conventions de coins **non relues par une modéliste**.
+
+### Pinces, plis, ampleur et découpe
+
+- Outil **Pince** (`Y`) : cliquez le bord droit qui porte la base, puis le sommet dans la pièce ; tapez
+  l'**ouverture** ou visez à la souris, Entrée. Le panneau donne les jambes, l'angle et la ligne avant et
+  après pliage ; il permet de changer de côté, de **couper pince fermée**, de supprimer ou de **transférer la
+  pince** (tout ou un pourcentage) vers un autre bord, ce qui reconstruit la pièce sur une nouvelle feuille.
+- **Édition › Plis…** : ligne de pli en 2 clics, pli plat ou creux, côté, profondeur, nombre et répartition ;
+  largeur ajoutée, aire avant et après, vue de la pièce pliée.
+- **Édition › Ampleur…** : ouverture en éventail. Bord fixe droit, nombre ou positions des lignes, ouverture
+  en haut (une valeur ou une par ligne). Une seule ampleur par pièce.
+- **Édition › Découper…** : coupe une pièce en deux selon une ligne et pose des **crans de repérage**
+  identiques sur les deux nouveaux bords.
+
+Fronces et godets ne sont pas proposés.
+
+### Lignes de piqûre et zones du cuir
+
+Dans la fiche de pièce.
+
+- **Lignes de piqûre…** : tracés consécutifs du contour, forme du trou (emporte-pièce rond ou plat, losange
+  français, oblique japonais), **nombre automatique** d'après un pas demandé ou **nombre fixe**, et
+  **retrait** du bord. Les positions suivent le bord.
+- **Apparier** deux lignes de deux pièces compare nombres de trous et pas moyens et liste les trous manquants
+  ou décalés.
+- **Zones (parage, collage, découpe)…** : **bande** le long d'un bord (recalculée avec lui) ou
+  **polygone libre** depuis des points sélectionnés ; l'aire est affichée.
+
+### Variables, formules et constructions maintenues
+
+- **Édition › Variables…** : valeurs nommées (mm, degrés ou sans unité) définies par des expressions :
+  `+ - * / ( )`, `min(a;b)`, `max(a;b)`, `abs`, `sqrt`, `pi` ; arguments séparés par `;`. Rien ne change tant
+  qu'une saisie est invalide.
+- **Formule** : dans l'inspecteur d'un point placé par distance, proportion, direction ou dx / dy, tapez par
+  exemple `L/2+10` ; la valeur reste **maintenue**. **Délier** garde le nombre courant.
+- **Maintenir la construction** : segment par longueur et angle, perpendiculaire, parallèle, rectangle ;
+  coché, la forme suit ses références ; décoché, les points restent où ils sont.
+- **Longueur imposée** : une courbe de Bézier ou lisse peut avoir sa longueur développée imposée, une poignée
+  ou une extrémité s'ajustant ; elle peut aussi suivre la longueur d'un autre tracé.
+- **Affichage › Diagnostic des liens** liste les liens et leurs problèmes ; **Affichage › Dépendances** montre
+  parents et dépendants de la sélection.
+
+Il n'y a toujours pas de solveur de contraintes général.
+
+### Tailles et gradation
+
+- **Affichage › Tailles…** : gammes (alphanumériques ou numériques) dans l'ordre de gradation, avec une
+  **taille de base**.
+- **Affichage › Gradation…** : sur un point libre, écarts **cumulés** (dx, dy) depuis la base, par taille. Les
+  points construits suivent leurs parents. Une règle se **copie** (à l'identique, en miroir, inversée) ou
+  s'**interpole** entre deux points gradués.
+- Une variable peut avoir une expression différente par taille.
+- On bascule la taille affichée pour contrôler ; hors base, elle est en lecture seule.
+- **Mesures par taille**, **nid de tailles** et **contrôle de forme** (courbure d'une taille à l'autre) dans le
+  menu Affichage ; **Fichier › Exporter des tailles…** écrit un fichier par taille.
+
+Constructions maintenues et longueurs imposées ne sont pas réévaluées par taille ; aucun fichier `.rul`.
+
+### Barème, fiches client et retouches
+
+- **Affichage › Barème de mesures…** : mesures (mm ou degrés) par taille. Case vide = non renseignée.
+- **Affichage › Fiches client…** : les mesures d'une personne ; une valeur absente n'est jamais devinée. La
+  taille la plus proche est indiquée pour information, et une **taille sur mesure** peut être générée.
+- **Affichage › Retouches et mesures finies…** : une retouche ajoute un écart à la lecture ; une mesure finie
+  est lue sur une couture ou une cote et comparée à sa tolérance.
+
+Ces fenêtres ne modifient jamais le dessin et ne fournissent aucune valeur par défaut.
+
+### Variantes, nomenclature, bibliothèque, versions
+
+- **Fichier › Variantes…** : pièces du projet avec quantité, matière et option, sans les copier.
+- **Fichier › Nomenclature et fiche technique…** : pièces, matières, coupes et surface nette par taille.
+- **Fichier › Bibliothèque…** : enregistrer une pièce, un bloc (la sélection) ou un modèle, et l'insérer
+  ensuite comme copie indépendante.
+- **Fichier › Versions…** : instantanés nommés à côté du projet ; comparer, ou restaurer en une étape
+  annulable.
+- **Fichier › Conventions de nommage…** : noms par préfixe, compteur et suffixe, sur demande seulement.
+
+### Plan de coupe et placement automatique
+
+**Fichier › Plan de coupe…** : plusieurs plans par projet. Laize, lisière, tissu plié et écart minimal, puis
+glissez les pièces sur le tissu.
+
+- **Contrôles** : recouvrements (hachures rouges) et débordements (orange) ; le plan dit s'il est valide.
+- **Métrage** : longueur utilisée, laize utile, surface, rendement et part par taille ; aucun chiffre pour un
+  plan invalide.
+- **Placement automatique** : tout remplacer ou **compléter** les pièces non placées. Le résultat est une
+  **proposition**, ni optimale ni garantie minimale.
+- **Export** SVG ou PDF à 1:1, métrage en CSV.
+
+Pour le cuir, voir « Plan de coupe sur peau » ci-dessus.
+
+### Impression et projection
+
+- **Fichier › Imprimer…** envoie la même mise en page que le PDF au service d'impression du système, à
+  100 %, carré étalon compris. **Windows seulement.**
+- **Fichier › Projection…** : plein écran sur fond noir pour un vidéoprojecteur. Saisissez la largeur réelle
+  de l'image projetée ; miroir, grille et épaisseur réglables ; `Échap` quitte.
+
+La précision est calculée, **non mesurée** sur papier ou à l'écran : contrôlez le carré de 100 mm au réglet.
+
+### Imports et construction rapide
+
+- **Fichier › Importer des pièces d'un DXF de type AAMA / ASTM…** : une pièce détachée par bloc, en une
+  étape annulable.
+- **Fichier › Importer un SVG / PDF…** : les tracés seulement, comme géométrie ordinaire.
+- **Édition › Construction rapide…** : polygone par coordonnées, rectangle ou rectangle arrondi ; les cotes
+  saisies ne sont pas maintenues ensuite.
+
+Aucun de ces imports n'a été essayé avec des fichiers de logiciels métier.
+
+### Espace de travail et ligne de commande
+
+**Affichage › Espace de travail**, **Personnaliser les barres d'outils…**, **Préférences…** et
+**Historique…** règlent l'interface et permettent de revenir en arrière.
+
+La ligne de commande (`patternforge-cli`) valide, convertit et exporte sans interface : voir
+[CLI.md](CLI.md).
+
 ## 9. Raccourcis et thème
 
 `F1` ouvre la table des raccourcis. Les lettres des **outils** peuvent être changées (bouton
@@ -1014,7 +1144,7 @@ remet les valeurs par défaut). Les raccourcis `Ctrl+…` et les touches spécia
 choix est mémorisé hors projet, comme la langue (menu Affichage › Langue) et le thème
 (Affichage › Thème, clair ou sombre).
 
-Réglages : `%APPDATA%\PatternCraft\settings.json` (Windows). Supprimer le fichier rétablit les
+Réglages : `%APPDATA%\PatternForge\settings.json` (Windows). Supprimer le fichier rétablit les
 valeurs par défaut.
 
 ## 10. Serveur MCP (assistants IA)

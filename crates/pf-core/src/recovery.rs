@@ -3,7 +3,7 @@
 //! - Projet enregistré : la copie de secours est `<projet>.pforge.json.autosave`,
 //!   à côté du fichier principal (même volume, donc renommage atomique).
 //! - Projet jamais enregistré : `<dossier de données>/recovery/untitled.pforge.json.autosave`
-//!   (`%APPDATA%\PatternCraft\recovery\` sous Windows). Un seul emplacement.
+//!   (`%APPDATA%\PatternForge\recovery\` sous Windows). Un seul emplacement.
 //! - Le fichier principal n'est jamais écrit ici. La copie passe par un
 //!   temporaire puis un renommage : un arrêt brutal laisse l'ancienne copie
 //!   (ou aucune) et ne produit jamais un `.autosave` tronqué.

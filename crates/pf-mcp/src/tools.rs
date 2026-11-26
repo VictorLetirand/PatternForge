@@ -11,7 +11,7 @@ use pf_core::{
 use serde_json::{json, Map, Value};
 use std::path::Path;
 
-pub(crate) const SUMMARY_URI: &str = "patterncraft://project/summary";
+pub(crate) const SUMMARY_URI: &str = "patternforge://project/summary";
 
 const UNIT: &str = "mm";
 const FRAME: &str = "X droite, Y haut, angles en degrés anti-horaires";

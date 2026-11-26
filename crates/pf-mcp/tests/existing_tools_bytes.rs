@@ -107,7 +107,7 @@ fn transcript() -> Vec<String> {
     s.call(8, "list_entities", json!({"sheet_id": 999_999}));
     s.call(9, "validate_project", json!({}));
     s.ask(json!({"jsonrpc":"2.0","id":10,"method":"resources/list"}));
-    s.ask(json!({"jsonrpc":"2.0","id":11,"method":"resources/read","params":{"uri":"patterncraft://project/summary"}}));
+    s.ask(json!({"jsonrpc":"2.0","id":11,"method":"resources/read","params":{"uri":"patternforge://project/summary"}}));
     s.ask(json!({"jsonrpc":"2.0","id":12,"method":"tools/call","params":{"name":"inconnu","arguments":{}}}));
     s.ask(json!({"jsonrpc":"2.0","id":13,"method":"tools/call","params":{"name":"list_entities","arguments":{}}}));
     let rename = json!({"type":"rename_project","name":"Golden"});

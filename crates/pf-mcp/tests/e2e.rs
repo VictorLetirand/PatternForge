@@ -47,7 +47,7 @@ fn binary_speaks_json_rpc_over_stdio() {
     // La notification ne produit aucune réponse : 4 réponses attendues.
     assert_eq!(replies.len(), 4);
     assert_eq!(replies[0]["id"], 1);
-    assert_eq!(replies[0]["result"]["serverInfo"]["name"], "patterncraft");
+    assert_eq!(replies[0]["result"]["serverInfo"]["name"], "patternforge");
     assert_eq!(
         replies[1]["result"]["tools"].as_array().map(Vec::len),
         Some(9)
