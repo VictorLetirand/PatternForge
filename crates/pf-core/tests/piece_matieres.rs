@@ -440,7 +440,9 @@ fn ca7_ancien_fichier_lu_et_reecrit_a_l_identique() {
     let mut seen = 0;
     for entry in std::fs::read_dir(dir).unwrap() {
         let path = entry.unwrap().path();
-        if !path.to_string_lossy().ends_with(".pforge.json") {
+        if !(path.to_string_lossy().ends_with(".pforge")
+            || path.to_string_lossy().ends_with(".pforge.json"))
+        {
             continue;
         }
         let text = std::fs::read_to_string(&path).unwrap();

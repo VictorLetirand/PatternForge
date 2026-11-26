@@ -19,7 +19,16 @@ pub const MIN_SCHEMA_VERSION: u32 = 1;
 /// Marqueur de format, premier garde-fou à l'ouverture.
 pub const FORMAT_TAG: &str = "patternforge";
 /// Extension des fichiers projet.
-pub const FILE_EXTENSION: &str = "pforge.json";
+pub const FILE_EXTENSION: &str = "pforge";
+
+/// Nom d'un fichier de projet sans son extension : `.pforge`, l'ancienne `.pforge.json` (toujours
+/// lue) ou `.json`.
+pub fn project_stem(file_name: &str) -> &str {
+    [".pforge.json", ".pforge", ".json"]
+        .iter()
+        .find_map(|s| file_name.strip_suffix(s))
+        .unwrap_or(file_name)
+}
 /// Longueur maximale d'un nom (projet, feuille, étiquette).
 pub const MAX_NAME_LEN: usize = 120;
 /// Longueur maximale du commentaire d'une pièce (US-04.2), en caractères.

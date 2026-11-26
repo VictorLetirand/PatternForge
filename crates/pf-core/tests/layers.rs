@@ -723,7 +723,9 @@ fn ca5_fichiers_sans_calque_octets_inchanges_apres_ouverture_et_enregistrement()
     for dir in dirs {
         for entry in std::fs::read_dir(dir).unwrap() {
             let path = entry.unwrap().path();
-            if !path.to_string_lossy().ends_with(".pforge.json") {
+            if !(path.to_string_lossy().ends_with(".pforge")
+                || path.to_string_lossy().ends_with(".pforge.json"))
+            {
                 continue;
             }
             let text = std::fs::read_to_string(&path).unwrap();

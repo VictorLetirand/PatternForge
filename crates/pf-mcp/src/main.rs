@@ -1,4 +1,4 @@
-//! Binaire `pf-mcp-server --project <chemin.pforge.json>` : boucle stdio.
+//! Binaire `pf-mcp-server --project <chemin.pforge>` : boucle stdio.
 
 use pf_mcp::Server;
 use std::io::{self, BufReader};
@@ -13,7 +13,7 @@ fn main() -> ExitCode {
             (PathBuf::from(path), true)
         }
         _ => {
-            eprintln!("usage : pf-mcp-server --project <chemin.pforge.json> [--allow-write]");
+            eprintln!("usage : pf-mcp-server --project <chemin.pforge> [--allow-write]");
             return ExitCode::from(2);
         }
     };

@@ -865,7 +865,9 @@ fn ca6_fixtures_et_exemples_inchanges_a_l_octet_schema_3() {
     let mut n = 0;
     for entry in std::fs::read_dir(&fixtures).unwrap() {
         let path = entry.unwrap().path();
-        if !path.to_string_lossy().ends_with(".pforge.json") {
+        if !(path.to_string_lossy().ends_with(".pforge")
+            || path.to_string_lossy().ends_with(".pforge.json"))
+        {
             continue;
         }
         let t = std::fs::read_to_string(&path).unwrap();
@@ -880,7 +882,9 @@ fn ca6_fixtures_et_exemples_inchanges_a_l_octet_schema_3() {
     let dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../examples");
     for entry in std::fs::read_dir(dir).unwrap() {
         let path = entry.unwrap().path();
-        if !path.to_string_lossy().ends_with(".pforge.json") {
+        if !(path.to_string_lossy().ends_with(".pforge")
+            || path.to_string_lossy().ends_with(".pforge.json"))
+        {
             continue;
         }
         let t = std::fs::read_to_string(&path)

@@ -26,6 +26,13 @@ resources = [
   { src = "examples", target = "examples" },
 ]
 
+[[file-associations]]
+extensions = ["pforge"]
+mime-type = "application/x-pforge"
+description = "PatternForge project"
+name = "PatternForge project"
+role = "editor"
+
 [[binaries]]
 path = "patternforge"
 main = true
@@ -40,6 +47,8 @@ path = "pf-mcp-server"
 # Libraries loaded at runtime (windowing, file dialogs).
 [deb]
 depends = ["libgtk-3-0", "libgl1", "libxkbcommon0", "libxkbcommon-x11-0"]
+# Declare le type application/x-pforge (le fichier .desktop ne fait que le citer).
+files = { "packaging/linux/patternforge.xml" = "usr/share/mime/packages/patternforge.xml" }
 
 [macos]
 minimum-system-version = "11.0"

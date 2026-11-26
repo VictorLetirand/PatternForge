@@ -700,7 +700,7 @@ fn commande_serialisable() {
 #[test]
 fn fichier_v3_sans_pieces_extraites_identique_a_l_octet() {
     let dir = env!("CARGO_MANIFEST_DIR");
-    let path = std::path::Path::new(dir).join("../../examples/piece-crans-droit-fil.pforge.json");
+    let path = std::path::Path::new(dir).join("../../examples/piece-crans-droit-fil.pforge");
     let text = std::fs::read_to_string(path).unwrap();
     let project = persist::from_json(&text).unwrap();
     assert_eq!(persist::to_json(&project).unwrap(), text);

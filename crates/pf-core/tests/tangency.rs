@@ -1185,7 +1185,9 @@ fn fichiers_d_exemple_relus_a_l_octet() {
     let mut n = 0;
     for entry in std::fs::read_dir(dir).unwrap() {
         let path = entry.unwrap().path();
-        if !path.to_string_lossy().ends_with(".pforge.json") {
+        if !(path.to_string_lossy().ends_with(".pforge")
+            || path.to_string_lossy().ends_with(".pforge.json"))
+        {
             continue;
         }
         let text = std::fs::read_to_string(&path).unwrap();

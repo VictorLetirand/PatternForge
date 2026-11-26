@@ -822,7 +822,7 @@ fn ca7_un_ancien_fichier_sans_ampleur_est_relu_et_reecrit_a_l_identique() {
     assert_eq!(text, bytes(&persist::from_json(&text).unwrap()));
     // Fichier du dépôt qui ne connaît pas l'ampleur.
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../examples/piece-crans-droit-fil.pforge.json");
+        .join("../../examples/piece-crans-droit-fil.pforge");
     let raw = std::fs::read_to_string(&path).unwrap();
     let loaded = persist::from_json(&raw).unwrap();
     assert!(!raw.contains("flares"));

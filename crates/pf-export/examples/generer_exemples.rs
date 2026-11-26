@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     fs::create_dir_all(&dir)?;
 
     let project = pf_core::demo_project()?;
-    pf_core::persist::save(&dir.join("geometrie-exercice.pforge.json"), &project)?;
+    pf_core::persist::save(&dir.join("geometrie-exercice.pforge"), &project)?;
 
     let scene = Scene::from_sheet(&project, project.sheets[0].id)?;
     fs::write(dir.join("geometrie-exercice.svg"), svg::export_svg(&scene)?)?;
@@ -62,14 +62,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         material: Some("Toile".into()),
         mirrored_pair: false,
     })?;
-    pf_core::persist::save(&dir.join("grande-piece-600x450.pforge.json"), &big)?;
+    pf_core::persist::save(&dir.join("grande-piece-600x450.pforge"), &big)?;
     let out = pdf::export_pdf(&[Scene::from_sheet(&big, sheet)?])?;
     fs::write(dir.join("grande-piece-600x450.pdf"), &out.bytes)?;
     println!("grande-piece-600x450.pdf : {} page(s)", out.page_count);
 
     // Pièce avec crans et droit-fil.
     let piece = pf_core::demo_piece_project()?;
-    pf_core::persist::save(&dir.join("piece-crans-droit-fil.pforge.json"), &piece)?;
+    pf_core::persist::save(&dir.join("piece-crans-droit-fil.pforge"), &piece)?;
     let scene = Scene::from_sheet(&piece, piece.sheets[0].id)?;
     fs::write(
         dir.join("piece-crans-droit-fil.svg"),
@@ -81,7 +81,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Jupe droite de base (PH-3a) : scénario par commandes partagé avec son test.
     let jupe = construction::build()?;
-    pf_core::persist::save(&dir.join("jupe-droite.pforge.json"), &jupe.project)?;
+    pf_core::persist::save(&dir.join("jupe-droite.pforge"), &jupe.project)?;
     let scene = Scene::from_sheet(&jupe.project, jupe.sheet)?;
     fs::write(dir.join("jupe-droite.svg"), svg::export_svg(&scene)?)?;
     fs::write(
@@ -98,7 +98,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Porte-cartes en cuir (PH-3b) : scénario par commandes partagé avec son test.
     let pc = porte_cartes::build()?;
-    pf_core::persist::save(&dir.join("porte-cartes.pforge.json"), &pc.project)?;
+    pf_core::persist::save(&dir.join("porte-cartes.pforge"), &pc.project)?;
     let scene = Scene::from_sheet(&pc.project, pc.sheet)?;
     fs::write(dir.join("porte-cartes.svg"), svg::export_svg(&scene)?)?;
     fs::write(

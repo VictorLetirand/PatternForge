@@ -559,8 +559,8 @@ fn projet_sans_formule_octets_inchanges() {
     assert!(!text.contains("formulas"));
     assert_eq!(bytes(&persist::from_json(&text).unwrap()), text);
     // Le fichier du dépôt qui ignore les formules est relu et réécrit à l'identique.
-    let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../../examples/jupe-droite.pforge.json");
+    let path =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../examples/jupe-droite.pforge");
     let raw = std::fs::read_to_string(path).unwrap();
     assert!(!raw.contains("formulas"));
     assert_eq!(bytes(&persist::from_json(&raw).unwrap()), raw);

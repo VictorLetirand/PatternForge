@@ -503,7 +503,9 @@ fn project_files() -> Vec<PathBuf> {
     for dir in ["examples", "crates/pf-core/tests/jeu_essai"] {
         for f in std::fs::read_dir(root.join(dir)).unwrap() {
             let path = f.unwrap().path();
-            if path.to_string_lossy().ends_with(".pforge.json") {
+            if path.to_string_lossy().ends_with(".pforge")
+                || path.to_string_lossy().ends_with(".pforge.json")
+            {
                 out.push(path);
             }
         }

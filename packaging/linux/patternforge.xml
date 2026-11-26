@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-pforge">
+    <comment>PatternForge project</comment>
+    <comment xml:lang="fr">Projet PatternForge</comment>
+    <glob pattern="*.pforge"/>
+  </mime-type>
+</mime-info>

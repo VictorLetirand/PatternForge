@@ -16,7 +16,9 @@ cargo run --release -p pf-desktop
 ```
 
 Options: the path of a project to open; `--demo` (reference exercise); `--lang fr|en`; `--theme dark`.
-Project files are `.pforge.json` (readable, versioned text).
+Project files are `.pforge` (readable, versioned JSON text). Older `.pforge.json` files still open. With an installed
+version, double-clicking a `.pforge` file opens it (on macOS the application starts but the file has to be opened
+from *File › Open*).
 
 ## 2. The screen
 
@@ -43,7 +45,7 @@ layers (locks included) and the linked piece, all independent of the original. U
 `Ctrl+Z`.
 
 **Import a sheet from another project**: `File › Import a sheet from a project…`, choose the
-`.pforge.json` file (older files are migrated), then the sheet to copy. It is added last in the current
+`.pforge` file (older files are migrated), then the sheet to copy. It is added last in the current
 project (the name is made unique: “X (2)” if it already exists); the source project is not modified.
 Undone in one step.
 
@@ -225,7 +227,7 @@ their perimeter and area in the inspector. See also “Special lines and linked 
 (unknown version, missing reference) opens with a clear error, with no silent loss.
 
 **Autosave.** Every 60 seconds (if the project changed), a backup copy is written next to the file:
-`myproject.pforge.json.autosave`. A project never saved is copied to `%APPDATA%\PatternForge\recovery\`
+`myproject.pforge.autosave`. A project never saved is copied to `%APPDATA%\PatternForge\recovery\`
 (Windows). Your file is never overwritten by this copy; `Ctrl+S` deletes it. After a crash, a box offers
 to **Recover** (the project comes back as modified: save to keep it) or **Ignore** (the copy is deleted).
 An unreadable copy is renamed `.corrupt`. The interval is set with the `autosave_seconds` key of
@@ -881,8 +883,8 @@ Settings: `%APPDATA%\PatternForge\settings.json` on Windows; `$XDG_CONFIG_HOME/p
 
 ### Validate a project file
 
-`pf-validate` checks a `.pforge.json` file without opening it in the application and without modifying it:
-`cargo run -q -p pf-core --bin pf-validate -- my-project.pforge.json` (add `--json` for machine-readable
+`pf-validate` checks a `.pforge` file without opening it in the application and without modifying it:
+`cargo run -q -p pf-core --bin pf-validate -- my-project.pforge` (add `--json` for machine-readable
 output). It applies the same rules as opening in the application. Exit code 0 = valid, 1 = invalid (the
 message says why), 2 = unreadable file or bad command line. The format is described (in French) in
 [FORMAT_PFORGE_V6.md](FORMAT_PFORGE_V6.md), with a JSON schema in

@@ -72,8 +72,8 @@ impl Example {
 
     fn json(self) -> &'static str {
         match self {
-            Example::Skirt => include_str!("../../../examples/jupe-droite.pforge.json"),
-            Example::Bag => include_str!("../../../examples/aide/sac-cabas.pforge.json"),
+            Example::Skirt => include_str!("../../../examples/jupe-droite.pforge"),
+            Example::Bag => include_str!("../../../examples/aide/sac-cabas.pforge"),
         }
     }
 

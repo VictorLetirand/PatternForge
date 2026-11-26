@@ -3,7 +3,7 @@
 use pf_core::clipboard::Fragment;
 use pf_core::persist;
 
-const BASE: &str = include_str!("../../../examples/piece-crans-droit-fil.pforge.json");
+const BASE: &str = include_str!("../../../examples/piece-crans-droit-fil.pforge");
 
 fn refus(text: &str) -> String {
     match persist::from_json(text) {

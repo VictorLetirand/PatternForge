@@ -220,7 +220,7 @@ pub const CATALOG: &[(&str, &str)] = &[
          mesuré sur papier.",
     ),
     // ----- fichiers et exports -----
-    ("file.filter", "Projet PatternForge (*.pforge.json)"),
+    ("file.filter", "Projet PatternForge (*.pforge)"),
     ("file.opened", "Projet ouvert : {path}"),
     (
         "file.open_error",
@@ -3332,7 +3332,7 @@ pub const CATALOG: &[(&str, &str)] = &[
     ("cli.batch.ok", "OK {file} ({count} fichier(s))"),
     ("cli.batch.fail", "ECHEC {file} (code {code}) : {detail}"),
     ("cli.batch.summary", "{ok} projet(s) exporté(s), {failed} en échec, {total} traité(s)."),
-    ("cli.batch.none", "aucun fichier .pforge.json trouvé dans {dir}"),
+    ("cli.batch.none", "aucun fichier .pforge trouvé dans {dir}"),
     ("cli.batch.csv_head", "fichier;statut;code;fichiers;message"),
     ("menu.file.versions", "Versions…"),
     ("verswin.title", "Versions"),

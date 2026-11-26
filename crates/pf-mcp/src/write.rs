@@ -275,7 +275,7 @@ fn protected_name(name: &str) -> bool {
 
 fn forbidden_extension(path: &Path) -> bool {
     let ext = path.extension().map(|e| e.to_string_lossy().to_lowercase());
-    matches!(ext.as_deref(), Some("json" | "jsonl" | "lock"))
+    matches!(ext.as_deref(), Some("pforge" | "json" | "jsonl" | "lock"))
 }
 
 /// Contrôle le chemin **réel** : liens, jonctions et noms courts de la partie existante sont
@@ -313,7 +313,7 @@ fn check_resolved(dir: &Path, relative: &Path) -> Result<(), ToolError> {
     }
     if forbidden_extension(inside) {
         return Err(refused_path(
-            "un fichier .json, .jsonl ou .lock ne peut pas être une sortie",
+            "un fichier .pforge, .json, .jsonl ou .lock ne peut pas être une sortie",
         ));
     }
     Ok(())
@@ -385,7 +385,7 @@ fn export_target(project: &Path, raw: &str) -> Result<PathBuf, ToolError> {
     }
     if forbidden_extension(&relative) {
         return Err(bad(
-            "un fichier .json, .jsonl ou .lock ne peut pas être une sortie",
+            "un fichier .pforge, .json, .jsonl ou .lock ne peut pas être une sortie",
         ));
     }
     check_resolved(&dir, &relative)?;

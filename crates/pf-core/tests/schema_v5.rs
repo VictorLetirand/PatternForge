@@ -103,7 +103,7 @@ fn ca2_les_exemples_v5_sont_les_fichiers_v4_avec_la_seule_version_changee() {
     for entry in std::fs::read_dir(tests_dir().join("../../../examples")).unwrap() {
         let path = entry.unwrap().path();
         let name = path.file_name().unwrap().to_string_lossy().into_owned();
-        if !name.ends_with(".pforge.json") {
+        if !(name.ends_with(".pforge") || name.ends_with(".pforge.json")) {
             continue;
         }
         n += 1;

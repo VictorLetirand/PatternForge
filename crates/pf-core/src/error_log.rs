@@ -21,8 +21,9 @@ pub const MAX_KIND_CHARS: usize = 24;
 
 const PATH_MARK: &str = "<chemin>";
 const SECRET_MARK: &str = "<…>";
-const EXTENSIONS: [&str; 8] = [
+const EXTENSIONS: [&str; 9] = [
     ".pforge.json",
+    ".pforge",
     ".json",
     ".pdf",
     ".svg",

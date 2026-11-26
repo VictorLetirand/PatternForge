@@ -284,7 +284,9 @@ fn ca1_fichiers_sans_ligne_speciale_octets_inchanges() {
     let mut seen = 0;
     for entry in std::fs::read_dir(examples).unwrap() {
         let path = entry.unwrap().path();
-        if !path.to_string_lossy().ends_with(".pforge.json") {
+        if !(path.to_string_lossy().ends_with(".pforge")
+            || path.to_string_lossy().ends_with(".pforge.json"))
+        {
             continue;
         }
         let shipped = std::fs::read_to_string(&path)

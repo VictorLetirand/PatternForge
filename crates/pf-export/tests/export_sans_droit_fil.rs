@@ -444,7 +444,7 @@ fn scenario_porte_cartes_rejoue_puis_declare_sans_droit_fil() {
     let fresh = construction::build().unwrap();
     let on_disk = std::fs::read_to_string(
         std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("../../examples/porte-cartes.pforge.json"),
+            .join("../../examples/porte-cartes.pforge"),
     )
     .unwrap();
     assert_eq!(

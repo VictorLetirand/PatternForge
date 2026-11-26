@@ -1,12 +1,12 @@
 # pf-mcp — serveur MCP local de PatternForge (lecture seule par défaut)
 
-Expose un projet `.pforge.json` à un assistant externe via le Model Context
+Expose un projet `.pforge` à un assistant externe via le Model Context
 Protocol (JSON-RPC 2.0 sur stdio, un message JSON par ligne, journaux sur stderr).
 
 ## Lancement
 
 ```bash
-cargo run -p pf-mcp --bin pf-mcp-server -- --project chemin/vers/projet.pforge.json
+cargo run -p pf-mcp --bin pf-mcp-server -- --project chemin/vers/projet.pforge
 ```
 
 Pour activer les outils d'écriture (désactivés par défaut) : ajouter `--allow-write`
@@ -73,7 +73,7 @@ Sans `--allow-write`, ces outils sont absents de `tools/list` et tout appel est 
   "mcpServers": {
     "patternforge": {
       "command": "pf-mcp-server",
-      "args": ["--project", "C:/chemin/vers/projet.pforge.json"]
+      "args": ["--project", "C:/chemin/vers/projet.pforge"]
     }
   }
 }

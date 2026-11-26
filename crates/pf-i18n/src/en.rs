@@ -192,7 +192,7 @@ pub const CATALOG: &[(&str, &str)] = &[
          experimental until the 100 mm calibration square has been measured on paper.",
     ),
     // ----- files and exports -----
-    ("file.filter", "PatternForge project (*.pforge.json)"),
+    ("file.filter", "PatternForge project (*.pforge)"),
     ("file.opened", "Project opened: {path}"),
     (
         "file.open_error",
@@ -3271,7 +3271,7 @@ pub const CATALOG: &[(&str, &str)] = &[
     ("cli.batch.ok", "OK {file} ({count} file(s))"),
     ("cli.batch.fail", "FAILED {file} (code {code}): {detail}"),
     ("cli.batch.summary", "{ok} project(s) exported, {failed} failed, {total} processed."),
-    ("cli.batch.none", "no .pforge.json file found in {dir}"),
+    ("cli.batch.none", "no .pforge file found in {dir}"),
     ("cli.batch.csv_head", "file;status;code;files;message"),
     ("menu.file.versions", "Versions…"),
     ("verswin.title", "Versions"),

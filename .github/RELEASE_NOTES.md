@@ -19,3 +19,6 @@ The application has been used by hand on **Windows only**. Linux and macOS build
 automatically, but nobody has used them by hand yet: please report problems in the issues.
 
 The interface starts in French; switch with *View › Language* (*Affichage › Langue*).
+
+Projects are saved as `.pforge` files; once installed, double-clicking one opens it (Windows and Linux; on
+macOS, open it from *File › Open*).

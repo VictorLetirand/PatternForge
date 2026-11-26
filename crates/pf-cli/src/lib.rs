@@ -256,11 +256,7 @@ fn file_stem(path: &Path) -> String {
     let name = path
         .file_name()
         .map_or_else(String::new, |n| n.to_string_lossy().into_owned());
-    let stem = name
-        .strip_suffix(".pforge.json")
-        .or_else(|| name.strip_suffix(".json"))
-        .unwrap_or(&name);
-    pf_export::size_export::sanitize_file_part(stem)
+    pf_export::size_export::sanitize_file_part(pf_core::project_stem(&name))
 }
 
 fn exporter(o: &Opts, fmt: Fmt, lang: Lang, out: &mut dyn std::io::Write) -> Result<u8, Failure> {
@@ -376,10 +372,10 @@ fn collect(dir: &Path, recursive: bool, acc: &mut Vec<PathBuf>) -> std::io::Resu
             if recursive {
                 collect(&p, true, acc)?;
             }
-        } else if p
-            .file_name()
-            .is_some_and(|n| n.to_string_lossy().to_lowercase().ends_with(".pforge.json"))
-        {
+        } else if p.file_name().is_some_and(|n| {
+            let n = n.to_string_lossy().to_lowercase();
+            n.ends_with(".pforge") || n.ends_with(".pforge.json")
+        }) {
             acc.push(p);
         }
     }

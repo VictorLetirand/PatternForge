@@ -212,10 +212,7 @@ pub struct ImportedImage {
 /// Dossier voisin des images d'un projet : `jupe.pforge.json` -> `jupe.assets`.
 pub fn assets_dir_name(project_file: &Path) -> Option<String> {
     let name = project_file.file_name()?.to_str()?;
-    let stem = name
-        .strip_suffix(".pforge.json")
-        .or_else(|| name.strip_suffix(".json"))
-        .unwrap_or(name);
+    let stem = crate::project_stem(name);
     if stem.is_empty() {
         None
     } else {

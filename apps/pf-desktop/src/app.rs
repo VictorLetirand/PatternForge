@@ -991,8 +991,13 @@ impl App {
         }
     }
 
+    /// Ouverture : les `.pforge` et les anciens `.pforge.json`.
     fn project_filter() -> rfd::FileDialog {
-        rfd::FileDialog::new().add_filter(tr("file.filter"), &["json"])
+        rfd::FileDialog::new().add_filter(tr("file.filter"), &[FILE_EXTENSION, "json"])
+    }
+
+    fn save_filter() -> rfd::FileDialog {
+        rfd::FileDialog::new().add_filter(tr("file.filter"), &[FILE_EXTENSION])
     }
 
     pub(crate) fn safe_file_stem(name: &str) -> String {
@@ -1018,7 +1023,7 @@ impl App {
     pub(crate) fn save(&mut self, force_dialog: bool) -> bool {
         let path = match (&self.editor.doc.path, force_dialog) {
             (Some(p), false) => Some(p.clone()),
-            _ => Self::project_filter()
+            _ => Self::save_filter()
                 .set_file_name(format!(
                     "{}.{FILE_EXTENSION}",
                     Self::safe_file_stem(&self.editor.project().name)

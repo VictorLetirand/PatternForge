@@ -15,7 +15,9 @@ cargo run --release -p pf-desktop
 ```
 
 Options : un chemin de projet à ouvrir ; `--demo` (exercice de référence) ; `--lang fr|en` ;
-`--theme dark`. Fichiers de projet : `.pforge.json` (texte lisible, versionné).
+`--theme dark`. Fichiers de projet : `.pforge` (texte JSON lisible, versionné). Les anciens `.pforge.json` s'ouvrent toujours. Avec
+une version installée, un double-clic sur un `.pforge` l'ouvre (sous macOS, l'application démarre mais il faut
+ouvrir le fichier par *Fichier › Ouvrir*).
 
 ## 2. L'écran
 
@@ -42,7 +44,7 @@ points, tracés, crans, cotations, groupes, calques (verrous compris) et la piè
 de l'original. Annulable en une fois avec `Ctrl+Z`.
 
 **Importer une feuille d'un autre projet** : `Fichier › Importer une feuille depuis un projet…`, choisissez
-le fichier `.pforge.json` (les anciens fichiers v1/v2 sont migrés), puis la feuille à copier. Elle est
+le fichier `.pforge` (les anciens fichiers v1/v2 sont migrés), puis la feuille à copier. Elle est
 ajoutée en dernier dans le projet courant (nom rendu unique : « X (2) » s'il existe déjà) ; le projet
 source n'est pas modifié. Annulable en une fois.
 
@@ -263,7 +265,7 @@ une seule étape. Un fichier refusé (version inconnue, référence manquante) s
 claire, sans perte silencieuse.
 
 **Sauvegarde automatique.** Toutes les 60 secondes (si le projet a changé), une copie de secours est
-écrite à côté du fichier : `monprojet.pforge.json.autosave`. Un projet jamais enregistré est copié
+écrite à côté du fichier : `monprojet.pforge.autosave`. Un projet jamais enregistré est copié
 dans `%APPDATA%\PatternForge\recovery\`. Votre fichier n'est jamais écrasé par cette copie ;
 `Ctrl+S` la supprime. Après un arrêt brutal, à l'ouverture du projet (ou au démarrage pour un projet
 jamais enregistré), une boîte propose **Récupérer** (le projet revient comme modifié : enregistrez
@@ -1157,8 +1159,8 @@ fichier ; refus si le fichier a changé) et `undo_last`, avec un journal à côt
 
 ### Valider un fichier de projet
 
-`pf-validate` vérifie un fichier `.pforge.json` sans l'ouvrir dans l'application et sans jamais le modifier :
-`cargo run -q -p pf-core --bin pf-validate -- mon-projet.pforge.json` (ajouter `--json` pour une sortie lisible par un programme).
+`pf-validate` vérifie un fichier `.pforge` sans l'ouvrir dans l'application et sans jamais le modifier :
+`cargo run -q -p pf-core --bin pf-validate -- mon-projet.pforge` (ajouter `--json` pour une sortie lisible par un programme).
 Il applique les mêmes règles que l'ouverture dans l'application. Code de sortie 0 = valide, 1 = invalide (le message dit
 pourquoi, avec la ligne et la colonne quand le fichier n'est pas du JSON correct), 2 = fichier illisible ou commande mal écrite.
 La description du format est dans [FORMAT_PFORGE_V6.md](FORMAT_PFORGE_V6.md), le schéma JSON dans

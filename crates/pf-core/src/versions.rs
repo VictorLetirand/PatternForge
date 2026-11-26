@@ -27,7 +27,9 @@ pub const INDEX_FILE: &str = "index.json";
 pub const INDEX_FORMAT: &str = "patternforge-versions";
 pub const INDEX_VERSION: u32 = 1;
 pub const MAX_NAME_CHARS: usize = 60;
-const VERSION_SUFFIX: &str = ".pforge.json";
+const VERSION_SUFFIX: &str = ".pforge";
+/// Suffixe des versions écrites avant le changement d'extension, toujours lues.
+const LEGACY_SUFFIX: &str = ".pforge.json";
 const DIR_SUFFIX: &str = ".pforge.versions";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -135,7 +137,7 @@ pub fn versions_dir(project: &Path) -> PathBuf {
         .map(|n| n.to_string_lossy().into_owned())
         .unwrap_or_default();
     let stem = name
-        .strip_suffix(VERSION_SUFFIX)
+        .strip_suffix(LEGACY_SUFFIX)
         .map(str::to_string)
         .or_else(|| {
             Path::new(&name)
@@ -228,7 +230,9 @@ fn display_date(stamp: &str) -> String {
 
 /// `(horodatage, nom assaini)` d'un nom de fichier de version, `None` si non conforme.
 fn parse_file_name(file: &str) -> Option<(&str, &str)> {
-    let stem = file.strip_suffix(VERSION_SUFFIX)?;
+    let stem = file
+        .strip_suffix(LEGACY_SUFFIX)
+        .or_else(|| file.strip_suffix(VERSION_SUFFIX))?;
     let b = stem.as_bytes();
     if b.len() < 18 || b[8] != b'T' || b[15] != b'Z' || b[16] != b'-' {
         return None;

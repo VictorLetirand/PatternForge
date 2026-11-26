@@ -90,7 +90,7 @@ it in *System Settings › Privacy & Security*, or remove the quarantine flag fr
 
   | Format | Open / import | Save / export |
   |---|---|---|
-  | PatternForge `.pforge.json` | ✔ (versions 1 to 6) | ✔ |
+  | PatternForge `.pforge` | ✔ (versions 1 to 6, and older `.pforge.json`) | ✔ |
   | PDF | vector paths only | ✔ tiled, 1:1, calibration page |
   | SVG | ✔ paths only | ✔ in millimetres |
   | DXF, generic | ✔ text DXF | ✔ construction geometry |
@@ -114,7 +114,7 @@ export, with a journal next to the project. The open application notices externa
 overwrite them.
 
 ```bash
-cargo run --release -p pf-mcp --bin pf-mcp-server -- --project path/to/project.pforge.json
+cargo run --release -p pf-mcp --bin pf-mcp-server -- --project path/to/project.pforge
 ```
 
 Reference and limits: [crates/pf-mcp/README.md](crates/pf-mcp/README.md) (in French).

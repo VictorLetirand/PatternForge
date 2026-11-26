@@ -18,7 +18,7 @@ use serde_json::{json, Value};
 use std::path::Path;
 use std::process::ExitCode;
 
-const USAGE: &str = "Usage : pf-validate FICHIER.pforge.json [--json]\n\
+const USAGE: &str = "Usage : pf-validate FICHIER.pforge [--json]\n\
 \n\
 Valide un projet PatternForge avec le chargeur de l'application, sans jamais modifier le fichier.\n\
   --json    écrit un seul objet JSON (clés triées) sur la sortie standard\n\

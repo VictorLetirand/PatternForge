@@ -435,7 +435,7 @@ fn ca6_champ_absent_octets_inchanges_et_present_relu_a_l_identique() {
     assert!(!bytes(&sc.p).contains("\"darts\""));
     // Fichier livré.
     let file = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../examples/piece-crans-droit-fil.pforge.json");
+        .join("../../examples/piece-crans-droit-fil.pforge");
     let shipped = std::fs::read_to_string(file).unwrap().replace("\r\n", "\n");
     assert_eq!(
         shipped,

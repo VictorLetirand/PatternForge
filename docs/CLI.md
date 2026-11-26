@@ -28,13 +28,13 @@ est refusé, code 2), `--aide`.
 ## Sous-commandes
 
 **`valider <fichier>`** : lecture seule, mêmes verdicts que `pf-validate` (`pf_core::diagnose`).
-`patternforge-cli valider jupe.pforge.json` (0 valide, 1 invalide, 2 illisible).
+`patternforge-cli valider jupe.pforge` (0 valide, 1 invalide, 2 illisible).
 
 **`convertir <fichier> --vers {svg,pdf,dxf,hpgl}`** : raccourci de `exporter` (png et jpeg refusés, code 3).
-`patternforge-cli convertir jupe.pforge.json --vers pdf --sortie plans`
+`patternforge-cli convertir jupe.pforge --vers pdf --sortie plans`
 
 **`exporter <fichier> --format {pdf,svg,dxf,hpgl,png,jpeg} [--taille <nom>] [--tailles-toutes] [--sortie <dossier ou fichier>] [--dpi <36 à 1200>]`**
-`patternforge-cli exporter jupe.pforge.json --format png --dpi 300 --tailles-toutes --sortie images`
+`patternforge-cli exporter jupe.pforge --format png --dpi 300 --tailles-toutes --sortie images`
 
 - `--sortie` : dossier (créé au besoin) ; ou un fichier portant l'extension du format si un seul fichier est
   produit. Défaut : dossier du projet.
@@ -46,7 +46,7 @@ est refusé, code 2), `--aide`.
 **`lot <dossier> --format <f> --sortie <dossier> [--tailles-toutes] [--recursif] [--dpi n] [--rapport-csv <nom>]`**
 `patternforge-cli lot projets --format svg --sortie sorties --recursif --rapport-csv rapport.csv`
 
-- Traite tous les `*.pforge.json`, triés par chemin relatif ; un échec n'arrête pas le lot et est listé dans le
+- Traite tous les `*.pforge`, triés par chemin relatif ; un échec n'arrête pas le lot et est listé dans le
   rapport de fin (texte sur la sortie standard, CSV `fichier;statut;code;fichiers;message` dans le dossier de
   sortie, `--rapport-csv` est un **nom** de fichier sans séparateur). Code 1 si au moins un échec, sinon 0.
 - Rien n'est écrit hors du dossier de sortie. Noms uniques sans tenir compte de la casse (`a`, `a-2`).

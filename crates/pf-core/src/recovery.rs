@@ -26,7 +26,7 @@ pub const AUTOSAVE_SUFFIX: &str = ".autosave";
 /// Sous-dossier du dossier de données pour les projets sans chemin.
 pub const RECOVERY_DIR: &str = "recovery";
 /// Nom du fichier de secours d'un projet sans chemin.
-pub const UNSAVED_NAME: &str = "untitled.pforge.json.autosave";
+pub const UNSAVED_NAME: &str = "untitled.pforge.autosave";
 
 /// Copie de secours exploitable, plus récente que le fichier principal.
 #[derive(Debug, Clone)]

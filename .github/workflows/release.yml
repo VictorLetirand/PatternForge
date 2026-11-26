@@ -128,8 +128,14 @@ jobs:
           $dir = $app.DirectoryName
           Get-ChildItem $dir | Out-Host
           foreach ($f in 'patternforge-cli.exe', 'pf-mcp-server.exe') { if (-not (Test-Path "$dir\$f")) { throw "$f missing" } }
-          & "$dir\patternforge-cli.exe" valider examples\jupe-droite.pforge.json
+          & "$dir\patternforge-cli.exe" valider examples\jupe-droite.pforge
           if ($LASTEXITCODE -ne 0) { throw "installed CLI failed" }
+          # Double-clic : .pforge -> classe -> commande d'ouverture qui reçoit le chemin.
+          $class = (Get-ItemProperty -LiteralPath 'Registry::HKEY_CLASSES_ROOT\.pforge').'(default)'
+          if (-not $class) { throw ".pforge is not associated" }
+          $cmd = (Get-ItemProperty -LiteralPath "Registry::HKEY_CLASSES_ROOT\$class\shell\open\command").'(default)'
+          Write-Host "open command: $cmd"
+          if ($cmd -notmatch 'patternforge' -or $cmd -notmatch '%1') { throw "unexpected open command: $cmd" }
           $un = Get-ChildItem $dir -Filter 'uninstall*.exe' | Select-Object -First 1
           if (-not $un) { throw "no uninstaller" }
           Start-Process -FilePath $un.FullName -ArgumentList '/S' -Wait
@@ -148,7 +154,13 @@ jobs:
           sudo apt-get install -y "$PWD/$deb"
           bin=$(dpkg -L "$(dpkg-deb -f "$deb" Package)" | grep -E '/patternforge$' | while read -r p; do [ -f "$p" ] && [ -x "$p" ] && echo "$p" && break; done)
           [ -n "$bin" ] || { echo "installed executable not found"; exit 1; }
-          xvfb-run -a -s "-screen 0 1920x1080x24" timeout 120 "$bin" --demo --screenshot "$PWD/deb.png"
+          # Double-clic : type MIME déclaré et lanceur qui reçoit le fichier.
+          test -f /usr/share/mime/packages/patternforge.xml
+          desktop=$(dpkg -L "$(dpkg-deb -f "$deb" Package)" | grep '\.desktop$' | head -n 1)
+          cat "$desktop"
+          grep -q 'application/x-pforge' "$desktop"
+          grep -qE '^Exec=.*%[fFuU]' "$desktop"
+          xvfb-run -a -s "-screen 0 1920x1080x24" timeout 120 "$bin" examples/jupe-droite.pforge --screenshot "$PWD/deb.png"
           [ "$(stat -c %s deb.png)" -gt 20000 ]
           sudo apt-get remove -y "$(dpkg-deb -f "$deb" Package)"
           img=$(ls dist/*.AppImage)
@@ -171,7 +183,8 @@ jobs:
           ditto "$app" "$RUNNER_TEMP/installed.app"
           bin="$RUNNER_TEMP/installed.app/Contents/MacOS"
           ls -l "$bin"
-          "$bin/patternforge-cli" valider examples/jupe-droite.pforge.json
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleDocumentTypes' "$RUNNER_TEMP/installed.app/Contents/Info.plist" | grep -q pforge
+          "$bin/patternforge-cli" valider examples/jupe-droite.pforge
           perl -e 'alarm 120; exec @ARGV' -- "$bin/patternforge" --demo --screenshot "$RUNNER_TEMP/dmg.png"
           [ "$(stat -f %z "$RUNNER_TEMP/dmg.png")" -gt 20000 ]
 

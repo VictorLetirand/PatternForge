@@ -981,7 +981,10 @@ fn corpus() -> Vec<(String, Value)> {
     let mut names: Vec<_> = std::fs::read_dir(repo().join("examples"))
         .unwrap()
         .map(|e| e.unwrap().path())
-        .filter(|p| p.to_string_lossy().ends_with(".pforge.json"))
+        .filter(|p| {
+            (p.to_string_lossy().ends_with(".pforge")
+                || p.to_string_lossy().ends_with(".pforge.json"))
+        })
         .collect();
     names.sort();
     for path in names {
@@ -1338,7 +1341,7 @@ fn ca2_les_enumerations_du_schema_suivent_le_code() {
 
 #[test]
 fn ca3_fichier_valide_code_0_et_fichier_intact() {
-    let file = repo().join("examples/piece-crans-droit-fil.pforge.json");
+    let file = repo().join("examples/piece-crans-droit-fil.pforge");
     let file = file.to_string_lossy().into_owned();
     let before = std::fs::read(&file).unwrap();
     let run = cli(&[&file]);

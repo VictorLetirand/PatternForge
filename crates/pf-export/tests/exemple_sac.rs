@@ -7,7 +7,7 @@ use std::path::PathBuf;
 mod construction;
 
 fn file() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../examples/aide/sac-cabas.pforge.json")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../examples/aide/sac-cabas.pforge")
 }
 
 #[test]
@@ -22,7 +22,7 @@ fn fichier_d_exemple_a_jour() {
     persist::save(&tmp, &built).unwrap();
     let want = std::fs::read(&tmp).unwrap();
     let _ = std::fs::remove_file(&tmp);
-    let have = std::fs::read(file()).expect("examples/aide/sac-cabas.pforge.json");
+    let have = std::fs::read(file()).expect("examples/aide/sac-cabas.pforge");
     assert!(
         want == have,
         "régénérer : cargo run -p pf-export --example generer_exemple_sac"

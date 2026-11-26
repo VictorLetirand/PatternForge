@@ -92,7 +92,7 @@ raccourci utilise la touche Cmd.
 
   | Format | Ouvrir / importer | Enregistrer / exporter |
   |---|---|---|
-  | PatternForge `.pforge.json` | ✔ (versions 1 à 6) | ✔ |
+  | PatternForge `.pforge` | ✔ (versions 1 à 6, et les anciens `.pforge.json`) | ✔ |
   | PDF | tracés vectoriels seulement | ✔ plusieurs pages, 1:1, page d'étalonnage |
   | SVG | ✔ tracés seulement | ✔ en millimètres |
   | DXF générique | ✔ DXF texte | ✔ géométrie de construction |
@@ -116,7 +116,7 @@ et exporter, avec un journal à côté du projet. L'application ouverte voit les
 de les écraser.
 
 ```bash
-cargo run --release -p pf-mcp --bin pf-mcp-server -- --project chemin/vers/projet.pforge.json
+cargo run --release -p pf-mcp --bin pf-mcp-server -- --project chemin/vers/projet.pforge
 ```
 
 Référence et limites : [crates/pf-mcp/README.md](crates/pf-mcp/README.md).

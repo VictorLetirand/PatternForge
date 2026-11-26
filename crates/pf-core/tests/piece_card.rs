@@ -108,7 +108,7 @@ fn ca1_champs_absents_octets_inchanges_apres_relecture() {
     }
     // Fichier livré (schéma 3) : relu puis réécrit, il est identique à l'octet.
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../examples/piece-crans-droit-fil.pforge.json");
+        .join("../../examples/piece-crans-droit-fil.pforge");
     let shipped = std::fs::read_to_string(path).unwrap().replace("\r\n", "\n");
     let again = persist::to_json(&persist::from_json(&shipped).unwrap()).unwrap();
     assert_eq!(shipped, again);
