@@ -47,6 +47,8 @@ def dessiner():
 if __name__ == "__main__":
     img = dessiner()
     img.resize((1024, 1024), Image.LANCZOS).save(os.path.join(ICI, "icon.png"), optimize=True)
+    # 512 px : plus grande taille que l'empaqueteur sait mettre dans l'icône macOS (1024 fait échouer).
+    img.resize((512, 512), Image.LANCZOS).save(os.path.join(ICI, "icon-512.png"), optimize=True)
     img.resize((256, 256), Image.LANCZOS).save(os.path.join(ICI, "icon-256.png"), optimize=True)
     img.resize((256, 256), Image.LANCZOS).save(os.path.join(ICI, "icon.ico"),
                                               sizes=[(s, s) for s in (16, 24, 32, 48, 64, 128, 256)])

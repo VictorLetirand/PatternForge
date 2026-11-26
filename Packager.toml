@@ -14,7 +14,7 @@ category = "GraphicsAndDesign"
 license-file = "LICENSE"
 out-dir = "dist"
 binaries-dir = "target/release"
-icons = ["assets/icon/icon.ico", "assets/icon/icon.png"]
+icons = ["assets/icon/icon.ico", "assets/icon/icon-512.png"]
 resources = [
   { src = "README.md", target = "README.md" },
   { src = "README.fr.md", target = "README.fr.md" },
