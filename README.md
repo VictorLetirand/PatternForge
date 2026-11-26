@@ -45,7 +45,19 @@ cut and print at true 1:1 scale.
 
 ## Install
 
-There is **no published release yet**: build from source.
+Download the **[0.1.0-rc.1 pre-release](https://github.com/VictorLetirand/PatternForge/releases/tag/v0.1.0-rc.1)** (checksums are on the same page):
+
+| System | Installer |
+|---|---|
+| **Windows 10 / 11** | [Setup program](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_x64-setup.exe) |
+| **macOS** | [Apple Silicon](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/PatternForge_0.1.0-rc.1_aarch64.dmg) · [Intel](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/PatternForge_0.1.0-rc.1_x64.dmg) |
+| **Linux** | [.deb](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_amd64.deb) · [AppImage](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_x86_64.AppImage) |
+
+The installers are **not code-signed**. On Windows, SmartScreen warns you: *More info* → *Run anyway*. On
+macOS, after copying the app to *Applications*, run
+`xattr -dr com.apple.quarantine /Applications/PatternForge.app`.
+
+### Build from source
 
 You need a recent stable [Rust](https://rustup.rs) toolchain (tried with 1.90).
 
@@ -64,9 +76,7 @@ You can also pass the path of a project to open. Example projects are in [`examp
 sudo apt-get install -y libgtk-3-dev libxkbcommon-dev libwayland-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 ```
 
-**macOS:** the application is not signed with Apple. A downloaded binary is blocked on first launch: allow
-it in *System Settings › Privacy & Security*, or remove the quarantine flag from the unpacked folder
-(`xattr -dr com.apple.quarantine <folder>`). Menus show “Ctrl” where the shortcut uses the Cmd key.
+**macOS:** menus show “Ctrl” where the shortcut uses the Cmd key.
 
 ## Features
 
@@ -126,7 +136,7 @@ Reference and limits: [crates/pf-mcp/README.md](crates/pf-mcp/README.md) (in Fre
 | Builds and passes the automated tests (CI) | ✔ | ✔ | ✔ |
 | Application launched and used by hand | ✔ | not yet | not yet |
 | Direct printing | ✔ | – | – |
-| Published binaries | not yet | not yet | not yet |
+| Published installers (pre-release, unsigned) | ✔ | ✔ | ✔ |
 
 ## Known limits
 

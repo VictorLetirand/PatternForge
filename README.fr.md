@@ -45,7 +45,19 @@ tailles, placez la coupe et imprimez à l'échelle 1:1.
 
 ## Installer
 
-**Aucune version n'est encore publiée** : il faut compiler.
+Télécharger la **[pré-version 0.1.0-rc.1](https://github.com/VictorLetirand/PatternForge/releases/tag/v0.1.0-rc.1)** (les sommes de contrôle sont sur la même page) :
+
+| Système | Installateur |
+|---|---|
+| **Windows 10 / 11** | [Programme d'installation](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_x64-setup.exe) |
+| **macOS** | [Apple Silicon](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/PatternForge_0.1.0-rc.1_aarch64.dmg) · [Intel](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/PatternForge_0.1.0-rc.1_x64.dmg) |
+| **Linux** | [.deb](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_amd64.deb) · [AppImage](https://github.com/VictorLetirand/PatternForge/releases/download/v0.1.0-rc.1/patternforge_0.1.0-rc.1_x86_64.AppImage) |
+
+Les installateurs ne sont **pas signés**. Sous Windows, SmartScreen avertit : *Informations
+complémentaires* → *Exécuter quand même*. Sous macOS, après avoir copié l'application dans *Applications*,
+lancer `xattr -dr com.apple.quarantine /Applications/PatternForge.app`.
+
+### Compiler depuis les sources
 
 Une chaîne [Rust](https://rustup.rs) stable récente est nécessaire (essayé avec la 1.90).
 
@@ -64,10 +76,7 @@ On peut aussi passer le chemin d'un projet à ouvrir. Des exemples sont dans [`e
 sudo apt-get install -y libgtk-3-dev libxkbcommon-dev libwayland-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
 ```
 
-**macOS :** l'application n'est pas signée auprès d'Apple. Un binaire téléchargé est bloqué à la première
-ouverture : l'autoriser dans *Réglages Système › Confidentialité et sécurité*, ou retirer la quarantaine du
-dossier décompressé (`xattr -dr com.apple.quarantine <dossier>`). Les menus affichent « Ctrl » là où le
-raccourci utilise la touche Cmd.
+**macOS :** les menus affichent « Ctrl » là où le raccourci utilise la touche Cmd.
 
 ## Fonctions
 
@@ -128,7 +137,7 @@ Référence et limites : [crates/pf-mcp/README.md](crates/pf-mcp/README.md).
 | Compile et passe les tests automatiques (CI) | ✔ | ✔ | ✔ |
 | Application lancée et utilisée par une personne | ✔ | pas encore | pas encore |
 | Impression directe | ✔ | – | – |
-| Binaires publiés | pas encore | pas encore | pas encore |
+| Installateurs publiés (pré-version, non signés) | ✔ | ✔ | ✔ |
 
 ## Limites connues
 
