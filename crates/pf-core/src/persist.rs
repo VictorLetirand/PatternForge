@@ -441,6 +441,15 @@ pub fn save(path: &Path, project: &Project) -> Result<(), CoreError> {
     write_atomic(path, &to_json(project)?)
 }
 
+/// Refuse d'écraser un fichier en lecture seule. Sans ce contrôle, le renommage d'un temporaire
+/// l'écraserait sous Linux et macOS (seul le droit d'écrire dans le dossier y compte).
+pub fn refuse_read_only(path: &Path) -> std::io::Result<()> {
+    match fs::metadata(path) {
+        Ok(m) if m.permissions().readonly() => Err(std::io::ErrorKind::PermissionDenied.into()),
+        _ => Ok(()),
+    }
+}
+
 /// Écrit `json` dans un temporaire voisin, le synchronise, puis le renomme sur
 /// `path` : un échec ou un arrêt en cours de route laisse `path` intact.
 pub(crate) fn write_atomic(path: &Path, json: &str) -> Result<(), CoreError> {
@@ -452,6 +461,7 @@ pub(crate) fn write_atomic(path: &Path, json: &str) -> Result<(), CoreError> {
     tmp_name.push(format!(".tmp{}", std::process::id()));
     let tmp = path.with_file_name(tmp_name);
     let write = || -> std::io::Result<()> {
+        refuse_read_only(path)?;
         let mut f = fs::File::create(&tmp)?;
         f.write_all(json.as_bytes())?;
         f.sync_all()?;

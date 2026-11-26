@@ -250,3 +250,22 @@ fn dossier_introuvable_pas_de_verrou() {
     let path = tmp.file("absent").join("p.pforge.json");
     assert!(matches!(FileLock::acquire(&path, 1), Err(LockError::Io(_))));
 }
+
+#[test]
+fn enregistrer_sur_un_fichier_en_lecture_seule_est_refuse() {
+    let dir = TempDir::new("lecture-seule");
+    let path = dir.file("p.pforge.json");
+    std::fs::write(&path, b"ancien").unwrap();
+    let mut perm = std::fs::metadata(&path).unwrap().permissions();
+    perm.set_readonly(true);
+    std::fs::set_permissions(&path, perm.clone()).unwrap();
+    let res = persist::save(&path, &Project::new("Lecture seule"));
+    let content = std::fs::read(&path).unwrap();
+    let files = std::fs::read_dir(&dir.0).unwrap().count();
+    #[allow(clippy::permissions_set_readonly_false)]
+    perm.set_readonly(false);
+    std::fs::set_permissions(&path, perm).unwrap();
+    assert!(res.is_err(), "écrasement d'un fichier en lecture seule");
+    assert_eq!(content, b"ancien");
+    assert_eq!(files, 1, "aucun fichier temporaire laissé");
+}

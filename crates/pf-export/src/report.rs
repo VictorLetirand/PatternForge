@@ -89,6 +89,7 @@ impl ReportExport {
             .and_then(|n| n.to_str())
             .filter(|n| !n.is_empty())
             .ok_or(ReportError::NoDestination)?;
+        pf_core::persist::refuse_read_only(path).map_err(|e| ReportError::Write(e.to_string()))?;
         let tmp = path.with_file_name(format!("{name}.pf-tmp-{}", std::process::id()));
         let result = std::fs::OpenOptions::new()
             .write(true)

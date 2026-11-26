@@ -771,6 +771,7 @@ fn write_atomic(path: &Path, bytes: &[u8]) -> Result<(), ToolError> {
     tmp_name.push(format!(".undo{}", std::process::id()));
     let tmp = path.with_file_name(tmp_name);
     let run = || -> std::io::Result<()> {
+        persist::refuse_read_only(path)?;
         let mut f = fs::File::create(&tmp)?;
         f.write_all(bytes)?;
         f.sync_all()?;
